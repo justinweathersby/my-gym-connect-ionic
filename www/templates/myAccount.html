@@ -1,0 +1,101 @@
+<ion-view view-title="My Account">
+  <ion-content class="padding" style="padding-top:20px;" >
+  <!-- <div class="head-bar">
+    <div class="header-logo row">
+    </div>
+  </div> -->
+
+    <div style="text-align: center;">
+      <img ng-src="{{current_user.image_url}}" alt="No Image Uploaded" style="width: 40%; margin: 0 30%;">
+    </div>
+
+    <div class="list list-inset">
+      <label class="form-box item item-input">
+        <i class="icon ion-android-person placeholder-icon"></i>
+        <input style="font-size:20px;padding-top:10px;font-family:Brandon;color:grey;" type="text" placeholder="Name" ng-model="current_user.name">
+      </label>
+
+      <label class="form-box item item-input">
+        <i class="icon ion-ios-email-outline placeholder-icon"></i>
+        <input style="font-size:20px;padding-top:10px;font-family:Brandon;color:grey;" type="email" placeholder="Email" ng-model="current_user.email" disabled="disabled" readonly>
+      </label>
+
+      <label class="item item-input item-select">
+          <div class="input-label">
+            <i class="icon ion-stats-bars placeholder-icon" style="padding-left:0"></i>Workout Level
+          </div>
+          <select ng-model="current_user.workout_level">
+              <option >beginner</option>
+              <option>intermediate</option>
+              <option>expert</option>
+          </select>
+      </label>
+
+      <label class="item item-input item-select">
+          <div class="input-label">
+            <i class="icon ion-man placeholder-icon" style="padding: 0 0"></i><i class="icon ion-woman placeholder-icon" style="padding-left:0; padding-right:6px;"></i>Gender
+          </div>
+          <select ng-model="current_user.gender">
+              <option >male</option>
+              <option>female</option>
+          </select>
+      </label>
+    </div>
+
+    <div class="card">
+      <div class="item item-divider">
+        Hours In Gym
+      </div>
+      <div class="item item-text-wrap">
+        <div style="border:1px solid black">
+          <!-- {{indexToDayTime(current_user.hours_in_gym)}} -->
+          <div ng-repeat="time in current_user.hours_in_gym" >
+             {{indexToDayTime(time) | date:"EEEE 'at' h:mma"}}
+             <br />
+           </div>
+        </div>
+        </div>
+
+
+        <label class="item item-input item-select">
+            <div class="input-label">
+              <i class="icon ion-calendar placeholder-icon" style="padding-left: 0"></i>Day of Week
+            </div>
+            <select ng-model="selectedDay">
+              <option ng-repeat="day in daysOfWeek" value="{{day.id}}">{{day.name}}</option>
+            </select>
+        </label>
+        <label class="item item-input item-select">
+            <div class="input-label">
+              <i class="icon ion-clock placeholder-icon" style="padding-left: 0"></i>Hour of Day
+            </div>
+            <select ng-model="selectedHour">
+              <option ng-repeat="hour in hoursInDay" value="{{hour.id}}">{{hour.name}}</option>
+            </select>
+        </label>
+        <div class="row">
+          <div class="col text-right">
+            <button class="button button-small button-positive icon-left ion-plus-circled" ng-click="addWorkoutTime(selectedDay, selectedHour)">Add Time</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="list list-inset">
+      <label class="form-box item item-input">Your Gym: &nbsp;
+        <input style="font-size:20px;padding-top:10px;font-family:Brandon;color:grey;" type="text" placeholder="Gym" ng-model="current_user.gym"  disabled="disabled" readonly>
+      </label>
+    </div>
+
+
+    <button style="font-family:Brandon;" class="button button-block button-positive" ng-click="updateUser()">
+      Update Account
+    </button>
+    <button ui-sref="matches" style="font-family:Brandon;" class="button button-block button-positive">
+      Matches
+    </button>
+    <button ui-sref="login" style="font-family:Brandon;" class="button button-block button-positive">
+      Messages
+    </button>
+  </ion-content>
+</ion-view>

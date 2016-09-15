@@ -1,0 +1,41 @@
+<ion-view view-title="Login">
+  <ion-content class="padding" style="padding-top:20px;" >
+  <div class="head-bar">
+    <div class="header-logo row">
+    </div>
+  </div>
+    <div class="list list-inset">
+      <label class="form-box item item-input">
+        <i class="icon ion-android-person placeholder-icon"></i>
+        <input style="font-size:20px;padding-top:10px;font-family:Brandon;color:grey;" type="text" placeholder="Name" ng-model="data.name">
+      </label>
+
+      <label class="form-box item item-input">
+        <i class="icon ion-ios-email-outline placeholder-icon"></i>
+        <input style="font-size:20px;padding-top:10px;font-family:Brandon;color:grey;" type="email" placeholder="Email" ng-model="data.email">
+      </label>
+
+      <label class="form-box item item-input">
+        <i class="icon ion-ios-locked-outline placeholder-icon"></i>
+        <input style="font-size:20px;padding-top:10px;font-family:Brandon;color:grey;" type="password" placeholder="Password (min 8 characters)" ng-model="data.password">
+      </label>
+
+      <label class="form-box item item-input">
+      <i class="icon ion-ios-locked-outline placeholder-icon"></i>
+          <input style="font-size:20px;padding-top:10px;font-family:Brandon;color:grey;" type="password" placeholder="Re-Enter Password" ng-model="data.password_confirmation">
+      </label>
+
+      <label class="form-box item item-input">
+        <i class="icon ion-android-people placeholder-icon"></i>
+        <input style="font-size:20px;padding-top:10px;font-family:Brandon;color:grey;" type="text" placeholder="Gym Code" ng-model="data.gym_code">
+      </label>
+    </div>
+
+    <button style="font-family:Brandon;" class="button button-block button-positive" ng-click="createUser(data)">
+      Sign Up
+    </button>
+    <button ui-sref="login" style="font-family:Brandon;" class="button button-block button-positive">
+      Back
+    </button>
+  </ion-content>
+</ion-view>

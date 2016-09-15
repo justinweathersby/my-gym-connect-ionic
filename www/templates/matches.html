@@ -1,0 +1,24 @@
+<ion-view view-title="My Matches">
+  <ion-content class="padding" style="padding-top:20px;" >
+
+          <!-- {{indexToDayTime(current_user.hours_in_gym)}} -->
+          <div ng-repeat="match in matches" >
+            <div class="card">
+              <div class="item item-divider">
+                {{match.email}}
+              </div>
+              <div class="item item-text-wrap">
+                <div style="text-align: center;">
+                  <img ng-src="{{match.image_url}}" alt="No Image Uploaded" style="width: 40%; margin: 0 30%;">
+                </div>
+           </div>
+           <h2>Hours In Gym:</h2>
+           <div ng-repeat="hour in match.hours_in_gym">
+             {{indexToDayTime(hour) | date:"EEEE 'at' h:mma"}}
+             <br />
+           </div>
+       </div>
+
+    </div>
+  </ion-content>
+</ion-view>
