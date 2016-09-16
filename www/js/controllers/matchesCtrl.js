@@ -1,4 +1,4 @@
-app.controller('matchesCtrl', function($scope,$state, $http, $stateParams, $ionicPopup, $ionicLoading, currentUserService, GYM_CONNECT_API)
+app.controller('MatchesCtrl', function($scope,$state, $http, $stateParams, $ionicPopup, $ionicLoading, currentUserService, $ionicModal, GYM_CONNECT_API)
 {
   $ionicLoading.show({
       template: '<p>Loading...</p><ion-spinner></ion-spinner>'
@@ -28,6 +28,35 @@ app.controller('matchesCtrl', function($scope,$state, $http, $stateParams, $ioni
       var actualDate = new Date();
       actualDate.setTime(sunday.getTime() + (index*60*60*1000));
       return actualDate;
+    };
+
+    $scope.startConversation = function(send_to, body){
+      $ionicLoading.show({
+          template: '<p>Sending Message...</p><ion-spinner></ion-spinner>'
+      });
+      $http({ method: 'POST',
+                url: GYM_CONNECT_API.url + "/messages",
+                params: {
+                  "user_id": send_to,
+                  "body": body
+                },
+                headers: {'Authorization' : currentUserService.token}
+
+              })
+              .success( function( data )
+              {
+                $ionicLoading.hide();
+                // TODO:
+                console.log('Return Data post new message from Api:', JSON.stringify(data, null, 4));
+                // $scope.getConversations();
+                $state.go('messages');
+              }
+            )
+            .error( function(error)
+            {
+              $ionicLoading.hide();
+              console.log(error);
+            });
     };
 
 });

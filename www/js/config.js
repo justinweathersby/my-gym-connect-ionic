@@ -22,7 +22,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
   .state('matches', {
     url: '/matches',
     templateUrl: 'templates/matches.html',
-    controller: 'matchesCtrl'
+    controller: 'MatchesCtrl'
+  })
+
+  .state('messages', {
+    url: '/messages',
+    templateUrl: 'templates/messages.html',
+    controller: 'MessagesCtrl'
   })
 
   .state('myAccount', {
