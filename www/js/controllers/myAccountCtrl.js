@@ -9,6 +9,8 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
   $scope.selectedHour = 0;
   $scope.selectedDay = '';
 
+  $scope.base64ImageData = '';
+
   $scope.daysOfWeek = [
         {id: 0, name: 'Sunday'},
         {id: 1, name: 'Monday'},
@@ -43,6 +45,8 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
             currentUserService.image_url = data.image_url;
             currentUserService.gym = data.gym;
             currentUserService.hours_in_gym = data.hours_in_gym;
+
+            $scope.profileImgSrc = data.image_url;
 
             $scope.current_user = currentUserService;
           }
@@ -79,7 +83,8 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
                 "name": currentUserService.name,
                 "gender": currentUserService.gender,
                 "hours_in_gym[]": currentUserService.hours_in_gym,
-                "workout_level": currentUserService.workout_level
+                "workout_level": currentUserService.workout_level,
+                "image": currentUserService.image
               },
               headers: {'Authorization' : currentUserService.token}
 
@@ -95,5 +100,42 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
             console.log(error);
           });
   };
+
+  $scope.selectPicture = function() {
+    console.log('Selected option to upload a picture...');
+    // $scope.new_upload_image = true;
+    // $scope.imageSrc = undefined;
+    $ionicLoading.show({
+        template: '<p>Warming Camera Up...</p><ion-spinner></ion-spinner>'
+    });
+
+    document.addEventListener('deviceready', function() {
+        console.log("Device is ready..")
+        var options = {
+            quality: 100,
+            targetWidth: 300,
+            targetHeight: 300,
+            destinationType: Camera.DestinationType.DATA_URL,
+            sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+        };
+        navigator.camera.getPicture(options).then(function(imageData) {
+
+          console.log("Image Source from library: ", imageData);
+          currentUserService.image = "data:image/jpeg;base64," + imageData;
+          $scope.profileImgSrc = currentUserService.image;
+          $ionicLoading.hide();
+          // image.src = "data:image/jpeg;base64," + imageData;
+          // $scope.imageSrc = imageURI;
+
+        }, function(err) {
+            // document.getElementById('uploadImage').src = "";
+            console.log("Did not get image from library");
+            $ionicLoading.hide();
+            // $scope.s3_upload_image = false;
+            // alert(err);
+        });
+
+      }, false); // device ready
+  }; // Select picture
 
 });

@@ -23,7 +23,7 @@ app.controller('LoginCtrl', function($scope, $http, $ionicLoading, $state, $ioni
         $ionicLoading.hide();
         var alertPopup = $ionicPopup.alert({
           title: 'Login Unsuccessful',
-          template: "Email and password did not match Chatter's records."
+          template: "Email and password did not match our records."
         });
       });
     }

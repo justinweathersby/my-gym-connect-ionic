@@ -11,6 +11,7 @@ app.service('currentUserService', function(){
   this.gender = null;
   this.gym = null;
   this.hours_in_gym = [];
+  this.image = null;
 
 });
 

@@ -6,7 +6,10 @@
   </div> -->
 
     <div style="text-align: center;">
-      <img ng-src="{{current_user.image_url}}" alt="No Image Uploaded" style="width: 40%; margin: 0 30%;">
+      <img ng-src="{{profileImgSrc}}" alt="No Image Uploaded" style="width: 40%; margin: 0 30%;">
+      <button style="font-family:Brandon;" class="button button-block button-positive" ng-click="selectPicture()">
+        Add/Edit Image
+      </button>
     </div>
 
     <div class="list list-inset">
