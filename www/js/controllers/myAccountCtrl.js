@@ -1,4 +1,4 @@
-app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $ionicPopup, currentUserService, GYM_CONNECT_API){
+app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $ionicLoading, $ionicPopup, currentUserService, $cordovaCamera, GYM_CONNECT_API){
   $scope.WorkoutLevels = [
     'beginner',
     'intermediate',
@@ -77,9 +77,13 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
   };
 
   $scope.updateUser = function(){
+    $ionicLoading.show({
+        template: '<p>Updating your information please wait...</p><ion-spinner></ion-spinner>'
+    });
+    console.log("Inside update User function: ",  JSON.stringify(currentUserService, null, 4));
     $http({ method: 'POST',
               url: GYM_CONNECT_API.url + "/users/" + currentUserService.id,
-              params: {
+              data: {
                 "name": currentUserService.name,
                 "gender": currentUserService.gender,
                 "hours_in_gym[]": currentUserService.hours_in_gym,
@@ -93,11 +97,16 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
             {
               // TODO:
               console.log('Return Data From Get User Account Info from Api:', JSON.stringify(data, null, 4));
+              $ionicLoading.hide();
+
             }
           )
           .error( function(error)
           {
-            console.log(error);
+            console.log("Update User Failed...");
+            console.log("Error: ", error);
+            $ionicLoading.hide();
+
           });
   };
 
@@ -112,18 +121,19 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
     document.addEventListener('deviceready', function() {
         console.log("Device is ready..")
         var options = {
-            quality: 100,
+            quality: 60,
             targetWidth: 300,
             targetHeight: 300,
             destinationType: Camera.DestinationType.DATA_URL,
             sourceType: Camera.PictureSourceType.PHOTOLIBRARY
         };
-        navigator.camera.getPicture(options).then(function(imageData) {
+        $cordovaCamera.getPicture(options).then(function(imageData) {
 
-          console.log("Image Source from library: ", imageData);
+          // console.log("Inside get Picture()");
           currentUserService.image = "data:image/jpeg;base64," + imageData;
           $scope.profileImgSrc = currentUserService.image;
           $ionicLoading.hide();
+
           // image.src = "data:image/jpeg;base64," + imageData;
           // $scope.imageSrc = imageURI;
 
