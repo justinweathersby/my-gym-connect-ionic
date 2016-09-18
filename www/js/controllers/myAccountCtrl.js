@@ -87,8 +87,8 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
                 "name": currentUserService.name,
                 "gender": currentUserService.gender,
                 "hours_in_gym[]": currentUserService.hours_in_gym,
-                "workout_level": currentUserService.workout_level,
-                "image": currentUserService.image
+                "workout_level": currentUserService.workout_level
+                // "image": currentUserService.image
               },
               headers: {'Authorization' : currentUserService.token}
 
@@ -112,8 +112,7 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
 
   $scope.selectPicture = function() {
     console.log('Selected option to upload a picture...');
-    // $scope.new_upload_image = true;
-    // $scope.imageSrc = undefined;
+
     $ionicLoading.show({
         template: '<p>Warming Camera Up...</p><ion-spinner></ion-spinner>'
     });
@@ -121,28 +120,73 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
     document.addEventListener('deviceready', function() {
         console.log("Device is ready..")
         var options = {
-            quality: 60,
+            quality: 100,
             targetWidth: 300,
             targetHeight: 300,
-            destinationType: Camera.DestinationType.DATA_URL,
+            destinationType: Camera.DestinationType.FILE_URI,
             sourceType: Camera.PictureSourceType.PHOTOLIBRARY
         };
-        $cordovaCamera.getPicture(options).then(function(imageData) {
-
-          // console.log("Inside get Picture()");
-          currentUserService.image = "data:image/jpeg;base64," + imageData;
+        $cordovaCamera.getPicture(options).then(function(imageURI) {
+          $ionicLoading.hide(); //--Hide loading for camera
+          currentUserService.image = imageURI;
           $scope.profileImgSrc = currentUserService.image;
-          $ionicLoading.hide();
 
-          // image.src = "data:image/jpeg;base64," + imageData;
-          // $scope.imageSrc = imageURI;
+          //------File Transfer of Image to Server
+          var Uoptions = new FileUploadOptions();
+          Uoptions.fileKey="image";
+          Uoptions.mimeType ="image/jpeg";
+          Uoptions.chunkedMode = false;
+          Uoptions.params = {};
+          Uoptions.headers = {'Authorization' : currentUserService.token};
+
+          var ft = new FileTransfer();
+          console.log('File upload: ', currentUserService.image);
+
+          var uri = encodeURI(GYM_CONNECT_API.url + "/users/" + currentUserService.id);
+
+          var win = function (r) {
+            console.log("Code = " + r.responseCode);
+            console.log("Response = " + r.response);
+            console.log("Sent = " + r.bytesSent);
+            $ionicLoading.hide();
+
+          }//--End win
+
+          var fail = function (error) {
+              alert("An error has occurred: Code = " + error.code);
+              console.log("upload error source " + error.source);
+              console.log("upload error target " + error.target);
+              $ionicLoading.hide();
+
+          }
+
+          ft.onprogress = function(progressEvent) {
+              var loadingStatus = 0;
+              $ionicLoading.show({
+                  template: '<p>Uploading Image.</p><progress max="100" value=' + loadingStatus +'></progress>',
+                  scope: $scope
+              });
+
+              if (progressEvent.lengthComputable) {
+                  loadingStatus = (progressEvent.loaded / progressEvent.total) * 100;
+                  $ionicLoading.show({
+                      template: '<p>Uploading Image.</p><progress max="100" value='+ loadingStatus +'></progress>',
+                      scope: $scope
+                  });
+                  console.log("In If, loadingStatus: ", $scope.loadingStatus);
+              } else {
+                  loadingStatus += .1;
+                  console.log("In else, loadingStatus: ", $scope.loadingStatus);
+
+              }
+          };
+
+          ft.upload(currentUserService.image, uri, win, fail, Uoptions);
+          //------End File Transfer
 
         }, function(err) {
-            // document.getElementById('uploadImage').src = "";
             console.log("Did not get image from library");
             $ionicLoading.hide();
-            // $scope.s3_upload_image = false;
-            // alert(err);
         });
 
       }, false); // device ready
