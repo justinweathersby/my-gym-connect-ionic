@@ -1,4 +1,4 @@
-app.controller('LoginCtrl', function($scope, $http, $ionicLoading, $state, $ionicPopup, authService, currentUserService, GYM_CONNECT_API) {
+app.controller('LoginCtrl', function($scope, $http, $ionicLoading, $state, $ionicPopup, authService, currentUser, GYM_CONNECT_API) {
 
   $scope.login = function(user) {
     $ionicLoading.show({
@@ -9,13 +9,13 @@ app.controller('LoginCtrl', function($scope, $http, $ionicLoading, $state, $ioni
     if ($scope.loginForm.$valid){
       authService.login(user).success(function(){
         $ionicLoading.hide();
-        console.log('Login Success, Token: ', currentUserService.token);
+        console.log('Login Success, Token: ', currentUser.token);
         console.log('Sign-In', user);
         // localStorage.setItem('user', user.email);
         // alert(user.email);
         // alert(localStorage.getItem('user'));
-        // localStorage.setItem('token', currentUserService.token);
-        // localStorage.setItem('id', currentUserService.id);
+        // localStorage.setItem('token', currentUser.token);
+        // localStorage.setItem('id', currentUser.id);
         //window.location.reload();
         $state.go('myAccount');
       }).error(function()

@@ -27,8 +27,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
   .state('messages', {
     url: '/messages',
-    templateUrl: 'templates/messages.html',
-    controller: 'MessagesCtrl'
+    templateUrl: 'templates/message.html',
+    controller: 'MessageCtrl'
+  })
+
+  .state('conversations', {
+    url: '/conversations',
+    templateUrl: 'templates/conversations.html',
+    controller: 'ConversationsCtrl'
   })
 
   .state('myAccount', {

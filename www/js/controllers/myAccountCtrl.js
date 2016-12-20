@@ -1,4 +1,4 @@
-app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $ionicLoading, $ionicPopup, currentUserService, $cordovaCamera, GYM_CONNECT_API){
+app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $ionicLoading, $ionicPopup, currentUser, $cordovaCamera, GYM_CONNECT_API){
   $scope.WorkoutLevels = [
     'beginner',
     'intermediate',
@@ -31,24 +31,24 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
     ];
 
   $http({ method: 'GET',
-            url: GYM_CONNECT_API.url + "/users/" + currentUserService.id,
-            headers: {'Authorization' : currentUserService.token}
+            url: GYM_CONNECT_API.url + "/users/" + currentUser.id,
+            headers: {'Authorization' : currentUser.token}
           })
           .success( function( data )
           {
             // TODO:
             console.log('Return Data From Get User Account Info from Api:', JSON.stringify(data, null, 4));
-            currentUserService.name = data.name;
-            currentUserService.email = data.email;
-            currentUserService.workout_level = data.workout_level;
-            currentUserService.gender = data.gender;
-            currentUserService.image_url = data.image_url;
-            currentUserService.gym = data.gym;
-            currentUserService.hours_in_gym = data.hours_in_gym;
+            currentUser.name = data.name;
+            currentUser.email = data.email;
+            currentUser.workout_level = data.workout_level;
+            currentUser.gender = data.gender;
+            currentUser.image_url = data.image_url;
+            currentUser.gym = data.gym;
+            currentUser.hours_in_gym = data.hours_in_gym;
 
             $scope.profileImgSrc = data.image_url;
 
-            $scope.current_user = currentUserService;
+            $scope.current_user = currentUser;
           }
         )
         .error( function(error)
@@ -64,9 +64,9 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
     var index = (parseInt(day) * 24) + parseInt(hour);
 
     console.log("Calc Index: ", index);
-    currentUserService.hours_in_gym.push(index);
-    console.log("current user service hours: ", currentUserService.hours_in_gym);
-    $scope.current_user = currentUserService;
+    currentUser.hours_in_gym.push(index);
+    console.log("current user service hours: ", currentUser.hours_in_gym);
+    $scope.current_user = currentUser;
   };
 
   $scope.indexToDayTime = function(index){
@@ -80,17 +80,17 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
     $ionicLoading.show({
         template: '<p>Updating your information please wait...</p><ion-spinner></ion-spinner>'
     });
-    console.log("Inside update User function: ",  JSON.stringify(currentUserService, null, 4));
+    console.log("Inside update User function: ",  JSON.stringify(currentUser, null, 4));
     $http({ method: 'POST',
-              url: GYM_CONNECT_API.url + "/users/" + currentUserService.id,
+              url: GYM_CONNECT_API.url + "/users/" + currentUser.id,
               data: {
-                "name": currentUserService.name,
-                "gender": currentUserService.gender,
-                "hours_in_gym[]": currentUserService.hours_in_gym,
-                "workout_level": currentUserService.workout_level
-                // "image": currentUserService.image
+                "name": currentUser.name,
+                "gender": currentUser.gender,
+                "hours_in_gym[]": currentUser.hours_in_gym,
+                "workout_level": currentUser.workout_level
+                // "image": currentUser.image
               },
-              headers: {'Authorization' : currentUserService.token}
+              headers: {'Authorization' : currentUser.token}
 
             })
             .success( function( data )
@@ -128,8 +128,8 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
         };
         $cordovaCamera.getPicture(options).then(function(imageURI) {
           $ionicLoading.hide(); //--Hide loading for camera
-          currentUserService.image = imageURI;
-          $scope.profileImgSrc = currentUserService.image;
+          currentUser.image = imageURI;
+          $scope.profileImgSrc = currentUser.image;
 
           //------File Transfer of Image to Server
           var Uoptions = new FileUploadOptions();
@@ -137,12 +137,12 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
           Uoptions.mimeType ="image/jpeg";
           Uoptions.chunkedMode = false;
           Uoptions.params = {};
-          Uoptions.headers = {'Authorization' : currentUserService.token};
+          Uoptions.headers = {'Authorization' : currentUser.token};
 
           var ft = new FileTransfer();
-          console.log('File upload: ', currentUserService.image);
+          console.log('File upload: ', currentUser.image);
 
-          var uri = encodeURI(GYM_CONNECT_API.url + "/users/" + currentUserService.id);
+          var uri = encodeURI(GYM_CONNECT_API.url + "/users/" + currentUser.id);
 
           var win = function (r) {
             console.log("Code = " + r.responseCode);
@@ -181,7 +181,7 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
               }
           };
 
-          ft.upload(currentUserService.image, uri, win, fail, Uoptions);
+          ft.upload(currentUser.image, uri, win, fail, Uoptions);
           //------End File Transfer
 
         }, function(err) {

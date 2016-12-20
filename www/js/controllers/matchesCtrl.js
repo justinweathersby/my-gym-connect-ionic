@@ -1,11 +1,11 @@
-app.controller('MatchesCtrl', function($scope,$state, $http, $stateParams, $ionicPopup, $ionicLoading, currentUserService, $ionicModal, GYM_CONNECT_API)
+app.controller('MatchesCtrl', function($scope,$state, $http, $stateParams, $ionicPopup, $ionicLoading, currentUser, $ionicModal, GYM_CONNECT_API)
 {
   $ionicLoading.show({
       template: '<p>Loading...</p><ion-spinner></ion-spinner>'
     });
-  $http({ method: 'GET',
+    $http({ method: 'GET',
             url: GYM_CONNECT_API.url + "/matches",
-            headers: {'Authorization' : currentUserService.token}
+            headers: {'Authorization' : currentUser.token}
           })
           .success( function( data )
           {
@@ -36,11 +36,13 @@ app.controller('MatchesCtrl', function($scope,$state, $http, $stateParams, $ioni
       });
       $http({ method: 'POST',
                 url: GYM_CONNECT_API.url + "/messages",
-                params: {
-                  "user_id": send_to,
+                data: {
+                  "message":{
                   "body": body
+                  },
+                  "recipient_id":send_to
                 },
-                headers: {'Authorization' : currentUserService.token}
+                headers: {'Authorization' : currentUser.token}
 
               })
               .success( function( data )
