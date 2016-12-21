@@ -30,6 +30,9 @@ app.controller('ConversationsCtrl', function($scope, $state, $http, $stateParams
             }
             $state.go('login');
             $ionicLoading.hide();
+    }).finally(function() {
+           // Stop the ion-refresher from spinning
+           $scope.$broadcast('scroll.refreshComplete');
     });
   };
 

@@ -60,6 +60,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
   .state('tab.myAccount', {
     url: '/myAccount',
+    cache: false,
     views: {
       'tab-myAccount': {
         templateUrl: 'templates/tab-myAccount.html',

@@ -57,12 +57,16 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
     $scope.profileImgSrc = currentUser.image_url;
     $ionicLoading.hide();
 
-  }).error(function(){
+  }).error(function(error){
     $ionicLoading.hide();
-    var alertPopup = $ionicPopup.alert({
-      title: 'Could Not Get Your Profile',
-      template: "Please Restart Your App. If This problem continues please contact us."
-    });
+    if (error.errors === "Not authenticated"){
+      var alertPopup = $ionicPopup.alert({
+        title: 'Error',
+        template: 'Sorry you have been logged out. Please re-login'
+      });
+    }
+    $state.go('login');
+    $ionicLoading.hide();
   });
 
   $scope.addWorkoutTime = function(day, hour)

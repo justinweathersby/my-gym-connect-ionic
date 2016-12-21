@@ -1,12 +1,16 @@
 <ion-view view-title="Conversations">
   <ion-content ng-init="getConversations()">
-      <div class="list">
-          <a ng-repeat="convo in conversations"class="item item-avatar" ng-click="openConversation(convo)">
-            <img ng-src="{{convo.sender_image}}">
-            <span style="float:right; font-size: 12px;">{{convo.last_message.created_at}}</span>
-            <h2>{{convo.sender_name}} </h2>
-            <p>{{convo.last_message.body}}</p>
-          </a>
-      </div>
+    <ion-refresher
+      pulling-text="Pull to refresh matches..."
+      on-refresh="getConversations()">
+    </ion-refresher>
+    <div class="list">
+        <a ng-repeat="convo in conversations"class="item item-avatar" ng-click="openConversation(convo)">
+          <img ng-src="{{convo.sender_image}}">
+          <span style="float:right; font-size: 12px;">{{convo.last_message.created_at}}</span>
+          <h2>{{convo.sender_name}} </h2>
+          <p>{{convo.last_message.body}}</p>
+        </a>
+    </div>
   </ion-content>
 </ion-view>
