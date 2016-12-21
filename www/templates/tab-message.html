@@ -7,5 +7,19 @@
             <p>{{message.body}}</p>
           </div>
       </div>
+
+
   </ion-content>
+  <ion-footer-bar style="height: 60px;">
+    <div class="button-bar">
+      <div class="item item-divider" style="width:100%">
+        <button class="button button-small button-positive icon-left ion-reply" style="float:right" ng-click="reply(replyMessage.body)">Message</button>
+        <div style="overflow: hidden; padding-right: .5em;">
+          <input type="text" ng-model="replyMessage.body" style="width: 100%;" />
+        </div>
+      </div>
+    </div>
+  </ion-footer-bar>
 </ion-view>
+
+<!-- startConversation(match.id, replyMessage.body) -->
