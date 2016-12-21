@@ -1,5 +1,5 @@
 <ion-view view-title="Conversations">
-  <ion-content>
+  <ion-content ng-init="getConversations()">
       <div class="list">
           <a ng-repeat="convo in conversations"class="item item-avatar" ng-click="openConversation(convo)">
             <img ng-src="{{convo.sender_image}}">

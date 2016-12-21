@@ -91,32 +91,36 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
     });
     console.log("Inside update User function: ",  JSON.stringify(currentUser, null, 4));
     $http({ method: 'POST',
-              url: GYM_CONNECT_API.url + "/users/" + currentUser.id,
-              data: {
-                "name": currentUser.name,
-                "gender": currentUser.gender,
-                "hours_in_gym[]": currentUser.hours_in_gym,
-                "workout_level": currentUser.workout_level
-                // "image": currentUser.image
-              },
-              headers: {'Authorization' : currentUser.token}
+            url: GYM_CONNECT_API.url + "/users/" + currentUser.id,
+            data: {
+              "name": currentUser.name,
+              "gender": currentUser.gender,
+              "hours_in_gym[]": currentUser.hours_in_gym,
+              "workout_level": currentUser.workout_level
+            },
+            headers: {'Authorization' : currentUser.token}
 
-            })
-            .success( function( data )
-            {
-              // TODO:
-              console.log('Return Data From Get User Account Info from Api:', JSON.stringify(data, null, 4));
-              $ionicLoading.hide();
-
-            }
-          )
-          .error( function(error)
+          })
+          .success( function( data )
           {
-            console.log("Update User Failed...");
-            console.log("Error: ", error);
+            var alertPopup = $ionicPopup.alert({
+              title: 'Success',
+              template: 'Your account has been successfully updated'
+            });
             $ionicLoading.hide();
-
+          }
+        )
+        .error( function(error)
+        {
+          console.log("Update User Failed...");
+          console.log("Error: ", error);
+          var alertPopup = $ionicPopup.alert({
+            title: 'Error',
+            template: 'Sorry your account could not be updated. Please log out and try again. If the problem persists please contact support'
           });
+          $ionicLoading.hide();
+
+        });
   };
 
   $scope.selectPicture = function() {

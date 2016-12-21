@@ -28,6 +28,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
   .state('tab.dash', {
     url: '/dash',
+    cache: false,
     views: {
       'tab-dash': {
         templateUrl: 'templates/tab-dash.html',
@@ -38,6 +39,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
   .state('tab.conversations', {
     url: '/conversations',
+    cache: false,
     views: {
       'tab-conversations': {
         templateUrl: 'templates/tab-conversations.html',
