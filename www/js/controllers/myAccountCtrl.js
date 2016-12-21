@@ -41,10 +41,10 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
        {id: 17, name: ' 5:00pm'},
        {id: 18, name: ' 6:00pm'},
        {id: 19, name: ' 7:00pm'},
-       {id: 19, name: ' 8:00pm'},
-       {id: 20, name: ' 9:00pm'},
-       {id: 21, name: ' 10:00pm'},
-       {id: 22, name: ' 11:00pm'}
+       {id: 20, name: ' 8:00pm'},
+       {id: 21, name: ' 9:00pm'},
+       {id: 22, name: ' 10:00pm'},
+       {id: 23, name: ' 11:00pm'}
     ];
 
 

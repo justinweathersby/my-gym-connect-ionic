@@ -58,8 +58,7 @@ app.service('authService', function($http, currentUser, GYM_CONNECT_API){
     return  $http({method: 'POST',
                    url: GYM_CONNECT_API.url + '/login',
                    headers: {'X-API-EMAIL' : user.email, 'X-API-PASS' : user.password}})
-      .success( function( data )
-      {
+      .success( function( data ){
         // TODO:
         console.log('Return Data From Login Post to Api:', JSON.stringify(data, null, 4));
         currentUser.token = data.user.auth_token;
@@ -74,12 +73,8 @@ app.service('authService', function($http, currentUser, GYM_CONNECT_API){
         //--Set header for all subsequent requests
         $http.defaults.headers.common['Authorization'] = data.user.auth_token;
 
-      }
-    )
-    .error( function(error)
-    {
+    }).error( function(error){
       console.log(error);
-
     });
   }; //--End of login function
 
