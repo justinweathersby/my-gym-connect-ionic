@@ -19,57 +19,78 @@ app.config(function($stateProvider, $urlRouterProvider) {
     controller: 'SignupCtrl'
   })
 
+  .state('tab', {
+    url: '/tab',
+    abstract: true,
+    templateUrl: 'templates/tabs.html',
+    controller: 'TabsCtrl'
+  })
+
+  .state('tab.dash', {
+    url: '/dash',
+    views: {
+      'tab-dash': {
+        templateUrl: 'templates/tab-dash.html',
+        controller: 'TabsCtrl'
+      }
+    }
+  })
+
+  .state('tab.conversations', {
+    url: '/conversations',
+    views: {
+      'tab-conversations': {
+        templateUrl: 'templates/tab-conversations.html',
+        controller: 'ConversationsCtrl'
+      }
+    }
+  })
+
+  .state('tab.messages', {
+    url: '/messages',
+    views: {
+      'tab-messages': {
+        templateUrl: 'templates/tab-message.html',
+        controller: 'MessageCtrl'
+      }
+    }
+  })
+
+  .state('tab.myAccount', {
+    url: '/myAccount',
+    views: {
+      'tab-myAccount': {
+        templateUrl: 'templates/tab-myAccount.html',
+        controller: 'MyAccountCtrl'
+      }
+    }
+  })
+
   .state('matches', {
     url: '/matches',
     templateUrl: 'templates/matches.html',
     controller: 'MatchesCtrl'
   })
 
-  .state('messages', {
-    url: '/messages',
-    templateUrl: 'templates/message.html',
-    controller: 'MessageCtrl'
-  })
+  // .state('messages', {
+  //   url: '/messages',
+  //   templateUrl: 'templates/message.html',
+  //   controller: 'MessageCtrl'
+  // })
 
-  .state('conversations', {
-    url: '/conversations',
-    templateUrl: 'templates/conversations.html',
-    controller: 'ConversationsCtrl'
-  })
-
-  .state('myAccount', {
-    url: '/myAccount',
-    templateUrl: 'templates/myAccount.html',
-    controller: 'MyAccountCtrl'
-  });
-
-  // setup an abstract state for the tabs directive
-  // .state('tab', {
-  //   url: '/tab',
-  //   abstract: true,
-  //   templateUrl: 'templates/tabs.html'
+  // .state('conversations', {
+  //   url: '/conversations',
+  //   templateUrl: 'templates/conversations.html',
+  //   controller: 'ConversationsCtrl'
   // })
   //
-  // // Each tab has its own nav history stack:
-  // .state('tab.dash', {
-  //   url: '/dash',
-  //   views: {
-  //     'tab-dash': {
-  //       templateUrl: 'templates/tab-dash.html',
-  //       controller: 'DashCtrl'
-  //     }
-  //   }
-  // })
-  //
-  // .state('tab.chats', {
-  //     url: '/chats',
-  //     views: {
-  //       'tab-chats': {
-  //         templateUrl: 'templates/tab-chats.html',
-  //         controller: 'ChatsCtrl'
-  //       }
-  //     }
-  //   })
+  // .state('myAccount', {
+  //   url: '/myAccount',
+  //   templateUrl: 'templates/myAccount.html',
+  //   controller: 'MyAccountCtrl'
+  // });
+
+
   //   .state('tab.chat-detail', {
   //     url: '/chats/:chatId',
   //     views: {
@@ -79,16 +100,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
   //       }
   //     }
   //   })
-  //
-  // .state('tab.account', {
-  //   url: '/account',
-  //   views: {
-  //     'tab-account': {
-  //       templateUrl: 'templates/tab-account.html',
-  //       controller: 'AccountCtrl'
-  //     }
-  //   }
-  //});
+
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login'); //--default go to page
