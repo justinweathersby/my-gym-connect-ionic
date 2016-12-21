@@ -1,4 +1,4 @@
-app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $ionicLoading, $ionicPopup, currentUser, currentUserService, $cordovaCamera, GYM_CONNECT_API){
+app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $ionicLoading, $ionicPopup,$ionicPlatform, currentUser, currentUserService, $cordovaCamera, GYM_CONNECT_API){
   $scope.WorkoutLevels = [
     'beginner',
     'intermediate',
@@ -53,19 +53,22 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
   });
 
   currentUserService.getUser().success(function(){
+    console.log("Inside myaccount ctrl current user success");
     $scope.current_user = currentUser;
     $scope.profileImgSrc = currentUser.image_url;
     $ionicLoading.hide();
 
   }).error(function(error){
-    $ionicLoading.hide();
+    console.log("Error in myAccount Ctrl");
+    console.log("Error ", JSON.stringify(error, null, 4));
     if (error.errors === "Not authenticated"){
       var alertPopup = $ionicPopup.alert({
         title: 'Error',
         template: 'Sorry you have been logged out. Please re-login'
       });
+      $state.go('login');
     }
-    $state.go('login');
+
     $ionicLoading.hide();
   });
 
@@ -99,7 +102,7 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
             data: {
               "name": currentUser.name,
               "gender": currentUser.gender,
-              "hours_in_gym[]": currentUser.hours_in_gym,
+              "hours_in_gym": currentUser.hours_in_gym,
               "workout_level": currentUser.workout_level
             },
             headers: {'Authorization' : currentUser.token}
@@ -131,10 +134,11 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
     console.log('Selected option to upload a picture...');
 
     $ionicLoading.show({
-        template: '<p>Warming Camera Up...</p><ion-spinner></ion-spinner>'
+        template: '<p>Warming Camera Up...</p><ion-spinner></ion-spinner>',
+        duration: 6000
     });
 
-    document.addEventListener('deviceready', function() {
+    $ionicPlatform.ready(function() {
         console.log("Device is ready..")
         var options = {
             quality: 100,
@@ -206,7 +210,7 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
             $ionicLoading.hide();
         });
 
-      }, false); // device ready
+       }, false); // device ready
   }; // Select picture
 
 });

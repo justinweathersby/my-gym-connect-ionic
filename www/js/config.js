@@ -50,6 +50,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
   .state('tab.messages', {
     url: '/messages',
+    cache: false,
     views: {
       'tab-conversations': {
         templateUrl: 'templates/tab-message.html',

@@ -28,8 +28,16 @@ app.controller('MessageCtrl', function($scope, $state, $http, $stateParams, $tim
         .error( function(error)
         {
           console.log( JSON.stringify(error, null, 4));
+          if (error.errors === "Not authenticated"){
+            var alertPopup = $ionicPopup.alert({
+              title: 'Error',
+              template: 'Sorry you have been logged out. Please re-login'
+            });
+            $state.go('login');
+          }
+
           $ionicLoading.hide();
-          // $state.go('conversations');
+          $state.go('tab.conversations');
         });
   };
 

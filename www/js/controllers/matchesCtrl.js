@@ -1,6 +1,6 @@
 app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
                                        $ionicPopup, $ionicLoading, $ionicModal,
-                                       currentUser,
+                                       currentUser, currentConversation,
                                        GYM_CONNECT_API)
 {
 
@@ -57,7 +57,15 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
       }).success( function( data ){
               $ionicLoading.hide();
               console.log('Return Data post new message from Api:', JSON.stringify(data, null, 4));
-              $state.go('messages');
+              //--add new current coversation
+              //--then go to tab.messages
+              currentConversation.id = data.conversation_id;
+              currentConversation.sender_id = data.partner_id;
+              currentConversation.sender_name = data.partner_name;
+              console.log('Beefore headed to messages:', JSON.stringify(currentConversation, null, 4));
+              console.log('Current Convo id:', JSON.stringify(currentConversation.id, null, 4));
+
+              $state.go('tab.messages');
       }).error( function(error){
               $ionicLoading.hide();
               console.log(error);

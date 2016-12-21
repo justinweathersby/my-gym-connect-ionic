@@ -18,11 +18,13 @@ app.service('currentUser', function(){
 app.service('currentUserService', function($http, currentUser, GYM_CONNECT_API){
   this.clear = function(){};
   this.getUser = function(){
+    console.log("inside currentUserService ", JSON.stringify(currentUser, null, 4));
     return $http({ method: 'GET',
               url: GYM_CONNECT_API.url + "/users/" + currentUser.id,
               headers: {'Authorization' : currentUser.token}
     }).success( function( data )
     {
+      console.log("Inside currentUserService getUser success");
       currentUser.name = data.name;
       currentUser.email = data.email;
       currentUser.workout_level = data.workout_level;
@@ -31,7 +33,7 @@ app.service('currentUserService', function($http, currentUser, GYM_CONNECT_API){
       currentUser.gym = data.gym;
       currentUser.hours_in_gym = data.hours_in_gym;
     }
-    ).error( function(error){console.log(error);});
+  ).error( function(error){console.log(JSON.stringify(error,null,4));});
   };
 });
 

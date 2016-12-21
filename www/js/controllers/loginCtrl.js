@@ -3,24 +3,17 @@ app.controller('LoginCtrl', function($scope, $http, $ionicLoading, $state, $ioni
   $scope.login = function(user) {
     $ionicLoading.show({
      template: '<p style="font-family:Brandon;color:grey;">Logging in</p><ion-spinner class="spinner-positive" icon="dots"></ion-spinner>',
+     duration: 6000,
      hideOnStageChange: true
     });
 
     if ($scope.loginForm.$valid){
       authService.login(user).success(function(){
-        $ionicLoading.hide();
-        console.log('Login Success, Token: ', currentUser.token);
-        console.log('Sign-In', user);
-        // localStorage.setItem('user', user.email);
-        // alert(user.email);
-        // alert(localStorage.getItem('user'));
-        // localStorage.setItem('token', currentUser.token);
-        // localStorage.setItem('id', currentUser.id);
-        //window.location.reload();
-        // $state.go('myAccount');
+        // console.log('Login Success, Token: ', currentUser.token);
+        // console.log('Sign-In', user);
         $state.go('tab.dash');
-      }).error(function()
-      {
+        $ionicLoading.hide();
+      }).error(function(){
         $ionicLoading.hide();
         var alertPopup = $ionicPopup.alert({
           title: 'Login Unsuccessful',
@@ -28,7 +21,8 @@ app.controller('LoginCtrl', function($scope, $http, $ionicLoading, $state, $ioni
         });
       });
     }
-  }; //end of login function
+  };
+  //end of login function
   $scope.goToSignUp = function() {
     $state.go('signup');
   };
