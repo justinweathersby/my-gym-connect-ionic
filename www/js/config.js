@@ -31,7 +31,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     views: {
       'tab-dash': {
         templateUrl: 'templates/tab-dash.html',
-        controller: 'TabsCtrl'
+        controller: 'MatchesCtrl'
       }
     }
   })
@@ -49,7 +49,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
   .state('tab.messages', {
     url: '/messages',
     views: {
-      'tab-messages': {
+      'tab-conversations': {
         templateUrl: 'templates/tab-message.html',
         controller: 'MessageCtrl'
       }
@@ -64,43 +64,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         controller: 'MyAccountCtrl'
       }
     }
-  })
-
-  .state('matches', {
-    url: '/matches',
-    templateUrl: 'templates/matches.html',
-    controller: 'MatchesCtrl'
-  })
-
-  // .state('messages', {
-  //   url: '/messages',
-  //   templateUrl: 'templates/message.html',
-  //   controller: 'MessageCtrl'
-  // })
-
-  // .state('conversations', {
-  //   url: '/conversations',
-  //   templateUrl: 'templates/conversations.html',
-  //   controller: 'ConversationsCtrl'
-  // })
-  //
-  // .state('myAccount', {
-  //   url: '/myAccount',
-  //   templateUrl: 'templates/myAccount.html',
-  //   controller: 'MyAccountCtrl'
-  // });
-
-
-  //   .state('tab.chat-detail', {
-  //     url: '/chats/:chatId',
-  //     views: {
-  //       'tab-chats': {
-  //         templateUrl: 'templates/chat-detail.html',
-  //         controller: 'ChatDetailCtrl'
-  //       }
-  //     }
-  //   })
-
+  });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login'); //--default go to page

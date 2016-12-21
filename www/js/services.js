@@ -15,6 +15,26 @@ app.service('currentUser', function(){
 
 });
 
+app.service('currentUserService', function($http, currentUser, GYM_CONNECT_API){
+  this.clear = function(){};
+  this.getUser = function(){
+    return $http({ method: 'GET',
+              url: GYM_CONNECT_API.url + "/users/" + currentUser.id,
+              headers: {'Authorization' : currentUser.token}
+    }).success( function( data )
+    {
+      currentUser.name = data.name;
+      currentUser.email = data.email;
+      currentUser.workout_level = data.workout_level;
+      currentUser.gender = data.gender;
+      currentUser.image_url = data.image_url;
+      currentUser.gym = data.gym;
+      currentUser.hours_in_gym = data.hours_in_gym;
+    }
+    ).error( function(error){console.log(error);});
+  };
+});
+
 app.service('currentConversation', function(){
   this.id =
   this.sender_id =
@@ -43,6 +63,7 @@ app.service('authService', function($http, currentUser, GYM_CONNECT_API){
         currentUser.token = data.user.auth_token;
         currentUser.id = data.user.id;
         currentUser.role = data.user.role;
+        currentUser.name = data.user.name;
         // console.log('UserService token: ', data.user.auth_token)
 
         localStorage.setItem('user', user.email);

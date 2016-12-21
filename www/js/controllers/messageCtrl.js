@@ -31,4 +31,13 @@ app.controller('MessageCtrl', function($scope, $state, $http, $stateParams,
           // $state.go('conversations');
         });
   };
+
+  $scope.changeName = function(name){
+    console.log("Name: ", name);
+    console.log("CurrentUser: ", currentUser.name);
+    if (name === currentUser.name){
+      return "Me";
+    }
+    return name;
+  };
 });

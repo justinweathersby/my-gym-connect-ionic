@@ -48,7 +48,7 @@ app.controller('ConversationsCtrl', function($scope, $state, $http, $stateParams
     //--Set Conversation
     console.log("OpenConvo Convo", JSON.stringify(convo,null, 4));
     currentConversation.id = convo.conversation_id;
-    $state.go('tab-messages');
+    $state.go('tab.messages');
   };
 
   // $scope.reply = function(send_to, body){

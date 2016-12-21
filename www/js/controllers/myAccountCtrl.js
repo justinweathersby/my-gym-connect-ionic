@@ -1,4 +1,4 @@
-app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $ionicLoading, $ionicPopup, currentUser, $cordovaCamera, GYM_CONNECT_API){
+app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $ionicLoading, $ionicPopup, currentUser, currentUserService, $cordovaCamera, GYM_CONNECT_API){
   $scope.WorkoutLevels = [
     'beginner',
     'intermediate',
@@ -27,34 +27,43 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
        {id: 3, name: ' 3:00am'},
        {id: 4, name: ' 4:00am'},
        {id: 5, name: ' 5:00am'},
-       {id: 6, name: ' 6:00am'}
+       {id: 6, name: ' 6:00am'},
+       {id: 7, name: ' 7:00am'},
+       {id: 8, name: ' 8:00am'},
+       {id: 9, name: ' 9:00am'},
+       {id: 10, name: ' 10:00am'},
+       {id: 11, name: ' 11:00am'},
+       {id: 12, name: ' 12:00pm'},
+       {id: 13, name: ' 1:00pm'},
+       {id: 14, name: ' 2:00pm'},
+       {id: 15, name: ' 3:00pm'},
+       {id: 16, name: ' 4:00pm'},
+       {id: 17, name: ' 5:00pm'},
+       {id: 18, name: ' 6:00pm'},
+       {id: 19, name: ' 7:00pm'},
+       {id: 19, name: ' 8:00pm'},
+       {id: 20, name: ' 9:00pm'},
+       {id: 21, name: ' 10:00pm'},
+       {id: 22, name: ' 11:00pm'}
     ];
 
-  $http({ method: 'GET',
-            url: GYM_CONNECT_API.url + "/users/" + currentUser.id,
-            headers: {'Authorization' : currentUser.token}
-          })
-          .success( function( data )
-          {
-            // TODO:
-            console.log('Return Data From Get User Account Info from Api:', JSON.stringify(data, null, 4));
-            currentUser.name = data.name;
-            currentUser.email = data.email;
-            currentUser.workout_level = data.workout_level;
-            currentUser.gender = data.gender;
-            currentUser.image_url = data.image_url;
-            currentUser.gym = data.gym;
-            currentUser.hours_in_gym = data.hours_in_gym;
 
-            $scope.profileImgSrc = data.image_url;
+  $ionicLoading.show({
+    template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+  });
 
-            $scope.current_user = currentUser;
-          }
-        )
-        .error( function(error)
-        {
-          console.log(error);
-        });
+  currentUserService.getUser().success(function(){
+    $scope.current_user = currentUser;
+    $scope.profileImgSrc = currentUser.image_url;
+    $ionicLoading.hide();
+
+  }).error(function(){
+    $ionicLoading.hide();
+    var alertPopup = $ionicPopup.alert({
+      title: 'Could Not Get Your Profile',
+      template: "Please Restart Your App. If This problem continues please contact us."
+    });
+  });
 
   $scope.addWorkoutTime = function(day, hour)
   {

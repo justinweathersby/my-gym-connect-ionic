@@ -3,7 +3,7 @@
       <div class="list">
           <div ng-repeat="message in messages"class="item item-avatar">
             <!-- <span style="float:right; font-size: 12px;">{{convo.last_message.created_at}}</span> -->
-            <h2>{{message.sender_name}} </h2>
+            <h2>{{changeName(message.sender_name)}} </h2>
             <p>{{message.body}}</p>
           </div>
       </div>
