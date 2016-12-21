@@ -5,15 +5,11 @@
       on-refresh="getMatches()">
     </ion-refresher>
     <div ng-hide="matches.length">
-      <!-- <div class="row">
-          <div class="col"> -->
-              <div class="text-center" style="margin-top: 35vh; background-color:rgba(30, 180, 255, .9); border-radius: 5px; max-width: 40%; margin-left: auto; margin-right: auto; padding:10px">
-                  <h4 style="text-align: center; color: white">No Matches</h4>
-                  <hr style=" isplay: block; height: 0px; border: 0; border-top: 1px solid #fff; border-bottom: 1px solid #fff; border-radius:2px; margin: 1em auto; padding: 0; width: 90% "/>
-                  <p style="color: white"><b>Note:</b> Try to diversify your workout times to find more workout buddies</p>
-              </div>
-          <!-- </div>
-      </div> -->
+      <div class="text-center" style="margin-top: 35vh; background-color:rgba(30, 180, 255, .9); border-radius: 5px; max-width: 40%; margin-left: auto; margin-right: auto; padding:10px">
+          <h4 style="text-align: center; color: white">No Matches</h4>
+          <hr style=" isplay: block; height: 0px; border: 0; border-top: 1px solid #fff; border-bottom: 1px solid #fff; border-radius:2px; margin: 1em auto; padding: 0; width: 90% "/>
+          <p style="color: white"><b>Note:</b> Try to diversify your workout times to find more workout buddies</p>
+      </div>
     </div>
     <div ng-repeat="match in matches" >
       <div class="card" style="">
