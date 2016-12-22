@@ -24,7 +24,7 @@
          <p>Workout Level: {{match.workout_level}}</p>
          <p>Gender: {{match.gender}}</p>
          <p>Hours In Gym:</p>
-         <div style="height: 16vh; overflow-y:auto; border: 1px solid black">
+         <div style="max-height: 16vh; overflow-y:auto; border: 1px solid black">
            <div ng-repeat="hour in match.hours_in_gym">
              {{indexToDayTime(hour) | date:"EEEE 'at' h:mma"}}
              <br />

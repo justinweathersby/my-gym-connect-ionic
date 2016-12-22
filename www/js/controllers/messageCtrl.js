@@ -38,9 +38,12 @@ app.controller('MessageCtrl', function($scope, $state, $http, $stateParams, $tim
 
           $ionicLoading.hide();
           $state.go('tab.conversations');
+        }).finally(function() {
+               // Stop the ion-refresher from spinning
+               $scope.$broadcast('scroll.refreshComplete');
         });
   };
-  
+
   $scope.getMessages();
 
   $scope.changeName = function(name){
