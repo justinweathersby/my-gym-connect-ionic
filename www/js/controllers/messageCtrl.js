@@ -5,9 +5,9 @@ app.controller('MessageCtrl', function($scope, $state, $http, $stateParams, $tim
 {
 
   //---Call to get conversations
-  getMessages();
 
-  function getMessages() {
+
+  $scope.getMessages = function() {
     $ionicLoading.show({
         template: '<p>Loading...</p><ion-spinner></ion-spinner>'
     });
@@ -40,6 +40,8 @@ app.controller('MessageCtrl', function($scope, $state, $http, $stateParams, $tim
           $state.go('tab.conversations');
         });
   };
+  
+  $scope.getMessages();
 
   $scope.changeName = function(name){
     console.log("Name: ", name);

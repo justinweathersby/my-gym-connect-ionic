@@ -1,17 +1,16 @@
 <ion-view view-title="My Account">
   <ion-content class="padding" style="padding-top:0" >
     <div class="list list-inset">
-      <label class="form-box item item-input">
-        <i class="icon ion-ios-email-outline placeholder-icon"></i>
-        <input style="font-size:20px;padding-top:10px;font-family:Brandon;color:grey;" type="email" placeholder="Email" ng-model="current_user.email" disabled="disabled" readonly>
+     <label class="item item-input">Your Email:&nbsp;
+        <span style="font-size:20px;padding-top:10px;font-family:Brandon;color:#55b74e;">{{current_user.email}}</span>
       </label>
-      <label class="form-box item item-input">Your Gym: &nbsp;
-        <input style="font-size:20px;padding-top:10px;font-family:Brandon;color:grey;" type="text" placeholder="Gym" ng-model="current_user.gym"  disabled="disabled" readonly>
+      <label class="item item-input">Your Gym: &nbsp;
+        <span style="font-size:20px;padding-top:10px;font-family:Brandon;color:#55b74e;">{{current_user.gym}}</span>
       </label>
     </div>
     <div style="text-align: center;">
-      <img ng-src="{{profileImgSrc}}" alt="No Image Uploaded" style="height:25vh; margin: 0 30%;">
-      <button style="font-family:Brandon; background-color: #55b74e; width:30%; margin:0 auto" class="button button-block button-positive" ng-click="selectPicture()">
+      <img ng-src="{{profileImgSrc}}" alt="No Image Uploaded" style="height:25vh;">
+      <button style="font-family:Brandon; background-color: #55b74e; width:60%; margin:0 auto" class="button button-block button-positive" ng-click="selectPicture()">
         Add/Edit Image
       </button>
     </div>
