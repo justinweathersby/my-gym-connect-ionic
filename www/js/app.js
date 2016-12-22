@@ -11,10 +11,10 @@ var app = angular.module('my-gym-connect-app', ['ionic', 'ngCordova'])
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
-    TestFairy.begin('<iOS SDK App Token from http://app.testfairy.com/settings>');
+    TestFairy.begin('993218db594324f249e28bfa5a72f74f0d21732d');
 
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
       cordova.plugins.Keyboard.disableScroll(true);
 
     }

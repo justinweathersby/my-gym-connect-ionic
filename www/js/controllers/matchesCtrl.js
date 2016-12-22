@@ -3,7 +3,12 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
                                        currentUser, currentConversation,
                                        GYM_CONNECT_API)
 {
-
+    $scope.options = {
+      loop: false,
+      effect: 'fade',
+      speed: 500,
+    };
+    
     $scope.getMatches = function(){
       $ionicLoading.show({
         template: '<p>Loading...</p><ion-spinner></ion-spinner>'
