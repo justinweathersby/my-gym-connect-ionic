@@ -29,7 +29,6 @@ app.controller('SignupCtrl', function($scope,$state, $http, $stateParams, $ionic
   	})
     .error( function(error)
     {
-      // window.plugins.toast.showShortCenter('username already taken');
       var alertPopup = $ionicPopup.alert({
         title: 'Sorry',
         template: "An error occured while creating your account.. Please try again. If problem continues please contact support with these errors: " + error.errors

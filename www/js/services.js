@@ -8,15 +8,16 @@ app.service('currentUser', function(){
   this.email = null;
   this.image_url = null;
   this.workout_level = null;
+  this.workout_time = null;
   this.gender = null;
-  this.gym = null;
-  this.hours_in_gym = [];
+  this.match_gender = null;
+  this.gym = null;;
   this.image = null;
 
 });
 
 app.service('currentUserService', function($http, currentUser, GYM_CONNECT_API){
-  this.clear = function(){};
+  // this.clear = function(){};
   this.getUser = function(){
     console.log("inside currentUserService ", JSON.stringify(currentUser, null, 4));
     return $http({ method: 'GET',
@@ -28,10 +29,12 @@ app.service('currentUserService', function($http, currentUser, GYM_CONNECT_API){
       currentUser.name = data.name;
       currentUser.email = data.email;
       currentUser.workout_level = data.workout_level;
+      currentUser.workout_time = data.workout_time;
       currentUser.gender = data.gender;
+      currentUser.gender_match = data.gender_match;
       currentUser.image_url = data.image_url;
       currentUser.gym = data.gym;
-      currentUser.hours_in_gym = data.hours_in_gym;
+      currentUser.description = data.description;
     }
   ).error( function(error){console.log(JSON.stringify(error,null,4));});
   };

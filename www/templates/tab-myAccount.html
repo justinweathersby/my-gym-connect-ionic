@@ -26,60 +26,43 @@
             <i class="icon ion-stats-bars placeholder-icon" style="padding-left:0"></i>Workout Level
           </div>
           <select ng-model="current_user.workout_level">
-              <option >beginner</option>
-              <option>intermediate</option>
-              <option>expert</option>
+             <option ng-repeat="option in WorkoutLevels" value="{{option}}">{{option}}</option>
           </select>
       </label>
 
       <label class="item item-input item-select">
           <div class="input-label">
-            <i class="icon ion-man placeholder-icon" style="padding: 0 0"></i><i class="icon ion-woman placeholder-icon" style="padding-left:0; padding-right:6px;"></i>Gender
+            <i class="icon ion-stats-bars placeholder-icon" style="padding-left:0"></i>Workout Time
           </div>
-          <select ng-model="current_user.gender">
-              <option >male</option>
-              <option>female</option>
+          <select ng-model="current_user.workout_time">
+             <option ng-repeat="option in WorkoutTimes" value="{{option}}">{{option}}</option>
           </select>
       </label>
-    </div>
 
-    <div class="card">
-      <div class="item item-divider">
-        Hours In Gym
-      </div>
-      <div class="item item-text-wrap">
-        <div style="border:1px solid black">
-          <!-- {{indexToDayTime(current_user.hours_in_gym)}} -->
-          <div ng-repeat="time in current_user.hours_in_gym" >
-             {{indexToDayTime(time) | date:"EEEE 'at' h:mma"}}
-             <br />
-           </div>
-        </div>
-        </div>
-
-
-        <label class="item item-input item-select">
-            <div class="input-label">
-              <i class="icon ion-calendar placeholder-icon" style="padding-left: 0"></i>Day of Week
-            </div>
-            <select ng-model="selectedDay">
-              <option ng-repeat="day in daysOfWeek" value="{{day.id}}">{{day.name}}</option>
-            </select>
-        </label>
-        <label class="item item-input item-select">
-            <div class="input-label">
-              <i class="icon ion-clock placeholder-icon" style="padding-left: 0"></i>Hour of Day
-            </div>
-            <select ng-model="selectedHour">
-              <option ng-repeat="hour in hoursInDay" value="{{hour.id}}">{{hour.name}}</option>
-            </select>
-        </label>
-        <div class="row">
-          <div class="col text-right">
-            <button class="button button-small button-positive icon-left ion-plus-circled" ng-click="addWorkoutTime(selectedDay, selectedHour)">Add Time</button>
+      <label class="item item-input item-select">
+          <div class="input-label">
+            <i class="icon ion-man placeholder-icon" style="padding: 0 0"></i><i class="icon ion-woman placeholder-icon" style="padding-left:0; padding-right:6px;"></i>My Gender:
           </div>
-        </div>
-      </div>
+          <select ng-model="current_user.gender">
+              <option ng-repeat="option in Genders" value="{{option}}">{{option}}</option>
+          </select>
+      </label>
+
+      <label class="item item-input item-select">
+          <div class="input-label">
+            <i class="icon ion-man placeholder-icon" style="padding: 0 0"></i><i class="icon ion-woman placeholder-icon" style="padding-left:0; padding-right:6px;"></i>Match Me With:
+          </div>
+          <select ng-model="current_user.gender_match">
+              <option ng-repeat="option in GenderMatch" value="{{option}}">{{option}}</option>
+          </select>
+      </label>
+
+      <label class="form-box item item-input">
+        <i class="icon ion-android-person placeholder-icon"></i>
+        <textarea name="comment" id="comment-textarea" ng-model="current_user.description" placeholder="Description" maxlength="255">
+    	 </textarea>
+        <!-- <input ng-model="current_user.description" type="text" placeholder="Description" maxlength="255" style="font-size:20px;padding-top:10px;font-family:Brandon;color:grey;"> -->
+      </label>
     </div>
 
 
