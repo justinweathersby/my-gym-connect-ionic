@@ -1,5 +1,5 @@
 <ion-view view-title="Conversations">
-  <ion-content ng-init="getConversations()">
+  <ion-content class="lime-green" ng-init="getConversations()">
     <ion-refresher
       pulling-text="Pull to refresh..."
       on-refresh="getConversations()">
@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="list">
-        <a ng-repeat="convo in conversations"class="item item-avatar" ng-click="openConversation(convo)">
+        <a ng-repeat="convo in conversations"class="item item-avatar" ng-click="openConversation(convo)" style="margin:5px; border-radius:5px;">
           <img ng-src="{{convo.sender_image}}">
           <span style="float:right; font-size: 12px;">{{convo.last_message.created_at}}</span>
           <h2>{{convo.sender_name}} </h2>

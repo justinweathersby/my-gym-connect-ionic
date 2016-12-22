@@ -1,1 +1,9 @@
 /* Empty. Add your own CSS if you like */
+.lime-green{
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cdeb8e+0,a5c956+100;Green+3D+%232 */
+  background: #cdeb8e; /* Old browsers */
+  background: -moz-linear-gradient(45deg,  #cdeb8e 0%, #a5c956 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(45deg,  #cdeb8e 0%,#a5c956 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(45deg,  #cdeb8e 0%,#a5c956 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cdeb8e', endColorstr='#a5c956',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
