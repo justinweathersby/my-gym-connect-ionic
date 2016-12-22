@@ -8,7 +8,7 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
       effect: 'fade',
       speed: 500,
     };
-    
+
     $scope.imgLoadingCircle = "<spinner-blue.gif>";
 
     $scope.getMatches = function(){

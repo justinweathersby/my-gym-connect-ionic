@@ -3,11 +3,11 @@
 //     url:'http://.com/api'
 // });
 
-// -- Local Testing API Url
-app.constant('GYM_CONNECT_API', {
-    url: 'http://localhost:3000/api'
-});
-
+// // -- Local Testing API Url
 // app.constant('GYM_CONNECT_API', {
-//     url: 'http://my-gym-connect-staging.herokuapp.com/api'
+//     url: 'http://localhost:3000/api'
 // });
+
+app.constant('GYM_CONNECT_API', {
+    url: 'http://my-gym-connect-staging.herokuapp.com/api'
+});
