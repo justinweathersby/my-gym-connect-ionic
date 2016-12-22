@@ -23,7 +23,7 @@
           </div>
           <div class="item item-text-wrap">
             <div style="text-align: center;">
-              <img ng-src="{{match.image_url}}" alt="No Image Uploaded" style="height: 38vh; max-width: 100%;">
+              <img ng-src="{{ (match.image_url) || (imgLoadingCircle) }}" alt="No Image Uploaded" style="height: 38vh; max-width: 100%;">
             </div>
             <div style="height: 15vh; padding-top: 1vh;  overflow-y:auto">
 

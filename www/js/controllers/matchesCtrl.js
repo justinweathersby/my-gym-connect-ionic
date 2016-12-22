@@ -9,6 +9,8 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
       speed: 500,
     };
     
+    $scope.imgLoadingCircle = "<spinner-blue.gif>";
+
     $scope.getMatches = function(){
       $ionicLoading.show({
         template: '<p>Loading...</p><ion-spinner></ion-spinner>'

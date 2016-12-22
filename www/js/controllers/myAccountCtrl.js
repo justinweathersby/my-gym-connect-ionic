@@ -4,7 +4,7 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
   $scope.WorkoutTimes = ['morning', 'afternoon', 'night', 'all'];
   $scope.GenderMatch = ['male', 'female', 'both'];
 
-
+  $scope.imgLoadingCircle = "<spinner-blue.gif>";
   $scope.base64ImageData = '';
 
   $ionicLoading.show({

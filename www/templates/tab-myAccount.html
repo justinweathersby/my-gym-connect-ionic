@@ -1,7 +1,7 @@
 <ion-view view-title="My Account">
   <ion-content class="padding lime-green" style="padding-top:30px" >
     <div style="text-align: center;">
-      <img ng-src="{{profileImgSrc}}" alt="No Image Uploaded" style="height:25vh; border: 3px solid #E2F6B6; border-radius: 3px;">
+      <img ng-src='{{ (profileImgSrc) || (imgLoadingCircle) }}' alt="No Image Uploaded" style="height:25vh; border: 3px solid #E2F6B6; border-radius: 3px;">
       <button style="font-family:Brandon; background-color: #85AB31; width:60%; margin:0 auto; margin-top:10px" class="button button-block button-positive" ng-click="selectPicture()">
         Add/Edit Image
       </button>
