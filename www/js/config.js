@@ -1,31 +1,26 @@
 app.config(function($stateProvider, $urlRouterProvider) {
-
-  // Ionic uses AngularUI Router which uses the concept of states
-  // Learn more here: https://github.com/angular-ui/ui-router
-  // Set up the various states which the app can be in.
-  // Each state's controller can be found in controllers.js
   $stateProvider
-
-
   .state('login', {
       url: '/login',
       templateUrl: 'templates/login.html',
       controller: 'LoginCtrl'
   })
-
   .state('signup', {
     url: '/signup',
     templateUrl: 'templates/signup.html',
     controller: 'SignupCtrl'
   })
-
+  .state('forgot-password', {
+    url: '/forgot-password',
+    templateUrl: 'templates/forgot-password.html',
+    controller: 'LoginCtrl'
+  })
   .state('tab', {
     url: '/tab',
     abstract: true,
     templateUrl: 'templates/tabs.html',
     controller: 'TabsCtrl'
   })
-
   .state('tab.dash', {
     url: '/dash',
     cache: false,
@@ -36,7 +31,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     }
   })
-
   .state('tab.conversations', {
     url: '/conversations',
     cache: false,
@@ -47,7 +41,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     }
   })
-
   .state('tab.messages', {
     url: '/messages',
     cache: false,
@@ -58,7 +51,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     }
   })
-
   .state('tab.myAccount', {
     url: '/myAccount',
     cache: false,

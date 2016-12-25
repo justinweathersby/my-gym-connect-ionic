@@ -21,7 +21,45 @@ app.controller('LoginCtrl', function($scope, $http, $ionicLoading, $state, $ioni
         });
       });
     }
+    else{
+      $ionicLoading.hide();
+    }
   };
+
+  $scope.resetPassword = function(email) {
+
+    $ionicLoading.show({
+     template: '<p style="font-family:Brandon;color:grey;">Checking to see if your account exists..</p><ion-spinner class="spinner-positive" icon="dots"></ion-spinner>',
+     hideOnStageChange: true
+    });
+
+    if ($scope.forgotPasswordForm.$valid){
+      $http({method: 'POST', url: GYM_CONNECT_API.url + '/reset_password?email=' + email})
+        .success( function( data )
+        {
+          $ionicLoading.hide();
+          $ionicPopup.alert({
+             title: 'Thank You',
+             content: 'An email has been sent to the email provided with instructions to reset your password.'
+           });
+           $state.go('login');
+        }
+      )
+      .error( function(error)
+      {
+        $ionicLoading.hide();
+        $ionicPopup.alert({
+           title: 'Woops..',
+           content: 'The email you have entered does not exist in our records'
+         });
+         $state.go('signup');
+      });
+    }
+    else {
+      $ionicLoading.hide();
+    }
+  };//end of reset password function
+
   //end of login function
   $scope.goToSignUp = function() {
     $state.go('signup');
