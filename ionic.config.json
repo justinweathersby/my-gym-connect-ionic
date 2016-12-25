@@ -1,4 +1,12 @@
 {
   "name": "my-gym-connect-app",
-  "app_id": "fff6c12d"
+  "app_id": "fff6c12d",
+  "gulpStartupTasks": [
+    "watch",
+    "sass"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
 }
