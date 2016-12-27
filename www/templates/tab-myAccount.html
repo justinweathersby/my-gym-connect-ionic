@@ -1,74 +1,74 @@
 <ion-view view-title="My Account" >
-  <ion-content class="padding mainBackground" style="padding-top:30px" >
+  <ion-content class="padding mainBackground" style="padding-top:30px;"  has-footer="true"  >
     <div style="text-align: center;">
       <img ng-src='{{ (profileImgSrc) || (imgLoadingCircle) }}' alt="No Image Uploaded" style="height:25vh; border: 3px solid #E2F6B6; border-radius: 3px;">
-      <button style="font-family:Brandon; background-color: #85AB31; width:60%; margin:0 auto; margin-top:10px" class="button button-block button-positive" ng-click="selectPicture()">
+      <button style="width:60%; margin:0 auto; margin-top:10px" class="button button-block button-positive" ng-click="selectPicture()">
         Add/Edit Image
       </button>
     </div>
+<!--
+    <div class="list list-inset">
+      <label class="form-box item item-input">
+        <i class="icon ion-ios-email-outline placeholder-icon"></i>
+        <input class="loginFields" style=""  type="email" placeholder="Email" ng-model="user.email" required>
+      </label>
+      <label class="form-box item item-input">
+        <i class="icon ion-ios-locked-outline placeholder-icon"></i>
+        <input class="loginFields" style="" type="password" placeholder="Password" ng-model="user.password" required>
+      </label>
+    </div> -->
 
     <div class="list list-inset">
       <label class="form-box item item-input">
         <i class="icon ion-android-person placeholder-icon"></i>
-        <input style="font-size:20px;padding-top:10px;font-family:Brandon;color:grey;" type="text" placeholder="Name" ng-model="current_user.name">
+        <input style="loginFields" type="text" placeholder="Name" ng-model="current_user.name">
       </label>
 
       <label class="item item-input item-select">
-          <div class="input-label">
-            <i class="icon ion-stats-bars placeholder-icon" style="padding-left:0"></i>Workout Level
-          </div>
-          <select ng-model="current_user.workout_level">
+          <i class="icon ion-stats-bars placeholder-icon" style=""></i><span class="item-select-label">Workout Level</span>
+          <select style="loginFields" ng-model="current_user.workout_level">
              <option ng-repeat="option in WorkoutLevels" value="{{option}}">{{option}}</option>
           </select>
       </label>
 
       <label class="item item-input item-select">
-          <div class="input-label">
-            <i class="icon ion-stats-bars placeholder-icon" style="padding-left:0"></i>Workout Time
-          </div>
+          <i class="icon ion-stats-bars placeholder-icon" style=""></i><span class="item-select-label">Workout Time</span>
           <select ng-model="current_user.workout_time">
              <option ng-repeat="option in WorkoutTimes" value="{{option}}">{{option}}</option>
           </select>
       </label>
 
       <label class="item item-input item-select">
-          <div class="input-label">
-            <i class="icon ion-man placeholder-icon" style="padding: 0 0"></i><i class="icon ion-woman placeholder-icon" style="padding-left:0; padding-right:6px;"></i>My Gender:
-          </div>
+          <i class="icon ion-man placeholder-icon" style=""></i><span class="item-select-label">My Gender</span>
           <select ng-model="current_user.gender">
               <option ng-repeat="option in Genders" value="{{option}}">{{option}}</option>
           </select>
       </label>
 
       <label class="item item-input item-select">
-          <div class="input-label">
-            <i class="icon ion-man placeholder-icon" style="padding: 0 0"></i><i class="icon ion-woman placeholder-icon" style="padding-left:0; padding-right:6px;"></i>Match Me With:
-          </div>
+          <i class="icon ion-man placeholder-icon" style=""></i><span class="item-select-label">Match Me With</span>
           <select ng-model="current_user.gender_match">
               <option ng-repeat="option in GenderMatch" value="{{option}}">{{option}}</option>
           </select>
       </label>
 
       <label class="form-box item item-input">
-        <i class="icon ion-android-person placeholder-icon"></i>
-        <!-- <textarea name="comment" id="comment-textarea" ng-model="current_user.description" placeholder="Description" maxlength="255">
-    	 </textarea> -->
-       <textarea
-        rows="1"
-        expanding-textarea
-        placeholder="Description"
-        maxlength="255"
-        ng-model="current_user.description"
-        placeholder="This is an auto-expanding textarea with just angularjs... try typing something and watch it grow.">
-      </textarea>
-        <!-- <input ng-model="current_user.description" type="text" placeholder="Description" maxlength="255" style="font-size:20px;padding-top:10px;font-family:Brandon;color:grey;"> -->
+         <i class="icon ion-android-person placeholder-icon" style="width:45px"></i>
+         <textarea
+          rows="1"
+          expanding-textarea
+          placeholder="Description"
+          maxlength="255"
+          ng-model="current_user.description"
+          placeholder="This is an auto-expanding textarea with just angularjs... try typing something and watch it grow.">
+        </textarea>
       </label>
     </div>
-    <button style="font-family:Brandon; background-color: #85AB31;" class="button button-block button-positive" ng-click="updateUser()">
+    <button style="" class="button button-block button-positive" ng-click="updateUser()">
       Update Account
     </button>
 
-    <div class="list list-inset">
+    <div class="list list-inset" style="padding-bottom: 80px;">
      <label class="item item-input">Your Email:&nbsp;
         <span style="font-size:12px;padding-top:10px;font-family:Brandon;color:#55b74e;">{{current_user.email}}</span>
       </label>

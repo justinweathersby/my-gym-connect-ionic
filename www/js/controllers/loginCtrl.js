@@ -2,7 +2,7 @@ app.controller('LoginCtrl', function($scope, $http, $ionicLoading, $state, $ioni
 
   $scope.login = function(user) {
     $ionicLoading.show({
-     template: '<p style="font-family:Brandon;color:grey;">Logging in</p><ion-spinner class="spinner-positive" icon="dots"></ion-spinner>',
+     template: '<p>Loading...</p><ion-spinner></ion-spinner>',
      duration: 6000,
      hideOnStageChange: true
     });
@@ -29,7 +29,7 @@ app.controller('LoginCtrl', function($scope, $http, $ionicLoading, $state, $ioni
   $scope.resetPassword = function(email) {
 
     $ionicLoading.show({
-     template: '<p style="font-family:Brandon;color:grey;">Checking to see if your account exists..</p><ion-spinner class="spinner-positive" icon="dots"></ion-spinner>',
+     template: '<p style="font-family:Brandon;color:grey;">Checking to see if your account exists..</p><ion-spinner></ion-spinner>',
      hideOnStageChange: true
     });
 
