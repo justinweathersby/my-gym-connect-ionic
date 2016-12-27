@@ -8,8 +8,7 @@ app.controller('SignupCtrl', function($scope,$state, $http, $stateParams, $ionic
 
     if ($scope.signupForm.$valid){
       $http.post(GYM_CONNECT_API.url + "/users", {user: {email: user.email,
-                                                         password: user.password,
-                                                         name: user.name}, gym_code: user.gym_code})
+                                                         password: user.password}, gym_code: user.gym_code})
       .success( function (data) {
         console.log("Returned Success Data> ");
         console.log(JSON.stringify(data, null, 4));
