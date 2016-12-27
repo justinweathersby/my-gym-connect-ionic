@@ -9815,6 +9815,11 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+@font-face {
+  font-family: 'ComfortaaRegular';
+  src: url("../fonts/ComfortaaRegular.eot");
+  src: url("../fonts/ComfortaaRegular.eot") format("embedded-opentype"), url("../fonts/ComfortaaRegular.woff2") format("woff2"), url("../fonts/ComfortaaRegular.woff") format("woff"), url("../fonts/ComfortaaRegular.ttf") format("truetype"), url("../fonts/ComfortaaRegular.svg#ComfortaaRegular") format("svg"); }
+
 .mainBackground {
   /*background-color: #CFD8DC*/
   /*background-color: #607D8B;*/
@@ -9917,6 +9922,15 @@ input:invalid {
 
 p.convo-last-message {
   color: #c3c3c3; }
+
+p.tutorial-text {
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  font-family: "ComfortaaRegular";
+  color: white;
+  text-align: center;
+  font-weight: 150;
+  padding: 0 5%; }
 
 /*.login-container{
   display: -webkit-flex;
