@@ -13,11 +13,33 @@ app.service('currentUser', function(){
   this.match_gender = null;
   this.gym = null;;
   this.image = null;
+  this.description = null;
 
 });
 
 app.service('currentUserService', function($http, currentUser, GYM_CONNECT_API){
   // this.clear = function(){};
+  this.updateUser = function(){
+    console.log("Updating currentUserService...", JSON.stringify(currentUser, null, 4));
+    return $http({ method: 'POST',
+                   url: GYM_CONNECT_API.url + "/users/" + currentUser.id,
+                   data: {
+                      "name": currentUser.name,
+                      "gender": currentUser.gender,
+                      "gender_match": currentUser.gender_match,
+                      "workout_time": currentUser.workout_time,
+                      "workout_level": currentUser.workout_level,
+                      "description": currentUser.description
+                   },
+                   headers: {'Authorization' : currentUser.token}
+
+     }).success( function( data ){
+
+     }).error( function(error) {
+          console.log("Update User Failed...");
+          console.log("Error: ", JSON.stringify(error, null, 4));
+     });
+  };
   this.getUser = function(){
     console.log("inside currentUserService ", JSON.stringify(currentUser, null, 4));
     return $http({ method: 'GET',
@@ -68,6 +90,7 @@ app.service('authService', function($http, currentUser, GYM_CONNECT_API){
         currentUser.id = data.user.id;
         currentUser.role = data.user.role;
         currentUser.name = data.user.name;
+        currentUser.description = data.user.description;
         // console.log('UserService token: ', data.user.auth_token)
 
         localStorage.setItem('user', user.email);

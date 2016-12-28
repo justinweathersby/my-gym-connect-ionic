@@ -1,76 +1,67 @@
 <ion-view view-title="Login" class="mainBackground">
-  <!-- <form name="loginForm" ng-controller="LoginCtrl"> -->
+
   <ion-content scroll="false" class="padding" style="padding-top:20px;">
-
     <section class="text-center" style="">
-    <div class="text-center">
-      <img src="images/gymconnect.png" style="height: 35vh; margin-left:auto; margin-right:auto; display:block;" alt="">
-    </div>
+      <div class="text-center">
+        <img src="images/gymconnect.png" style="height: 35vh; margin-left:auto; margin-right:auto; display:block;" alt="">
+      </div>
+      <p style="padding-top:5%"class="tutorial-text">First we need some basic information about you. Your name should be first and last. The description should be a short blurb that best describes you!</p>
+      <div class="list list-inset">
+        <label class="form-box item item-input">
+          <i class="icon ion-android-person placeholder-icon" style=" padding-left:7px"></i>
+          <input id="nameInput2S" style="loginFields" type="text" placeholder="Name" ng-model="current_user.name"  />
+        </label>
+        <label class="form-box item item-input" style="height: 125px;">
+           <i class="icon ion-edit placeholder-icon" style="padding-right:29px; height:100%;"></i>
+           <textarea
+            id="descInput2S"
+            rows="7"
+            placeholder="Description"
+            maxlength="255"
+            ng-model="current_user.description"
+            placeholder="This is an auto-expanding textarea with just angularjs... try typing something and watch it grow."
+            style="background-color: transparent; color: white; margin-top: 15px; margin-right:5px; overflow-y:hidden; resize:none;" />
+          </textarea>
+        </label>
+      </div>
 
-    <p style="padding-top:5%"class="tutorial-text">First we need some basic information about you. Your name should be first and last. The description should be a short blurb that best describes you!</p>
+    </section>
 
-    <div class="list list-inset">
-      <label class="form-box item item-input">
-        <i class="icon ion-android-person placeholder-icon" style=" padding-left:7px"></i>
-        <input style="loginFields" type="text" placeholder="Name" ng-model="user.name">
-      </label>
-
-      <label class="form-box item item-input" style="height: 125px;">
-         <i class="icon ion-edit placeholder-icon" style="padding-right:29px; height:100%;"></i>
-         <textarea
-          rows="7"
-          placeholder="Description"
-          maxlength="255"
-          ng-model="current_user.description"
-          placeholder="This is an auto-expanding textarea with just angularjs... try typing something and watch it grow."
-          style="background-color: transparent;
-color: white; margin-top: 20px; margin-right:5px; overflow-y:hidden; resize:none;  ">
-        </textarea>
-      </label>
-    </div>
-
-</section>
-
-
-  <section style="position: absolute; bottom:0; left:0; padding:0; margin:0; width:100%;">
-
-
-  <div class="row" style="width:33.3%; margin:0 auto;">
-    <div class="col col-center" style="color:white;">
-      <div class="row" style="padding:0 0 0 0; margin:0;">
-        <div class="col" style="text-align:center">
-          <i class="icon ion-ios-circle-outline " style=""></i>
-        </div>
-        <div class="col" style="text-align:center">
-          <i class="icon ion-ios-circle-filled"></i>
-        </div>
-        <div class="col" style="text-align:center">
-          <i class="icon ion-ios-circle-outline"></i>
-        </div>
-        <div class="col" style="text-align:center">
-          <i class="icon ion-ios-circle-outline"></i>
-        </div>
-        <div class="col" style="text-align:center">
-          <i class="icon ion-ios-circle-outline"></i>
+    <section style="position: absolute; bottom:0; left:0; padding:0; margin:0; width:100%;">
+      <div class="row" style="width:33.3%; margin:0 auto;">
+        <div class="col col-center" style="color:white;">
+          <div class="row" style="padding:0 0 0 0; margin:0;">
+            <div class="col" style="text-align:center">
+              <i class="icon ion-ios-circle-outline " style=""></i>
+            </div>
+            <div class="col" style="text-align:center">
+              <i class="icon ion-ios-circle-filled"></i>
+            </div>
+            <div class="col" style="text-align:center">
+              <i class="icon ion-ios-circle-outline"></i>
+            </div>
+            <div class="col" style="text-align:center">
+              <i class="icon ion-ios-circle-outline"></i>
+            </div>
+            <div class="col" style="text-align:center">
+              <i class="icon ion-ios-circle-outline"></i>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="row" style="padding:0; margin:0">
-    <div class="col" style="padding:0;">
-      <button style="width: 100%" class="button  button-positive"  ui-sref="1st-step" nav-direction="back">
-        Back
-      </button>
-    </div>
-    <div class="col"></div>
-    <div class="col" style="padding:0; text-align:right">
-      <button  style="width: 100%" class="button  button-positive"  ui-sref="3rd-step" nav-direction="forward">
-        Next
-      </button>
-    </div>
-  </div>
-  </section>
-
-
+      <div class="row" style="padding:0; margin:0">
+        <div class="col" style="padding:0;">
+          <button style="width: 100%" class="button  button-positive"  ui-sref="1st-step" nav-direction="back">
+            Back
+          </button>
+        </div>
+        <div class="col"></div>
+        <div class="col" style="padding:0; text-align:right">
+          <button  style="width: 100%" class="button  button-positive" ng-click='NameDescNext()' nav-direction="forward">
+            Next
+          </button>
+        </div>
+      </div>
+    </section>
   </ion-content>
 </ion-view>
