@@ -2,23 +2,31 @@
   <!-- <form name="loginForm" ng-controller="LoginCtrl"> -->
   <ion-content scroll="false" class="padding" style="padding-top:20px;">
 
-    <section class="text-center" style="position: relative;
-  top: 25%;
-  transform: translateY(-25%);">
-
-
+    <section class="text-center" style="">
     <div class="text-center">
       <img src="images/gymconnect.png" style="height: 38vh; margin-left:auto; margin-right:auto; display:block;" alt="">
     </div>
 
-    <p style="padding-top:10%"class="tutorial-text">First we need some basic information about you</p>
+    <p style="padding-top:5%"class="tutorial-text">Next we need to determine the type of gym experience you are looking for. Please select a workout level and time that best describes you!</p>
+
+    <div class="list list-inset">
+      <label class="item item-input item-select">
+          <i class="icon ion-heart placeholder-icon" style="padding-left: 7px;"></i><span class="item-select-label">Workout Level</span>
+          <select style="loginFields" ng-model="user.workout_level">
+             <option ng-repeat="option in WorkoutLevels" value="{{option}}">{{option}}</option>
+          </select>
+      </label>
+
+      <label class="item item-input item-select">
+          <i class="icon ion-ios-clock-outline placeholder-icon" style="padding-left: 7px;"></i><span class="item-select-label">Workout Time</span>
+          <select ng-model="user.workout_time">
+             <option ng-repeat="option in WorkoutTimes" value="{{option}}">{{option}}</option>
+          </select>
+      </label>
+    </div>
 
 </section>
-
-
   <section style="position: absolute; bottom:0; left:0; padding:0; margin:0; width:100%;">
-
-
   <div class="row" style="width:33.3%; margin:0 auto;">
     <div class="col col-center" style="color:white;">
       <div class="row" style="padding:0 0 0 0; margin:0;">
@@ -34,19 +42,22 @@
         <div class="col" style="text-align:center">
           <i class="icon ion-ios-circle-filled"></i>
         </div>
+        <div class="col" style="text-align:center">
+          <i class="icon ion-ios-circle-outline"></i>
+        </div>
       </div>
     </div>
   </div>
   <div class="row" style="padding:0; margin:0">
     <div class="col" style="padding:0;">
-      <button style="width: 100%" class="button  button-positive"  ui-sref="3rd-step">
+      <button style="width: 100%" class="button  button-positive"  ui-sref="3rd-step" nav-direction="back">
         Back
       </button>
     </div>
     <div class="col"></div>
     <div class="col" style="padding:0; text-align:right">
-      <button  style="width: 100%" class="button  button-positive"  >
-        Done
+      <button  style="width: 100%" class="button  button-positive"  ui-sref="5th-step" nav-direction="forward">
+        Next
       </button>
     </div>
   </div>

@@ -30,6 +30,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/signup-tutorial/4th-step.html',
     controller: 'SignupTutorialCtrl'
   })
+  .state('5th-step', {
+    url: '/step-four',
+    templateUrl: 'templates/signup-tutorial/5th-step.html',
+    controller: 'SignupTutorialCtrl'
+  })
   .state('forgot-password', {
     url: '/forgot-password',
     templateUrl: 'templates/forgot-password.html',

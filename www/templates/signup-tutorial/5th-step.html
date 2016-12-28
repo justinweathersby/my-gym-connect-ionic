@@ -2,30 +2,27 @@
   <!-- <form name="loginForm" ng-controller="LoginCtrl"> -->
   <ion-content scroll="false" class="padding" style="padding-top:20px;">
 
-    <section class="text-center" style="">
+    <section class="text-center">
+
+
     <div class="text-center">
       <img src="images/gymconnect.png" style="height: 38vh; margin-left:auto; margin-right:auto; display:block;" alt="">
     </div>
 
-    <p style="padding-top:5%"class="tutorial-text">First we need some basic information about you. Your name should be first and last. The description should be a short blurb that best describes you!</p>
-
+    <p style="padding-top:5%"class="tutorial-text">Last step! Please fill out your gender and the gender you would like to match with.</p>
     <div class="list list-inset">
-      <label class="form-box item item-input">
-        <i class="icon ion-android-person placeholder-icon" style=" padding-left:7px"></i>
-        <input style="loginFields" type="text" placeholder="Name" ng-model="user.name">
+      <label class="item item-input item-select">
+          <i class="icon ion-ios-person placeholder-icon" style="padding-left:7px"></i><span class="item-select-label">My Gender</span>
+          <select ng-model="current_user.gender">
+              <option ng-repeat="option in Genders" value="{{option}}">{{option}}</option>
+          </select>
       </label>
 
-      <label class="form-box item item-input" style="height: 125px;">
-         <i class="icon ion-edit placeholder-icon" style="padding-right:29px; height:100%;"></i>
-         <textarea
-          rows="7"
-          placeholder="Description"
-          maxlength="255"
-          ng-model="current_user.description"
-          placeholder="This is an auto-expanding textarea with just angularjs... try typing something and watch it grow."
-          style="background-color: transparent;
-color: white; margin-top: 20px; margin-right:5px; overflow-y:hidden; resize:none;  ">
-        </textarea>
+      <label class="item item-input item-select">
+          <i class="icon ion-ios-people placeholder-icon" style="padding-left:7px"></i><span class="item-select-label">Match Me With</span>
+          <select ng-model="current_user.gender_match">
+              <option ng-repeat="option in GenderMatch" value="{{option}}">{{option}}</option>
+          </select>
       </label>
     </div>
 
@@ -42,30 +39,30 @@ color: white; margin-top: 20px; margin-right:5px; overflow-y:hidden; resize:none
           <i class="icon ion-ios-circle-outline " style=""></i>
         </div>
         <div class="col" style="text-align:center">
+          <i class="icon ion-ios-circle-outline"></i>
+        </div>
+        <div class="col" style="text-align:center">
+          <i class="icon ion-ios-circle-outline"></i>
+        </div>
+        <div class="col" style="text-align:center">
+          <i class="icon ion-ios-circle-outline"></i>
+        </div>
+        <div class="col" style="text-align:center">
           <i class="icon ion-ios-circle-filled"></i>
-        </div>
-        <div class="col" style="text-align:center">
-          <i class="icon ion-ios-circle-outline"></i>
-        </div>
-        <div class="col" style="text-align:center">
-          <i class="icon ion-ios-circle-outline"></i>
-        </div>
-        <div class="col" style="text-align:center">
-          <i class="icon ion-ios-circle-outline"></i>
         </div>
       </div>
     </div>
   </div>
   <div class="row" style="padding:0; margin:0">
     <div class="col" style="padding:0;">
-      <button style="width: 100%" class="button  button-positive"  ui-sref="1st-step" nav-direction="back">
+      <button style="width: 100%" class="button  button-positive"  ui-sref="4th-step">
         Back
       </button>
     </div>
     <div class="col"></div>
     <div class="col" style="padding:0; text-align:right">
-      <button  style="width: 100%" class="button  button-positive"  ui-sref="3rd-step" nav-direction="forward">
-        Next
+      <button  style="width: 100%" class="button  button-positive"  >
+        Done
       </button>
     </div>
   </div>

@@ -9948,6 +9948,24 @@ p.tutorial-text {
   font-weight: 150;
   padding: 0 5%; }
 
+.flex-row {
+  display: flex;
+  flex-direction: row; }
+
+.flex-col {
+  display: flex;
+  flex-direction: column; }
+
+.flex-item {
+  flex: 1; }
+
+.flex-profile-image {
+  margin: 10px;
+  border-radius: 5px;
+  /* <-- just for demonstration */
+  min-height: 50px;
+  background-color: rgba(0, 0, 0, 0.5); }
+
 /*.login-container{
   display: -webkit-flex;
   -webkit-flex-direction: column;
