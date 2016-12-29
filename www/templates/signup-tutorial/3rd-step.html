@@ -13,17 +13,17 @@
       <div class="flex-row" style="height:100%">
         <div class="flex-col" style="flex:2; position:relative">
           <div class="flex-item flex-profile-image" style="flex:2; overflow: hidden;">
-            <img ng-src="{{current_user.image_url}}" style="max-width:100%;"/>
+            <img ng-src="{{current_user.image_url}}" style="max-width:100%; max-height:100%"/>
             <a class="button button-icon icon ion-plus-circled" style="color:white; position: absolute; bottom: -5px;right: -5px;" ng-click="selectMainImage()"></a>
           </div>
         </div>
         <div class="flex-col" style="flex:1; position:relative">
           <div class="flex-item flex-profile-image" style="flex:1; overflow: hidden;">
-            <img ng-src="{{current_user.second_image_url}}" style="max-width:100%"/>
+            <img ng-src="{{current_user.second_image_url}}" style="max-width:100%; max-height:100%"/>
             <a class="button button-icon icon ion-plus-circled" style="color:white; position: absolute;bottom: 49%;right: -5px;" ng-click="selectSecondImage()"></a>
           </div>
           <div class="flex-item flex-profile-image" style="flex:1; overflow:hidden">
-            <img ng-src="{{current_user.third_image_url}}" style="max-width:100%" />
+            <img ng-src="{{current_user.third_image_url}}" style="max-width:100%; max-height:100%" />
             <a class="button button-icon icon ion-plus-circled" style="color:white; position: absolute;bottom: -5px;right: -5px;" ng-click="selectThirdImage()"></a>
           </div>
         </div>
