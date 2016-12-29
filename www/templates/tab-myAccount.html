@@ -1,10 +1,10 @@
 <ion-view view-title="My Account" >
   <ion-content class="padding mainBackground" style="padding-top:30px;"  has-footer="true"  >
     <div style="text-align: center;">
-      <img ng-src='{{ (profileImgSrc) || (imgLoadingCircle) }}' alt="No Image Uploaded" style="height:25vh; border: 3px solid #E2F6B6; border-radius: 3px;">
-      <button style="width:60%; margin:0 auto; margin-top:10px" class="button button-block button-positive" ng-click="selectPicture()">
+      <img ng-src='{{ (profileImgSrc) || (imgLoadingCircle) }}' alt="No Image Uploaded" style="height:25vh; border-radius: 3px;">
+      <!-- <button style="width:60%; margin:0 auto; margin-top:10px" class="button button-block button-positive" ng-click="selectPicture()">
         Add/Edit Image
-      </button>
+      </button> -->
     </div>
 
     <button style="" class="button button-block button-positive" ui-sref="2nd-step">
@@ -18,31 +18,31 @@
       </label>
 
       <label class="item item-input item-select">
-          <i class="icon ion-stats-bars placeholder-icon" style=""></i><span class="item-select-label">Workout Level</span>
-          <select style="loginFields" ng-model="current_user.workout_level">
-             <option ng-repeat="option in WorkoutLevels" value="{{option}}">{{option}}</option>
-          </select>
+        <i class="icon ion-stats-bars placeholder-icon" style=""></i><span class="item-select-label">Workout Level</span>
+        <select style="loginFields" ng-model="current_user.workout_level">
+           <option ng-repeat="option in WorkoutLevels" value="{{option}}">{{option}}</option>
+        </select>
       </label>
 
       <label class="item item-input item-select">
-          <i class="icon ion-stats-bars placeholder-icon" style=""></i><span class="item-select-label">Workout Time</span>
-          <select ng-model="current_user.workout_time">
-             <option ng-repeat="option in WorkoutTimes" value="{{option}}">{{option}}</option>
-          </select>
+        <i class="icon ion-stats-bars placeholder-icon" style=""></i><span class="item-select-label">Workout Time</span>
+        <select ng-model="current_user.workout_time">
+           <option ng-repeat="option in WorkoutTimes" value="{{option}}">{{option}}</option>
+        </select>
       </label>
 
       <label class="item item-input item-select">
-          <i class="icon ion-man placeholder-icon" style=""></i><span class="item-select-label">My Gender</span>
-          <select ng-model="current_user.gender">
-              <option ng-repeat="option in Genders" value="{{option}}">{{option}}</option>
-          </select>
+        <i class="icon ion-man placeholder-icon" style=""></i><span class="item-select-label">My Gender</span>
+        <select ng-model="current_user.gender">
+            <option ng-repeat="option in Genders" value="{{option}}">{{option}}</option>
+        </select>
       </label>
 
       <label class="item item-input item-select">
-          <i class="icon ion-man placeholder-icon" style=""></i><span class="item-select-label">Match Me With</span>
-          <select ng-model="current_user.gender_match">
-              <option ng-repeat="option in GenderMatch" value="{{option}}">{{option}}</option>
-          </select>
+        <i class="icon ion-man placeholder-icon" style=""></i><span class="item-select-label">Match Me With</span>
+        <select ng-model="current_user.gender_match">
+            <option ng-repeat="option in GenderMatch" value="{{option}}">{{option}}</option>
+        </select>
       </label>
 
       <label class="form-box item item-input">
