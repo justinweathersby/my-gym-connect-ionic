@@ -1,8 +1,12 @@
-app.controller('SignupTutorialCtrl', function($scope, $state,
-                                              $ionicPopup, $ionicLoading, $ionicViewSwitcher,
-                                              currentUser, currentUserService)
+app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera,
+                                              $ionicPopup, $ionicLoading, $ionicPlatform, $ionicViewSwitcher,
+                                              currentUser, currentUserService,
+                                              GYM_CONNECT_API)
 {
   $scope.current_user = currentUser;
+  $scope.current_user.second_image_url = "https://s3.amazonaws.com/my-gym-connect-staging/users/images/000/000/082/medium/image.jpg?1482980133";
+  $scope.current_user.third_image_url = "https://s3.amazonaws.com/my-gym-connect-staging/users/images/000/000/082/medium/image.jpg?1482980133";
+  $scope.current_user.image_url = "https://s3.amazonaws.com/my-gym-connect-staging/users/images/000/000/082/medium/image.jpg?1482980133";
   console.log("Reload SignupTutorialCtrl currentUser: ", JSON.stringify($scope.current_user, null, 4));
 
   $scope.WorkoutLevels = ['beginner','intermediate','expert'];
@@ -31,7 +35,9 @@ app.controller('SignupTutorialCtrl', function($scope, $state,
   };
 
   $scope.ImagesNext = function(){
-    confirmNext('4th-step');
+    if ($scope.current_user.image == null){
+      confirmNext('4th-step');
+    };
   };
 
   $scope.WorkoutNext = function(){
@@ -77,5 +83,163 @@ app.controller('SignupTutorialCtrl', function($scope, $state,
         $state.go('login');
       });
     });
+  };
+
+  $scope.selectMainImage = function() {
+    console.log('Selected option to upload a picture...');
+
+    $ionicLoading.show({
+        template: '<p>Warming Camera Up...</p><ion-spinner></ion-spinner>',
+        duration: 6000
+    });
+
+    $ionicPlatform.ready(function() {
+        console.log("Device is ready..")
+        var options = {
+            quality: 100,
+            targetWidth: 700,
+            targetHeight: 700,
+            destinationType: Camera.DestinationType.FILE_URI,
+            sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+        };
+        $cordovaCamera.getPicture(options).then(function(imageURI) {
+          $ionicLoading.hide(); //--Hide loading for camera
+          currentUser.image_url = imageURI;
+          imageUpload(imageURI, encodeURI(GYM_CONNECT_API.url + "/users/" + currentUser.id));
+
+        }, function(err) {
+            console.log("Did not get image from library");
+            $ionicLoading.hide();
+        });
+
+       }, false); // device ready
+  }; // Select picture
+
+  $scope.selectSecondImage = function(){
+    $ionicLoading.show({
+        template: '<p>Warming Camera Up...</p><ion-spinner></ion-spinner>',
+        duration: 6000
+    });
+    $ionicPlatform.ready(function() {
+        console.log("Device is ready..")
+        var options = {
+            quality: 100,
+            targetWidth: 700,
+            targetHeight: 700,
+            destinationType: Camera.DestinationType.FILE_URI,
+            sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+        };
+        $cordovaCamera.getPicture(options).then(function(imageURI) {
+          $ionicLoading.hide(); //--Hide loading for camera
+          currentUser.second_image_url = imageURI;
+          // imageUpload(imageURI, encodeURI(GYM_CONNECT_API.url + "/users/" + currentUser.id));
+
+        }, function(err) {
+            console.log("Did not get image from library");
+            $ionicLoading.hide();
+        });
+      }, false); // device ready
+  };
+
+  $scope.selectThirdImage = function(){
+      $ionicPlatform.ready(function() {
+      console.log("Device is ready..")
+      var options = {
+          quality: 100,
+          targetWidth: 700,
+          targetHeight: 700,
+          destinationType: Camera.DestinationType.FILE_URI,
+          sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+      };
+      $cordovaCamera.getPicture(options).then(function(imageURI) {
+        $ionicLoading.hide(); //--Hide loading for camera
+        currentUser.third_image_url = imageURI;
+        // imageUpload(imageURI, encodeURI(GYM_CONNECT_API.url + "/users/" + currentUser.id));
+
+      }, function(err) {
+          console.log("Did not get image from library");
+          $ionicLoading.hide();
+      });
+     }, false); // device ready
+  };
+
+  $scope.selectMainImage = function() {
+    console.log('Selected option to upload a picture...');
+
+    $ionicLoading.show({
+        template: '<p>Warming Camera Up...</p><ion-spinner></ion-spinner>',
+        duration: 6000
+    });
+
+    $ionicPlatform.ready(function() {
+        console.log("Device is ready..")
+        var options = {
+            quality: 100,
+            targetWidth: 700,
+            targetHeight: 700,
+            destinationType: Camera.DestinationType.FILE_URI,
+            sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+        };
+        $cordovaCamera.getPicture(options).then(function(imageURI) {
+          $ionicLoading.hide(); //--Hide loading for camera
+          currentUser.image = imageURI;
+          imageUpload(imageURI, encodeURI(GYM_CONNECT_API.url + "/users/" + currentUser.id));
+
+        }, function(err) {
+            console.log("Did not get image from library");
+            $ionicLoading.hide();
+        });
+
+       }, false); // device ready
+  }; // Select picture
+
+  function imageUpload(imageURI, uri){
+    //------File Transfer of Image to Server
+    var Uoptions = new FileUploadOptions();
+    Uoptions.fileKey="image";
+    Uoptions.mimeType ="image/jpeg";
+    Uoptions.chunkedMode = false;
+    Uoptions.params = {};
+    Uoptions.headers = {'Authorization' : currentUser.token};
+
+    var ft = new FileTransfer();
+
+    var win = function (r) {
+      console.log("Code = " + r.responseCode);
+      console.log("Response = " + r.response);
+      console.log("Sent = " + r.bytesSent);
+      $ionicLoading.hide();
+    }
+
+    var fail = function (error) {
+      alert("An error has occurred: Code = " + error.code);
+      console.log("upload error source " + error.source);
+      console.log("upload error target " + error.target);
+      $ionicLoading.hide();
+    }
+
+    ft.onprogress = function(progressEvent) {
+        var loadingStatus = 0;
+        $ionicLoading.show({
+            template: '<p>Uploading Image.</p><progress max="100" value=' + loadingStatus +'></progress>',
+            scope: $scope
+        });
+
+        if (progressEvent.lengthComputable) {
+            loadingStatus = (progressEvent.loaded / progressEvent.total) * 100;
+            $ionicLoading.show({
+                template: '<p>Uploading Image.</p><progress max="100" value='+ loadingStatus +'></progress>',
+                scope: $scope
+            });
+            console.log("In If, loadingStatus: ", $scope.loadingStatus);
+        } else {
+            loadingStatus += .1;
+            console.log("In else, loadingStatus: ", $scope.loadingStatus);
+
+        }
+    };
+    console.log("About to start file upload");
+    ft.upload(imageURI, uri, win, fail, Uoptions);
+    //------End File Transfer
   };
 });

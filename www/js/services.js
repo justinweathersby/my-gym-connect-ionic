@@ -7,6 +7,8 @@ app.service('currentUser', function(){
   this.name = null;
   this.email = null;
   this.image_url = null;
+  this.second_image_url = null;
+  this.third_image_url = null;
   this.workout_level = null;
   this.workout_time = null;
   this.gender = null;
