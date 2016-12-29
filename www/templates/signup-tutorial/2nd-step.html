@@ -1,31 +1,32 @@
 <ion-view view-title="Login" class="mainBackground">
-
+  <form name="nameDescForm" ng-controller="SignupTutorialCtrl">
   <ion-content scroll="false" class="padding" style="padding-top:20px;">
-    <section class="text-center" style="">
-      <div class="text-center">
-        <img src="images/gymconnect.png" style="height: 35vh; margin-left:auto; margin-right:auto; display:block;" alt="">
-      </div>
-      <p style="padding-top:5%"class="tutorial-text">First we need some basic information about you. Your name should be first and last. The description should be a short blurb that best describes you!</p>
-      <div class="list list-inset">
-        <label class="form-box item item-input">
-          <i class="icon ion-android-person placeholder-icon" style=" padding-left:7px"></i>
-          <input id="nameInput2S" style="loginFields" type="text" placeholder="Name" ng-model="current_user.name"  />
-        </label>
-        <label class="form-box item item-input" style="height: 125px;">
-           <i class="icon ion-edit placeholder-icon" style="padding-right:29px; height:100%;"></i>
-           <textarea
-            id="descInput2S"
-            rows="7"
-            placeholder="Description"
-            maxlength="255"
-            ng-model="current_user.description"
-            placeholder="This is an auto-expanding textarea with just angularjs... try typing something and watch it grow."
-            style="background-color: transparent; color: white; margin-top: 15px; margin-right:5px; overflow-y:hidden; resize:none;" />
-          </textarea>
-        </label>
-      </div>
+      <section class="text-center" style="">
+        <div class="text-center">
+          <img src="images/gymconnect.png" style="height: 35vh; margin-left:auto; margin-right:auto; display:block;" alt="">
+        </div>
+        <p style="padding-top:5%"class="tutorial-text">First we need some basic information about you. Your name should be first and last. The description should be a short blurb that best describes you!</p>
+        <div class="list list-inset">
+          <label class="form-box item item-input">
+            <i class="icon ion-android-person placeholder-icon" style=" padding-left:7px"></i>
+            <input id="nameInput2S" style="loginFields" type="text" placeholder="Name" ng-model="current_user.name"  />
+          </label>
+          <label class="form-box item item-input" style="height: 125px;">
+             <i class="icon ion-edit placeholder-icon" style="padding-right:29px; height:100%;"></i>
+             <textarea
+              id="descInput2S"
+              rows="7"
+              placeholder="Description"
+              maxlength="255"
+              ng-model="current_user.description"
+              placeholder="This is an auto-expanding textarea with just angularjs... try typing something and watch it grow."
+              style="background-color: transparent; color: white; margin-top: 15px; margin-right:5px; overflow-y:hidden; resize:none;" />
+            </textarea>
+          </label>
+        </div>
 
-    </section>
+      </section>
+    </form>
 
     <section style="position: absolute; bottom:0; left:0; padding:0; margin:0; width:100%;">
       <div class="row" style="width:33.3%; margin:0 auto;">

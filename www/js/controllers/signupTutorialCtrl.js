@@ -30,7 +30,12 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera,
   };
 
   $scope.NameDescNext = function(){
-    if ($scope.current_user.name != null || $scope.current_user.description != null){ updateUser('3rd-step');}
+    if ($scope.current_user.name != null || $scope.current_user.description != null){
+      if ($scope.nameDescForm.$dirty){ updateUser('3rd-step');}
+      else{ $ionicViewSwitcher.nextDirection('forward');
+            $state.go('3rd-step');
+      }
+    }
     else{ confirmNext('3rd-step'); }
   };
 
