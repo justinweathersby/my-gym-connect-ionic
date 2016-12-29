@@ -83,15 +83,15 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
         console.log("Device is ready..")
         var options = {
             quality: 100,
-            targetWidth: 300,
-            targetHeight: 300,
+            targetWidth: 700,
+            targetHeight: 700,
             destinationType: Camera.DestinationType.FILE_URI,
             sourceType: Camera.PictureSourceType.PHOTOLIBRARY
         };
         $cordovaCamera.getPicture(options).then(function(imageURI) {
           $ionicLoading.hide(); //--Hide loading for camera
-          currentUser.image = imageURI;
-          $scope.profileImgSrc = currentUser.image;
+          currentUser.image_url = imageURI;
+          $scope.profileImgSrc = currentUser.image_url;
 
           //------File Transfer of Image to Server
           var Uoptions = new FileUploadOptions();
@@ -102,7 +102,7 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
           Uoptions.headers = {'Authorization' : currentUser.token};
 
           var ft = new FileTransfer();
-          console.log('File upload: ', currentUser.image);
+          console.log('File upload: ', currentUser.image_url);
 
           var uri = encodeURI(GYM_CONNECT_API.url + "/users/" + currentUser.id);
 
@@ -143,7 +143,7 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
               }
           };
 
-          ft.upload(currentUser.image, uri, win, fail, Uoptions);
+          ft.upload(currentUser.image_url, uri, win, fail, Uoptions);
           //------End File Transfer
 
         }, function(err) {

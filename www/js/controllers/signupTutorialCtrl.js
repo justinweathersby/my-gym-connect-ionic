@@ -40,9 +40,13 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera,
   };
 
   $scope.ImagesNext = function(){
-    if ($scope.current_user.image == null){
+    if ($scope.current_user.image_url == null){
       confirmNext('4th-step');
-    };
+    }
+    else{
+      $ionicViewSwitcher.nextDirection('forward');
+      $state.go('4th-step');
+    }
   };
 
   $scope.WorkoutNext = function(){

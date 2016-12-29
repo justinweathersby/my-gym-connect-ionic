@@ -13,8 +13,8 @@ app.service('currentUser', function(){
   this.workout_time = null;
   this.gender = null;
   this.match_gender = null;
-  this.gym = null;;
-  this.image = null;
+  this.gym = null;
+  // this.image = null;
   this.description = null;
 
 });
