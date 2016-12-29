@@ -4,7 +4,7 @@
 
     <section class="text-center" style="">
     <div class="text-center">
-      <img src="images/gymconnect.png" style="height: 35vh; margin-left:auto; margin-right:auto; display:block;" alt="">
+      <img src="images/gymconnect.png" class="tutorial-logo">
     </div>
 
     <p style="padding-top:5%"class="tutorial-text">Now lets add some images to your profile. The first image will be your main profile picture for matches.</p>
@@ -13,7 +13,7 @@
       <div class="flex-row" style="height:100%">
         <div class="flex-col" style="flex:2; position:relative">
           <div class="flex-item flex-profile-image" style="flex:2; overflow: hidden;">
-            <img ng-src="{{current_user.image_url}}" />
+            <img ng-src="{{current_user.image_url}}" style="max-width:100%;"/>
             <a class="button button-icon icon ion-plus-circled" style="color:white; position: absolute; bottom: -5px;right: -5px;" ng-click="selectMainImage()"></a>
           </div>
         </div>
@@ -38,9 +38,9 @@
   <div class="row" style="width:33.3%; margin:0 auto;">
     <div class="col col-center" style="color:white;">
       <div class="row" style="padding:0 0 0 0; margin:0;">
-        <div class="col" style="text-align:center">
+        <!-- <div class="col" style="text-align:center">
           <i class="icon ion-ios-circle-outline " style=""></i>
-        </div>
+        </div> -->
         <div class="col" style="text-align:center">
           <i class="icon ion-ios-circle-outline"></i>
         </div>

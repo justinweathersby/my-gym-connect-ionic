@@ -17,7 +17,7 @@ $dark:                            #444 !default;
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
-$dark:                            #455A64 !default;
+$dark:                            #1D262A !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
@@ -179,6 +179,10 @@ p.tutorial-text{
   font-weight: 150;
   padding: 0 5%;
 
+}
+
+img.tutorial-logo{
+  height: 30vh; margin-left:auto; margin-right:auto; margin-top: 2vh; display:block;
 }
 
 .flex-row {

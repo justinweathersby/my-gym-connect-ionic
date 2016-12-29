@@ -4,9 +4,9 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera,
                                               GYM_CONNECT_API)
 {
   $scope.current_user = currentUser;
-  $scope.current_user.second_image_url = "https://s3.amazonaws.com/my-gym-connect-staging/users/images/000/000/082/medium/image.jpg?1482980133";
-  $scope.current_user.third_image_url = "https://s3.amazonaws.com/my-gym-connect-staging/users/images/000/000/082/medium/image.jpg?1482980133";
-  $scope.current_user.image_url = "https://s3.amazonaws.com/my-gym-connect-staging/users/images/000/000/082/medium/image.jpg?1482980133";
+  // $scope.current_user.second_image_url = "https://s3.amazonaws.com/my-gym-connect-staging/users/images/000/000/082/medium/image.jpg?1482980133";
+  // $scope.current_user.third_image_url = "https://s3.amazonaws.com/my-gym-connect-staging/users/images/000/000/082/medium/image.jpg?1482980133";
+  // $scope.current_user.image_url = "https://s3.amazonaws.com/my-gym-connect-staging/users/images/000/000/082/medium/image.jpg?1482980133";
   console.log("Reload SignupTutorialCtrl currentUser: ", JSON.stringify($scope.current_user, null, 4));
 
   $scope.WorkoutLevels = ['beginner','intermediate','expert'];
