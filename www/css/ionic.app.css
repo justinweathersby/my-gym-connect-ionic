@@ -9985,6 +9985,19 @@ p.match-description {
   color: #757575;
   margin: 0 10px; }
 
+.showMessagePopup {
+  background: rgba(69, 90, 100, 0.85); }
+  .showMessagePopup .popup {
+    border-radius: 10px;
+    width: 80%; }
+    .showMessagePopup .popup .popup-body {
+      padding: 0 10px; }
+    .showMessagePopup .popup h3.popup-title {
+      font-size: 21px;
+      color: #212121; }
+    .showMessagePopup .popup input {
+      color: #212121; }
+
 .convo-name {
   color: white; }
 

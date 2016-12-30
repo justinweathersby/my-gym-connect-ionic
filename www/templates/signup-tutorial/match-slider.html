@@ -15,10 +15,10 @@
     </div>
     <div ng-controller="MatchesCtrl" class="row match-buttons-container">
       <div class="col">
-        <button class="button button-small button-positive button-block" style="border-radius: 20px">Profile</button>
+        <button ng-click="openModal" class="button button-small button-positive button-block" style="border-radius: 20px">Profile</button>
       </div>
       <div class="col">
-        <button ng-click="openModal()" class="button button-small button-positive button-block" style="border-radius: 20px">Connect</button>
+        <button ng-click="showPopup()" class="button button-small button-positive button-block" style="border-radius: 20px">Connect</button>
       </div>
     </div>
   </div>

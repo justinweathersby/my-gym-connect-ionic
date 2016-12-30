@@ -82,6 +82,40 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
       // Execute action
     });
 
+    // Triggered on a button click, or some other target
+    $scope.showPopup = function() {
+      $scope.data = {};
+
+      // An elaborate, custom popup
+      var myPopup = $ionicPopup.show({
+        // template: '<input type="text" ng-model="data.msg">',
+        templateUrl: "templates/popups/send-message-input.html",
+        cssClass: 'showMessagePopup',
+        title: 'Send A Message To Connect',
+        scope: $scope,
+        buttons: [
+          { text: 'Cancel',
+            type: 'button-small'},
+          {
+            text: '<b>Send</b>',
+            type: 'button-small button-positive',
+            onTap: function(e) {
+              if (!$scope.data.msg) {
+                //don't allow the user to close unless he enters wifi password
+                e.preventDefault();
+              } else {
+                return $scope.data.msg;
+              }
+            }
+          }
+        ]
+      });
+
+      myPopup.then(function(res) {
+        console.log('Tapped!', res);
+      });
+     };
+
     $scope.startConversation = function(send_to, body){
       $ionicLoading.show({
           template: '<p>Sending Message...</p><ion-spinner></ion-spinner>'

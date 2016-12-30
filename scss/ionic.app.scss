@@ -222,6 +222,24 @@ p.match-description{
   margin: 0 10px;
 }
 
+//-------- Popups --------------
+.showMessagePopup{
+  background: rgba(69,90,100, .85);
+  .popup{
+    border-radius:10px;
+    width:80%;
+    .popup-body{
+      padding: 0 10px;
+    }
+    h3.popup-title{
+      font-size: 21px;
+      color: #212121;
+    }
+    input{
+      color:#212121;
+    }
+  }
+}
 //-------- Conversations --------
 .convo-name{
   color: white;
