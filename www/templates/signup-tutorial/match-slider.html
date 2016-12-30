@@ -1,0 +1,29 @@
+<div class="matches-slider" style="visibility: visible; max-width: 600px; margin: 0 auto;">
+<div ng-repeat="match in matches" ng-show="match.visible" class="row" style="padding-top:5vh;">
+  <div class="col-10 match-direction-col">
+    <img ng-src="images/circled-chevron-left.png" ng-click="prev()"/>
+  </div>
+  <div class="col-80 match-background">
+    <div class="match-image-container">
+      <img class="match-image" ng-src="{{match.image_url}}"/>
+    </div>
+    <div class="row">
+      <h1 class="match-name">{{match.name}}</h1>
+    </div>
+    <div class="row" style="overflow:hidden; max-height: 60px;">
+      <p class="match-description">{{match.description}}</p>
+    </div>
+    <div ng-controller="MatchesCtrl" class="row match-buttons-container">
+      <div class="col">
+        <button class="button button-small button-positive button-block" style="border-radius: 20px">Profile</button>
+      </div>
+      <div class="col">
+        <button ng-click="openModal()" class="button button-small button-positive button-block" style="border-radius: 20px">Connect</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-10 match-direction-col">
+    <img ng-src="images/circled-chevron-left.png" ng-click="next()" style="transform: rotate(180deg);"/>
+  </div>
+</div>
+</div>

@@ -3,14 +3,30 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
                                        currentUser, currentConversation,
                                        GYM_CONNECT_API)
 {
-    $scope.options = {
-      loop: false,
-      effect: 'fade',
-      speed: 500,
-    };
-
     $scope.imgLoadingCircle = "<spinner-blue.gif>";
-
+    $scope.matchDataLoaded = false;
+    // $scope.matches = [];
+    // {
+    //     "id": 32,
+    //     "name": "First Example",
+    //     "email": "firstuser@email.com",
+    //     "gender": "male",
+    //     "workout_time": "all",
+    //     "workout_level": "beginner",
+    //     "description": "This is my description.. Not much huh? Message me for more details.",
+    //     "image_url": "https://s3.amazonaws.com/my-gym-connect-staging/users/images/000/000/032/medium/image.jpg?1482364702"
+    // },
+    // {
+    //     "id": 42,
+    //     "name": "George Clooney",
+    //     "email": "george_clooney@email.com",
+    //     "gender": "male",
+    //     "workout_time": "afternoon",
+    //     "workout_level": "intermediate",
+    //     "description": "I love hitting the gym after work. Pumping iron is best done after a full days work.",
+    //     "image_url": "https://s3.amazonaws.com/my-gym-connect-staging/users/images/000/000/042/medium/image.jpg?1482368359"
+    // }];
+    //
     $scope.getMatches = function(){
       $ionicLoading.show({
         template: '<p>Loading...</p><ion-spinner></ion-spinner>'
@@ -21,6 +37,8 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
       }).success( function( data ){
               console.log('Return Data From Get Matches from Api:', JSON.stringify(data, null, 4));
               $scope.matches = data;
+              $scope.matchDataLoaded = true;
+              // $scope.$apply();
               $ionicLoading.hide();
       }).error( function(error){
             console.log(error);
@@ -37,16 +55,32 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
              $scope.$broadcast('scroll.refreshComplete');
       });
     };
-
     $scope.getMatches();
 
-
-    $scope.indexToDayTime = function(index){
-      var sunday = new Date("September 04, 2016 00:00:00");
-      var actualDate = new Date();
-      actualDate.setTime(sunday.getTime() + (index*60*60*1000));
-      return actualDate;
+    $ionicModal.fromTemplateUrl('templates/modals/send-message-modal.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+    $scope.openModal = function() {
+      $scope.modal.show();
     };
+    $scope.closeModal = function() {
+      $scope.modal.hide();
+    };
+    // Cleanup the modal when we're done with it!
+    $scope.$on('$destroy', function() {
+      $scope.modal.remove();
+    });
+    // Execute action on hide modal
+    $scope.$on('modal.hidden', function() {
+      // Execute action
+    });
+    // Execute action on remove modal
+    $scope.$on('modal.removed', function() {
+      // Execute action
+    });
 
     $scope.startConversation = function(send_to, body){
       $ionicLoading.show({
