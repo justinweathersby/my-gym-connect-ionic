@@ -94,35 +94,6 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera,
     });
   };
 
-  $scope.selectMainImage = function() {
-    console.log('Selected option to upload a picture...');
-
-    $ionicLoading.show({
-        template: '<p>Warming Camera Up...</p><ion-spinner></ion-spinner>',
-        duration: 6000
-    });
-
-    $ionicPlatform.ready(function() {
-        console.log("Device is ready..")
-        var options = {
-            quality: 100,
-            targetWidth: 700,
-            targetHeight: 700,
-            destinationType: Camera.DestinationType.FILE_URI,
-            sourceType: Camera.PictureSourceType.PHOTOLIBRARY
-        };
-        $cordovaCamera.getPicture(options).then(function(imageURI) {
-          $ionicLoading.hide(); //--Hide loading for camera
-          currentUser.image_url = imageURI;
-          imageUpload(imageURI, encodeURI(GYM_CONNECT_API.url + "/users/" + currentUser.id));
-
-        }, function(err) {
-            console.log("Did not get image from library");
-            $ionicLoading.hide();
-        });
-
-       }, false); // device ready
-  }; // Select picture
 
   $scope.selectSecondImage = function(){
     $ionicLoading.show({
@@ -141,7 +112,7 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera,
         $cordovaCamera.getPicture(options).then(function(imageURI) {
           $ionicLoading.hide(); //--Hide loading for camera
           currentUser.second_image_url = imageURI;
-          // imageUpload(imageURI, encodeURI(GYM_CONNECT_API.url + "/users/" + currentUser.id));
+          imageUpload(imageURI, "second_image", encodeURI(GYM_CONNECT_API.url + "/users/" + currentUser.id));
 
         }, function(err) {
             console.log("Did not get image from library");
@@ -163,7 +134,7 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera,
       $cordovaCamera.getPicture(options).then(function(imageURI) {
         $ionicLoading.hide(); //--Hide loading for camera
         currentUser.third_image_url = imageURI;
-        // imageUpload(imageURI, encodeURI(GYM_CONNECT_API.url + "/users/" + currentUser.id));
+        imageUpload(imageURI, "third_image", encodeURI(GYM_CONNECT_API.url + "/users/" + currentUser.id));
 
       }, function(err) {
           console.log("Did not get image from library");
@@ -192,7 +163,7 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera,
         $cordovaCamera.getPicture(options).then(function(imageURI) {
           $ionicLoading.hide(); //--Hide loading for camera
           currentUser.image = imageURI;
-          imageUpload(imageURI, encodeURI(GYM_CONNECT_API.url + "/users/" + currentUser.id));
+          imageUpload(imageURI, "image", encodeURI(GYM_CONNECT_API.url + "/users/" + currentUser.id));
 
         }, function(err) {
             console.log("Did not get image from library");
@@ -202,10 +173,10 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera,
        }, false); // device ready
   }; // Select picture
 
-  function imageUpload(imageURI, uri){
+  function imageUpload(imageURI, fileKey, uri){
     //------File Transfer of Image to Server
     var Uoptions = new FileUploadOptions();
-    Uoptions.fileKey="image";
+    Uoptions.fileKey = fileKey;
     Uoptions.mimeType ="image/jpeg";
     Uoptions.chunkedMode = false;
     Uoptions.params = {};

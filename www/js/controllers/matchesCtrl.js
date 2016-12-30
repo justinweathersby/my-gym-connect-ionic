@@ -83,7 +83,7 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
     });
 
     // Triggered on a button click, or some other target
-    $scope.showPopup = function() {
+    $scope.showPopup = function(send_to_id) {
       $scope.data = {};
 
       // An elaborate, custom popup
@@ -104,6 +104,7 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
                 //don't allow the user to close unless he enters wifi password
                 e.preventDefault();
               } else {
+                startConversation(send_to_id, $scope.data.msg);
                 return $scope.data.msg;
               }
             }
@@ -116,7 +117,7 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
       });
      };
 
-    $scope.startConversation = function(send_to, body){
+    function startConversation(send_to, body){
       $ionicLoading.show({
           template: '<p>Sending Message...</p><ion-spinner></ion-spinner>'
       });
