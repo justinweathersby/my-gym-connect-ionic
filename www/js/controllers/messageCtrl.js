@@ -5,7 +5,8 @@ app.controller('MessageCtrl', function($scope, $state, $http, $stateParams, $tim
 {
 
   //---Call to get conversations
-
+  $scope.current_user = currentUser;
+  $scope.current_conv = currentConversation;
 
   $scope.getMessages = function() {
     $ionicLoading.show({
@@ -20,6 +21,7 @@ app.controller('MessageCtrl', function($scope, $state, $http, $stateParams, $tim
           })
           .success( function( data )
           {
+            console.log( JSON.stringify(data, null, 4));
             $scope.messages = data.messages;
             $ionicScrollDelegate.scrollBottom(true);
             $ionicLoading.hide();
@@ -46,14 +48,6 @@ app.controller('MessageCtrl', function($scope, $state, $http, $stateParams, $tim
 
   $scope.getMessages();
 
-  $scope.changeName = function(name){
-    console.log("Name: ", name);
-    console.log("CurrentUser: ", currentUser.name);
-    if (name === currentUser.name){
-      return "Me";
-    }
-    return name;
-  };
 
   $scope.reply = function(body){
     $ionicLoading.show({

@@ -1,7 +1,5 @@
 
-
-
-<ion-view view-title="Messages" class="mainBackground">  <!--TODO: ADD name of person -->
+<ion-view view-title="{{current_conv.sender_name}}" class="mainBackground">  <!--TODO: ADD name of person -->
   <ion-nav-buttons side="left">
     <button class="button back-button buttons button-clear header-item" ui-sref="tab.conversations">
       <i class="icon ion-ios-arrow-back"> Back</i>
@@ -12,32 +10,34 @@
       pulling-text="Pull to refresh..."
       on-refresh="getMessages()">
     </ion-refresher>
-    <div class="list">
-        <div ng-repeat="message in messages"class="item item-avatar">
-          <!-- <span style="float:right; font-size: 12px;">{{convo.last_message.created_at}}</span> -->
-          <h2>{{changeName(message.sender_name)}} </h2>
-          <p>{{message.body}}</p>
+    <ol class="messages-container">
+      <li ng-repeat="message in messages" class="item" style="width:100%; background:transparent;">
+        <div ng-class="{{message.sender_id == current_user.id}} ? 'message-from-me' : ['message-from-sender', 'item-avatar']" style="">
+          <img ng-src="{{current_conv.sender_image}}" ng-hide="{{message.sender_id == current_user.id}}" style="">
+          <p style="color:white;">{{message.body}}</p>
         </div>
-    </div>
-    <div class="button-bar">
-      <div class="item item-divider" style="width:100%">
+        <!-- <h2>{{changeName(message.sender_name)}} </h2> -->
+      </li>
+    </ol>
+    <!-- <div class="button-bar">
+      <div class="message-item item item-divider" style="width:100%;">
         <button class="button button-small button-positive icon-left ion-reply" style="float:right" ng-click="reply(replyMessage.body)">Message</button>
         <div style="overflow: hidden; padding-right: .5em;">
           <input type="text" ng-model="replyMessage.body" style="width: 100%;" />
         </div>
       </div>
-    </div>
+    </div> -->
   </ion-content>
-  <!-- <ion-footer-bar style="height: 60px;">
+  <ion-footer-bar keyboard-attach style="height: 60px; padding:0;">
     <div class="button-bar">
-      <div class="item item-divider" style="width:100%">
+      <div class="message-item item-divider" style="width:100%; margin-bottom: 0;">
         <button class="button button-small button-positive icon-left ion-reply" style="float:right" ng-click="reply(replyMessage.body)">Message</button>
         <div style="overflow: hidden; padding-right: .5em;">
-          <input type="text" ng-model="replyMessage.body" style="width: 100%;" />
+          <input type="text" ng-model="replyMessage.body" style="width: 100%; color:#212121" />
         </div>
       </div>
     </div>
-  </ion-footer-bar> -->
+  </ion-footer-bar>
 </ion-view>
 
 <!-- startConversation(match.id, replyMessage.body) -->

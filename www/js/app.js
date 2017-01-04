@@ -1,4 +1,4 @@
-var app = angular.module('my-gym-connect-app', ['ionic', 'ngCordova'])
+var app = angular.module('my-gym-connect-app', ['ionic', 'ngCordova', 'ngAnimate'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -34,6 +34,12 @@ app.directive('matchslider', function($timeout) {
         $scope.matches[$scope.currentIndex].visible = true; // make the current image visible
       });
     },
-    templateUrl: 'templates/signup-tutorial/match-slider.html'
+    templateUrl: 'templates/partials/match-slider.html'
   };
+});
+
+app.filter('capitalizeFirst', function() {
+    return function(input) {
+      return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
+    }
 });

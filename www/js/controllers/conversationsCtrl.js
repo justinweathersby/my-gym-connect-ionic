@@ -42,6 +42,7 @@ app.controller('ConversationsCtrl', function($scope, $state, $http, $stateParams
     currentConversation.id = convo.conversation_id;
     currentConversation.sender_id = convo.sender_id;
     currentConversation.sender_name = convo.sender_name;
+    currentConversation.sender_image = convo.sender_image;
     $state.go('tab.messages');
   };
 });

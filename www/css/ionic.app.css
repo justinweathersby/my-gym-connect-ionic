@@ -9820,6 +9820,24 @@ a.button {
   src: url("../fonts/ComfortaaRegular.eot");
   src: url("../fonts/ComfortaaRegular.eot") format("embedded-opentype"), url("../fonts/ComfortaaRegular.woff2") format("woff2"), url("../fonts/ComfortaaRegular.woff") format("woff"), url("../fonts/ComfortaaRegular.ttf") format("truetype"), url("../fonts/ComfortaaRegular.svg#ComfortaaRegular") format("svg"); }
 
+.message-from-me {
+  background: #FF5252 !important;
+  border-radius: 30px 30px 0px 30px;
+  max-width: 90%;
+  float: right;
+  text-align: right;
+  padding: 10px; }
+
+.message-from-sender {
+  float: clear;
+  background: rgba(0, 0, 0, 0.5) !important;
+  border-radius: 30px 30px 30px 0;
+  max-width: 90%;
+  padding: 25px 0px 0px 60px; }
+
+.messages-container li.item {
+  padding: 0; }
+
 .mainBackground {
   /*background-color: #CFD8DC*/
   /*background-color: #607D8B;*/
@@ -10037,6 +10055,16 @@ img.tutorial-logo {
   /* <-- just for demonstration */
   min-height: 50px;
   background-color: rgba(0, 0, 0, 0.5); }
+
+.profile-item:first-letter {
+  text-transform: capitalize; }
+
+.profile-item-label {
+  color: #FF5252;
+  font-variant: small-caps; }
+
+.profile-item-divider {
+  border-top: .5px solid #BDBDBD; }
 
 /*.login-container{
   display: -webkit-flex;
