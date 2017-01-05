@@ -57,6 +57,8 @@ app.service('currentUserService', function($http, currentUser, GYM_CONNECT_API){
       currentUser.gender = data.gender;
       currentUser.gender_match = data.gender_match;
       currentUser.image_url = data.image_url;
+      currentUser.second_image_url = data.second_image_url;
+      currentUser.third_image_url = data.third_image_url;
       currentUser.gym = data.gym;
       currentUser.description = data.description;
     }
