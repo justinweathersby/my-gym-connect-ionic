@@ -1,5 +1,5 @@
 app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera,
-                                              $ionicPopup, $ionicLoading, $ionicPlatform, $ionicViewSwitcher,
+                                              $ionicPopup, $ionicLoading, $ionicPlatform, $ionicViewSwitcher, $ionicHistory,
                                               currentUser, currentUserService,
                                               GYM_CONNECT_API)
 {
@@ -28,6 +28,10 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera,
       }
     });
   };
+
+  $scope.ionicHistoryBack = function(){
+    $ionicHistory.goBack();
+  }
 
   $scope.NameDescNext = function(){
     if ($scope.current_user.name != null || $scope.current_user.description != null){

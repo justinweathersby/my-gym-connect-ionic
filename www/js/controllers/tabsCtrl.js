@@ -9,6 +9,9 @@ app.controller('TabsCtrl', function($scope, $state,
 //   });
 // });
 //
+$scope.goToMatches = function(){
+  $state.go('tab.dash', {}, {reload:true});
+}
 $scope.openMoreModal = function(){
   var hideSheet = $ionicActionSheet.show({
     buttons: [
