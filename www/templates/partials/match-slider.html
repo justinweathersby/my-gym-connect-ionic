@@ -1,9 +1,12 @@
 <div class="matches-slider" style="visibility: visible; max-width: 600px; margin: 0 auto;">
-<div ng-repeat="match in matches" ng-show="match.visible" class="match row" style="padding-top:5vh;">
-  <div class="col-10 match-direction-col">
-    <img ng-src="images/circled-chevron-left.png" ng-click="prev()"/>
+<div ng-repeat="match in matches" ng-show="match.visible" class="match" style="padding-top:5vh;">
+  <div class="row">
+
+
+  <div class="col-5 match-direction-col">
+    <img ng-src="images/circled-chevron-left.png" ng-click="prev()" style="width: 160%; margin-left:50%;z-index:1"/>
   </div>
-  <div class="col-80 match-background">
+  <div class="col-90 match-background" style="z-index: 2;">
     <div class="match-image-container">
       <img class="match-image" ng-src="{{match.image_url}}"/>
     </div>
@@ -22,8 +25,12 @@
       </div>
     </div>
   </div>
-  <div class="col-10 match-direction-col">
-    <img ng-src="images/circled-chevron-left.png" ng-click="next()" style="transform: rotate(180deg);"/>
+  <div class="col-5 match-direction-col">
+    <img ng-src="images/circled-chevron-left.png" ng-click="next()" style="transform: rotate(180deg);width: 160%; margin-right:50%; z-index:1"/>
+  </div>
+    </div>
+  <div class="row" style="">
+    <h5 style="margin:0 auto; margin-top: 1vh;">{{$index+1}}/{{matches.length}}</h5>
   </div>
 </div>
 </div>
