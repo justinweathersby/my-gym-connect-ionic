@@ -9955,6 +9955,17 @@ input:invalid {
   font-size: 14px;
   font-family: "-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif; }
 
+.no-matches-container {
+  margin-top: 30vh;
+  background-color: #455A64;
+  border-radius: 5px;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 0 10px black; }
+
 .match-background {
   height: 80vh;
   background-color: #FFFFFF;
@@ -9962,16 +9973,6 @@ input:invalid {
   overflow: hidden;
   position: relative;
   box-shadow: 0 0 10px #1f2323; }
-
-.no-matches-container {
-  margin-top: 30vh;
-  background-color: rgba(30, 180, 255, 0.9);
-  border-radius: 5px;
-  max-width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 10px;
-  text-align: center; }
 
 .match-image-container {
   height: 50vh;
