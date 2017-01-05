@@ -10074,10 +10074,6 @@ img.tutorial-logo {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%); }
 
-.imagePortrait {
-  width: 100% !important;
-  height: auto !important; }
-
 .profile-item:first-letter {
   text-transform: capitalize; }
 
@@ -10104,18 +10100,3 @@ img.tutorial-logo {
   height: 50vh;
   background-position: center center;
   background-size: cover; }
-
-/*.login-container{
-  display: -webkit-flex;
-  -webkit-flex-direction: column;
-  height: 100%;
-}
-
-.login-container > .row{
-  -webkit-flex: 1;
-}
-
-.login-container > .logo {
-     -webkit-flex: 1.5 !important;
-     -webkit-align-items: center;
-}*/

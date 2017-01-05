@@ -54,12 +54,22 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera,
   };
 
   $scope.WorkoutNext = function(){
-    if($scope.current_user.workout_time != null){ updateUser('5th-step'); }
+    if($scope.current_user.workout_time != null){
+      if ($scope.workoutForm.$dirty){ updateUser('5th-step');}
+      else{ $ionicViewSwitcher.nextDirection('forward');
+            $state.go('5th-step');
+      }
+    }
     else{ confirmNext('5th-step'); }
   };
 
   $scope.GenderNext = function(){
-    if($scope.current_user.gender && $scope.current_user.gender_match){ updateUser('tab.dash');}
+    if($scope.current_user.gender && $scope.current_user.gender_match){
+      if ($scope.genderForm.$dirty){ updateUser('tab.dash');}
+      else{ $ionicViewSwitcher.nextDirection('forward');
+            $state.go('tab.dash');
+      }
+    }
     else{ confirmNext('tab.dash');}
   };
 
