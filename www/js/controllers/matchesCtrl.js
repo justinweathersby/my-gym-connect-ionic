@@ -5,6 +5,7 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
 {
     $scope.imgLoadingCircle = "<spinner-blue.gif>";
     $scope.matchDataLoaded = false;
+    $scope.matchSelectedLoaded = false;
 
     $scope.getMatches = function(){
       $ionicLoading.show({
@@ -14,7 +15,7 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
               url: GYM_CONNECT_API.url + "/matches",
               headers: {'Authorization' : currentUser.token}
       }).success( function( data ){
-              console.log('Return Data From Get Matches from Api:', JSON.stringify(data, null, 4));
+              // console.log('Return Data From Get Matches from Api:', JSON.stringify(data, null, 4));
               $scope.matches = data;
               $scope.matchDataLoaded = true;
               $ionicLoading.hide();
@@ -42,7 +43,10 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
     }).then(function(modal) {
       $scope.modal = modal;
     });
-    $scope.openModal = function() {
+    $scope.openModal = function(match) {
+      $scope.matchSelected = match;
+      $scope.matchSelectedLoaded = true;
+      console.log("openModal: ", JSON.stringify($scope.matchSelected, null, 4));
       $scope.modal.show();
     };
     $scope.closeModal = function() {

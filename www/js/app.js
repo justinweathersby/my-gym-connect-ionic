@@ -38,6 +38,48 @@ app.directive('matchslider', function($timeout) {
   };
 });
 
+app.directive('profileimageslider', function($timeout) {
+  return {
+    restrict: 'AE',
+    replace: true,
+    link: function($scope, elem, attrs) {
+      $scope.curProfileImageIndex= 0; // Initially the index is at the first image
+      $scope.profileImages = [{image: $scope.matchSelected.image_url}];
+      if ($scope.matchSelected.second_image_url){$scope.profileImages.push({image: $scope.matchSelected.second_image_url});}
+      if ($scope.matchSelected.third_image_url){$scope.profileImages.push({image: $scope.matchSelected.third_image_url});}
+      console.log("Profile Images: ", $scope.profileImages);
+
+      $scope.next = function() {
+        $scope.curProfileImageIndex < $scope.profileImages.length - 1 ? $scope.curProfileImageIndex++ : $scope.curProfileImageIndex = 0;
+      };
+      $scope.prev = function() {
+        $scope.curProfileImageIndex > 0 ? $scope.curProfileImageIndex-- : $scope.curProfileImageIndex = $scope.profileImages.length - 1;
+      };
+      $scope.$watch('curProfileImageIndex', function() {
+        $scope.profileImages.forEach(function(image) {
+          image.visible = false; // make every image invisible
+        });
+        $scope.profileImages[$scope.curProfileImageIndex].visible = true; // make the current image visible
+      });
+
+      var timer;
+      var sliderFunc = function() {
+        timer = $timeout(function() {
+          $scope.next();
+          timer = $timeout(sliderFunc, 5000);
+        }, 5000);
+      };
+
+      sliderFunc();
+
+      $scope.$on('$destroy', function() {
+        $timeout.cancel(timer); // when the scope is getting destroyed, cancel the timer
+      });
+    },
+    templateUrl: 'templates/partials/profile-image-slider.html'
+  };
+});
+
 app.filter('capitalizeFirst', function() {
     return function(input) {
       return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
