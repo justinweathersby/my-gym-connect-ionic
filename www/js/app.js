@@ -80,22 +80,22 @@ app.directive('profileimageslider', function($timeout) {
   };
 });
 
-app.directive('imageOrientationCrop', function(){
-   return {
-     restrict: 'A',
-     link: function(scope, elem, attr) {
-         elem.on('load', function() {
-            var img = elem[0];
-            var imgWidth = img.naturalWidth;
-            var imgHeight = img.naturalHeight;
-            if (imgHeight > imgWidth){
-            elem.addClass('imagePortrait');
-            }
-            //check width and height and apply styling to parent here.
-         });
-     }
-   };
-});
+// app.directive('imageOrientationCrop', function(){
+//    return {
+//      restrict: 'A',
+//      link: function(scope, elem, attr) {
+//          elem.on('load', function() {
+//             var img = elem[0];
+//             var imgWidth = img.naturalWidth;
+//             var imgHeight = img.naturalHeight;
+//             if (imgHeight > imgWidth){
+//             elem.addClass('imagePortrait');
+//             }
+//             //check width and height and apply styling to parent here.
+//          });
+//      }
+//    };
+// });
 
 app.filter('capitalizeFirst', function() {
     return function(input) {

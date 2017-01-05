@@ -355,13 +355,6 @@ img.tutorial-logo{
   }
 }
 
-// ------------Used with Directive ---------
-.imagePortrait{
-  width: 100% !important;
-  height: auto !important;
-  // min-height:100%;
-}
-
 //-------------Profile Modal-----------------
 
 .profile-item:first-letter{
@@ -380,21 +373,7 @@ img.tutorial-logo{
 }
 
 //-------------myAccount-----------------
-// .my-account-image{
-//   overflow: hidden;
-//   position:relative;
-//   img{
-//     position: absolute;
-//     left: 50%;
-//     top: 50%;
-//     height: 100%;
-//     width: auto;
-//     min-width:100%;
-//     -webkit-transform: translate(-50%,-50%);
-//     -ms-transform: translate(-50%,-50%);
-//     transform: translate(-50%,-50%);
-//   }
-// }
+
 .upload-image-crop{
   display: inline-block;
     width: 100%;
@@ -409,18 +388,3 @@ img.tutorial-logo{
     background-position: center center;
     background-size: cover;
 }
-
-/*.login-container{
-  display: -webkit-flex;
-  -webkit-flex-direction: column;
-  height: 100%;
-}
-
-.login-container > .row{
-  -webkit-flex: 1;
-}
-
-.login-container > .logo {
-     -webkit-flex: 1.5 !important;
-     -webkit-align-items: center;
-}*/
