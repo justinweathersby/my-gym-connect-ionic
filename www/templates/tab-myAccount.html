@@ -9,9 +9,7 @@ height: 80%;line-height:80%" ui-sref="2nd-step">
 <ion-content class="" style="background-color: white; ">
   <div class="col" style="position:relative; padding:0">
     <div class="row" style="padding:0;">
-      <!-- <profileimageslider ng-if="matchSelected"/> -->
-      <div class="test-account" style="background-image: url('{{current_user.image_url}}'); max-height: 50vh; box-shadow: 0 0 10px black;">
-      </div>
+      <account-image-slider user="current_user" ng-if="userLoaded"/>
     </div>
     <div class="row" style="position:absolute; bottom:0; left:0;">
       <h2 style="color: white;text-shadow: 0 0 5px black;">{{current_user.name}}</h2>

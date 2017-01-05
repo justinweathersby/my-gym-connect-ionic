@@ -1,8 +1,8 @@
-<div class="profile-image-slider" style="visibility: visible; width: 100%;margin: 0 auto;">
+<div class="account-image-slider" style="visibility: visible; width: 100%;margin: 0 auto;">
   <div ng-repeat="image in profileImages" ng-show="image.visible" class="" style="" on-swipe-right="next()" on-swipe-left="prev()">
       <div style="position:absolute; right:0; top: 0; padding: 12px;color: white;text-shadow: 0 0 5px black;">
         {{$index+1}}/{{profileImages.length}}
       </div>
-      <div class="test-account" style="background-image: url('{{image.image}}'); height: 65vh; box-shadow: 0 0 10px black;"/>
+      <div class="test-account" style="background-image: url('{{image.image}}'); height: 50vh; box-shadow: 0 0 10px black;"></div>
   </div>
 </div>

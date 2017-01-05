@@ -80,6 +80,55 @@ app.directive('profileimageslider', function($timeout) {
   };
 });
 
+app.directive('accountImageSlider', function($timeout) {
+  return {
+    restrict: 'AE',
+    replace: true,
+    scope: {
+      user: '='
+    },
+    link: function(scope, elem, attrs) {
+      console.log("Account Slider User: ", scope.user);
+
+      scope.currentIndex = 0; // Initially the index is at the first image
+      scope.profileImages = [{image: scope.user.image_url}];
+      if (scope.user.second_image_url){scope.profileImages.push({image: scope.user.second_image_url});}
+      if (scope.user.third_image_url){scope.profileImages.push({image: scope.user.third_image_url});}
+      console.log("Profile Images: ", scope.profileImages);
+
+      scope.next = function() {
+        scope.currentIndex < scope.profileImages.length - 1 ? scope.currentIndex++ : scope.currentIndex = 0;
+      };
+      scope.prev = function() {
+        scope.currentIndex > 0 ? scope.currentIndex-- : scope.currentIndex = scope.profileImages.length - 1;
+      };
+      scope.$watch('currentIndex', function() {
+        scope.profileImages.forEach(function(image) {
+          image.visible = false; // make every image invisible
+        });
+        scope.profileImages[scope.currentIndex].visible = true; // make the current image visible
+      });
+
+      var timer;
+      var sliderFunc = function() {
+        timer = $timeout(function() {
+          scope.next();
+          timer = $timeout(sliderFunc, 5000);
+        }, 5000);
+      };
+
+      sliderFunc();
+
+      scope.$on('$destroy', function() {
+        $timeout.cancel(timer); // when the scope is getting destroyed, cancel the timer
+      });
+
+    },
+    templateUrl: 'templates/partials/account-image-slider.html'
+
+  };
+});
+
 // app.directive('imageOrientationCrop', function(){
 //    return {
 //      restrict: 'A',

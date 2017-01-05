@@ -7,6 +7,8 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
   $scope.imgLoadingCircle = "<spinner-blue.gif>";
   $scope.base64ImageData = '';
 
+  $scope.userLoaded = false;
+
   $ionicLoading.show({
     template: '<p>Loading...</p><ion-spinner></ion-spinner>'
   });
@@ -14,7 +16,7 @@ app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $i
   currentUserService.getUser().success(function(){
     console.log("Inside myaccount ctrl current user success");
     $scope.current_user = currentUser;
-    $scope.profileImgSrc = currentUser.image_url;
+    $scope.userLoaded = true;
     $ionicLoading.hide();
 
   }).error(function(error){
