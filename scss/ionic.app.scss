@@ -32,6 +32,20 @@ $accent-color:                    #FF5252 !default;
          url('../fonts/ComfortaaRegular.ttf') format('truetype'),
          url('../fonts/ComfortaaRegular.svg#ComfortaaRegular') format('svg');
 }
+
+@font-face {
+  font-family: 'Nordica';
+	src: url('../fonts/nordica/NordicaHairline.eot');
+	src: url('../fonts/nordica/NordicaHairline.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/nordica/NordicaHairline.woff2') format('woff2'),
+		url('../fonts/nordica/NordicaHairline.woff') format('woff'),
+		url('../fonts/nordica/NordicaHairline.ttf') format('truetype'),
+		url('../fonts/nordica/NordicaHairline.svg#NordicaHairline') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+
 .message-from-me{
   background: #FF5252 !important;
   border-radius: 30px 30px 0px 30px;
@@ -341,7 +355,9 @@ img.tutorial-logo{
 .profile-item-divider{
   border-top: .5px solid #BDBDBD;
 }
-
+.profile-item{
+  font-family: "Nordica";
+}
 /*.login-container{
   display: -webkit-flex;
   -webkit-flex-direction: column;

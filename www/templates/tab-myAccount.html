@@ -1,10 +1,88 @@
-<ion-view view-title="My Account" >
+<ion-view view-title="Account">
+  <!-- <ion-header-bar class="bar-clear">
+  <div class="buttons">
+    <a class="button icon-left ion-arrow-left-c button-clear" style="color: white; text-shadow: 0 0 3px black;" ng-click="closeModal()"></a>
+  </div>
+</ion-header-bar> -->
+<ion-nav-buttons side="right">
+  <button class="button buttons button-outline header-item" style="color: white;
+border: 1px solid white;
+height: 80%;line-height:80%" ui-sref="2nd-step">
+    Edit
+  </button>
+</ion-nav-buttons>
+<ion-content class="" style="background-color: white; ">
+  <div class="col" style="position:relative; padding:0">
+    <div class="row" style="padding:0;">
+      <!-- <profileimageslider ng-if="matchSelected"/> -->
+      <img ng-src="{{current_user.image_url}}" style="width:100%; max-height:60vh; box-shadow: 0 0 10px black;"/>
+    </div>
+    <div class="row" style="position:absolute; bottom:0; left:0;">
+      <h2 style="color: white;text-shadow: 0 0 5px black;">{{current_user.name}}</h2>
+    </div>
+  </div>
+  <div class="col">
+    <div class="row profile-item-label">
+      Email
+    </div>
+    <div class="row profile-item">
+      {{current_user.email}}
+    </div>
+    <hr class="profile-item-divider"/>
+    <div class="row profile-item-label">
+      Gym
+    </div>
+    <div class="row profile-item">
+      {{current_user.gym}}
+    </div>
+    <hr class="profile-item-divider"/>
+    <div class="row profile-item-label">
+      Description
+    </div>
+    <div class="row profile-item">
+      {{current_user.description}}
+    </div>
+    <hr class="profile-item-divider"/>
+    <div class="row profile-item-label">
+      Gender
+    </div>
+    <div class="row profile-item">
+      {{current_user.gender | capitalizeFirst}}
+    </div>
+    <hr class="profile-item-divider"/>
+    <div class="row profile-item-label">
+      Looking For
+    </div>
+    <div class="row profile-item">
+      {{current_user.gender_match | capitalizeFirst}}
+    </div>
+    <hr class="profile-item-divider"/>
+    <div class="row profile-item-label">
+      Workout Time
+    </div>
+    <div class="row profile-item">
+      {{current_user.workout_time | capitalizeFirst}}
+    </div>
+    <hr class="profile-item-divider"/>
+
+    <div class="row profile-item-label">
+      Workout Level
+    </div>
+    <div class="row profile-item">
+      {{current_user.workout_level | capitalizeFirst}}
+    </div>
+  </div>
+  </ion-content>
+  <!-- <ion-footer-bar align-title="left" class="bar-assertive" style="background: #455A64"> -->
+    <!-- <button class="button button-positive" ng-click="showPopup(match.id)" style="margin:0 auto; width: 100%; font-variant: small-caps; font-size: 16px;font-family:"-apple-system", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;">Connect</button> -->
+  <!-- </ion-footer-bar> -->
+</ion-view>
+
+<!-- <ion-view view-title="My Account" >
   <ion-content class="padding mainBackground" style="padding-top:30px;"  has-footer="true"  >
     <div style="text-align: center;">
       <img ng-src='{{ (profileImgSrc) || (imgLoadingCircle) }}' alt="No Image Uploaded" style="height:25vh; border-radius: 3px;">
-      <!-- <button style="width:60%; margin:0 auto; margin-top:10px" class="button button-block button-positive" ng-click="selectPicture()">
-        Add/Edit Image
-      </button> -->
+
     </div>
 
     <button style="" class="button button-block button-positive" ui-sref="2nd-step">
@@ -69,4 +147,4 @@
       </label>
     </div>
   </ion-content>
-</ion-view>
+</ion-view> -->
