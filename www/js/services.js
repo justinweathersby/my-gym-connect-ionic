@@ -17,6 +17,9 @@ app.service('currentUser', function(){
   // this.image = null;
   this.description = null;
 
+  this.device_token = null;
+  this.device_type = null;
+
 });
 
 app.service('currentUserService', function($http, currentUser, GYM_CONNECT_API){
@@ -86,7 +89,7 @@ app.service('authService', function($http, currentUser, GYM_CONNECT_API){
   this.login = function(user){
     return  $http({method: 'POST',
                    url: GYM_CONNECT_API.url + '/login',
-                   headers: {'X-API-EMAIL' : user.email, 'X-API-PASS' : user.password}})
+                   headers: {'X-API-EMAIL' : user.email, 'X-API-PASS' : user.password, 'X-API-DEVICE-TOKEN' : currentUser.device_token, 'X-API-DEVICE-TYPE' : currentUser.device_type}})
       .success( function( data ){
         // TODO:
         console.log('Return Data From Login Post to Api:', JSON.stringify(data, null, 4));

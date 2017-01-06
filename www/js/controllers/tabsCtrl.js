@@ -1,14 +1,16 @@
 app.controller('TabsCtrl', function($scope, $state,
-                                    $ionicActionSheet, $ionicHistory, $ionicPlatform, $ionicActionSheet){
+                                    $ionicActionSheet, $ionicHistory, $ionicPlatform, $ionicActionSheet, $ionicPopup){
 
-// $scope.$on('cloud:push:notification', function(event, data) {
-//   var msg = data.message;
-//   var alertPopup = $ionicPopup.alert({
-//     title: msg.title,
-//     template: msg.text
-//   });
-// });
-//
+
+$scope.$on('cloud:push:notification', function(event, data) {
+  console.log("PUSH NOTIFICATION: ", JSON.stringify(data));
+  var msg = data.message;
+  var alertPopup = $ionicPopup.alert({
+    title: msg.title,
+    template: msg.text
+  });
+});
+
 $scope.goToMatches = function(){
   $state.go('tab.dash', {}, {reload:true});
 }

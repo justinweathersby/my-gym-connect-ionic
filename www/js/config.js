@@ -1,3 +1,23 @@
+app.config(function($ionicCloudProvider) {
+  $ionicCloudProvider.init({
+    "core": {
+      "app_id": "fff6c12d"
+    },
+    "push": {
+      "sender_id": "359998734646",
+      "pluginConfig": {
+        "ios": {
+          "badge": true,
+          "sound": true
+        },
+        "android": {
+          "iconColor": "#343434"
+        }
+      }
+    }
+  });
+});
+
 app.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
   .state('login', {
@@ -92,5 +112,4 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
   //--Cordova white list plugin
   // $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
-
 });

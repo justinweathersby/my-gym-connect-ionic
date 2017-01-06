@@ -1,4 +1,13 @@
 app.controller('MyAccountCtrl', function($scope, $http, $state, $stateParams, $ionicLoading, $ionicPopup,$ionicPlatform, currentUser, currentUserService, $cordovaCamera, GYM_CONNECT_API){
+  // $scope.$on('cloud:push:notification', function(event, data) {
+  //   console.log("PUSH NOTIFICATION: ", JSON.stringify(data));
+  //   var msg = data.message;
+  //   var alertPopup = $ionicPopup.alert({
+  //     title: msg.title,
+  //     template: msg.text
+  //   });
+  // });
+
   $scope.WorkoutLevels = ['beginner','intermediate','expert'];
   $scope.Genders = ['male', 'female'];
   $scope.WorkoutTimes = ['morning', 'afternoon', 'night', 'all'];

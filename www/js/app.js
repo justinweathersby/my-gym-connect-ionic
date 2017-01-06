@@ -1,7 +1,17 @@
-var app = angular.module('my-gym-connect-app', ['ionic', 'ngCordova', 'ngAnimate'])
+var app = angular.module('my-gym-connect-app', ['ionic', 'ionic.cloud', 'ngCordova', 'ngAnimate'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $ionicPush, currentUser) {
   $ionicPlatform.ready(function() {
+
+    $ionicPush.register().then(function(t) {
+      return $ionicPush.saveToken(t);
+    }).then(function(t) {
+      currentUser.device_token = t.token;
+      currentUser.device_type = t.type;
+      console.log("DEVICE TOKEN: ", t.token);
+      console.log("DEVICE TYPE: ", t.type);
+    });
+
     TestFairy.begin('993218db594324f249e28bfa5a72f74f0d21732d');
 
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
