@@ -1,4 +1,4 @@
-var app = angular.module('my-gym-connect-app', ['ionic', 'ngCordova', 'ngAnimate'])
+var app = angular.module('my-gym-connect-app', ['ionic', 'ngCordova', 'ngAnimate', 'ngCordovaOauth'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

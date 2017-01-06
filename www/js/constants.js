@@ -11,3 +11,7 @@
 app.constant('GYM_CONNECT_API', {
     url: 'http://my-gym-connect-staging.herokuapp.com/api'
 });
+
+app.constant('FACEBOOK_APP', {
+    id: "1239775672736193"
+});

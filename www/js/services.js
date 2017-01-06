@@ -14,13 +14,25 @@ app.service('currentUser', function(){
   this.gender = null;
   this.gender_match = null;
   this.gym = null;
+  this.gym_code = null;
   // this.image = null;
   this.description = null;
+  this.facebook_access_token = null;
 
 });
 
 app.service('currentUserService', function($http, currentUser, GYM_CONNECT_API){
   // this.clear = function(){};
+  this.createUser = function(user){
+    return $http({ method: 'POST',
+                   url: GYM_CONNECT_API.url + "/users",
+                   data: {
+                     "user": {
+                       "email": user.email,
+                       "password": user.password },
+                     "gym_code": user.gym_code}});
+                   };
+
   this.updateUser = function(){
     console.log("Updating currentUserService...", JSON.stringify(currentUser, null, 4));
     return $http({ method: 'POST',
