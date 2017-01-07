@@ -8,6 +8,10 @@ app.controller('MessageCtrl', function($scope, $state, $http, $stateParams, $tim
   $scope.current_user = currentUser;
   $scope.current_conv = currentConversation;
 
+  $scope.$on('$ionicView.afterEnter', function(){
+    $ionicScrollDelegate.scrollBottom();
+  }); 
+
   $scope.getMessages = function() {
     $ionicLoading.show({
         template: '<p>Loading...</p><ion-spinner></ion-spinner>'

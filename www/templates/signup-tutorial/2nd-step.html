@@ -1,15 +1,16 @@
 <ion-view class="mainBackground">
   <form name="nameDescForm" ng-controller="SignupTutorialCtrl">
-  <ion-content scroll="false" class="padding" style="padding-top:20px;">
-      <section class="text-center" style="">
-        <div class="text-center">
+  <ion-content class="padding has-footer step-two-content" style="padding-top:20px;">
+
+        <div class="row text-center">
           <img src="images/gymconnect.png" class="tutorial-logo">
         </div>
-        <p style="padding-top:0" class="tutorial-text">First we need some basic information about you. Including your name and a short blurb that best describes you!</p>
-        <div class="list list-inset">
+        <div class="row tutorial-text" style="padding-top:0">First we need some basic information about you. Including your name and a short blurb that best describes you!</div>
+
+        <div class="list list-inset step-two-list">
           <label class="form-box item item-input">
-            <i class="icon ion-android-person placeholder-icon" style=" padding-left:7px"></i>
-            <input id="nameInput2S" style="loginFields" type="text" placeholder="Name" ng-model="current_user.name"  />
+            <i class="icon ion-android-person placeholder-icon" style=" padding-left:15px"></i>
+            <input keyboard-attach id="nameInput2S" style="loginFields" type="text" placeholder="Name" ng-model="current_user.name"  />
           </label>
           <label class="form-box item item-input" style="height: 125px;">
              <i class="icon ion-edit placeholder-icon" style="padding-right:29px; height:100%;"></i>
@@ -19,44 +20,63 @@
               placeholder="Description"
               maxlength="255"
               ng-model="current_user.description"
-              style="background-color: transparent; color: white; margin-top: 15px; margin-right:5px; overflow-y:hidden; resize:none;" />
+              style="background-color: transparent; color: white; margin-top: 12px; margin-right:5px; overflow-y:hidden; resize:none;" />
             </textarea>
           </label>
         </div>
-      </section>
-    </form>
-    <section style="position: absolute; bottom:0; left:0; padding:0; margin:0; width:100%;">
-      <div class="row" style="width:33.3%; margin:0 auto;">
-        <div class="col col-center" style="color:white;  padding-bottom: 0;">
-          <div class="row" style="padding:0 0 0 0; margin:0;">
-            <div class="col" style="text-align:center">
-              <i class="icon ion-ios-circle-filled"></i>
-            </div>
-            <div class="col" style="text-align:center">
-              <i class="icon ion-ios-circle-outline"></i>
-            </div>
-            <div class="col" style="text-align:center">
-              <i class="icon ion-ios-circle-outline"></i>
-            </div>
-            <div class="col" style="text-align:center">
-              <i class="icon ion-ios-circle-outline"></i>
-            </div>
+
+  </ion-content>
+
+  <div class="bar bar-subfooter bar-clear auto-height">
+    <div class="row" style="width:33.3%; margin:0 auto; padding-bottom:0">
+      <div class="col col-center" style="color:white;  padding-bottom: 0;">
+        <div class="row" style="padding:0 0 0 0; margin:0;">
+          <div class="col" style="text-align:center">
+            <i class="icon ion-ios-circle-filled"></i>
+          </div>
+          <div class="col" style="text-align:center">
+            <i class="icon ion-ios-circle-outline"></i>
+          </div>
+          <div class="col" style="text-align:center">
+            <i class="icon ion-ios-circle-outline"></i>
+          </div>
+          <div class="col" style="text-align:center">
+            <i class="icon ion-ios-circle-outline"></i>
           </div>
         </div>
       </div>
-      <div class="row" style="padding:0; margin:0">
-        <div class="col" style="padding:0;">
-          <button style="width: 100%" class="button  button-positive"  ng-click="ionicHistoryBack()" nav-direction="back">
-            Back
-          </button>
-        </div>
-        <div class="col"></div>
-        <div class="col" style="padding:0; text-align:right">
-          <button  style="width: 100%" class="button  button-positive" ng-click='NameDescNext()' nav-direction="forward">
-            Next
-          </button>
-        </div>
+    </div>
+</div>
+<ion-footer-bar class="bar bar-footer bar-clear" style="padding:0; margin:0;">
+  <div class="row" style="padding:0; margin:0">
+    <div class="col" style="padding:0;">
+      <button style="width: 100%; min-height:44px; height:100%; font-size:16px; padding-bottom:0; margin-bottom:0" class="button  button-positive"  ng-click="ionicHistoryBack()" nav-direction="back">
+        Back
+      </button>
+    </div>
+    <div class="col"></div>
+    <div class="col" style="padding:0; text-align:right">
+      <button  style="width: 100%; min-height:44px; height:100%; font-size:16px; padding-bottom:0;margin-bottom:0" class="button  button-positive" ng-click='NameDescNext()' nav-direction="forward">
+        Next
+      </button>
+    </div>
+  </div>
+    </form>
+</ion-footer-bar>
+  <!-- <div class="bar bar-footer bar-clear" style="padding:0; margin:0" ng-controller="SignupTutorialCtrl">
+    <div class="row" style="padding:0; margin:0">
+      <div class="col" style="padding:0;">
+        <button style="width: 100%; min-height:44px; height:100%; font-size:16px; padding-bottom:0; margin-bottom:0" class="button  button-positive"  ng-click="ionicHistoryBack()" nav-direction="back">
+          Back
+        </button>
       </div>
-    </section>
-  </ion-content>
+      <div class="col"></div>
+      <div class="col" style="padding:0; text-align:right">
+        <button  style="width: 100%; min-height:44px; height:100%; font-size:16px; padding-bottom:0;margin-bottom:0" class="button  button-positive" ng-click='NameDescNext()' nav-direction="forward">
+          Next
+        </button>
+      </div>
+    </div>
+  </div> -->
+
 </ion-view>

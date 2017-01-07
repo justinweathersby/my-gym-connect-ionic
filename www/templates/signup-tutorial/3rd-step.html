@@ -9,17 +9,23 @@
         <div class="flex-row" style="height:100%">
           <div class="flex-col" style="flex:2; position:relative">
             <div class="flex-item flex-profile-image" style="flex:2; overflow: hidden; position:relative;">
-              <div class="upload-image-crop" style="background-image: url('{{current_user.image_url}}');"></div>
+              <div class="upload-image-crop" >
+                <img ng-src="{{current_user.image_url}}" style=" object-fit: cover; min-height: 152px; min-width:182px;"/>
+              </div>
               <a class="button button-icon icon ion-plus-circled" style="color:white; position: absolute; bottom: -5px;right: -5px;" ng-click="selectMainImage()"></a>
             </div>
           </div>
           <div class="flex-col" style="flex:1;">
             <div class="flex-item flex-profile-image" style="flex:1; overflow: hidden; position:relative;">
-              <div class="upload-image-crop" style="background-image: url('{{current_user.second_image_url}}');"></div>
+              <div class="upload-image-crop" >
+                <img ng-src="{{current_user.second_image_url}}" style=" object-fit: cover"/>
+              </div>
               <a class="button button-icon icon ion-plus-circled" style="color:white; position: absolute;bottom: -9%;right: -5px;" ng-click="selectSecondImage()"></a>
             </div>
             <div class="flex-item flex-profile-image" style="flex:1; overflow:hidden; position:relative;">
-              <div class="upload-image-crop" style="background-image: url('{{current_user.third_image_url}}');"></div>
+              <div class="upload-image-crop" >
+                <img ng-src="{{current_user.third_image_url}}" style=" object-fit: cover"/>
+              </div>
               <a class="button button-icon icon ion-plus-circled" style="color:white; position: absolute;bottom: -5px;right: -5px;" ng-click="selectThirdImage()"></a>
             </div>
           </div>

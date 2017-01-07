@@ -1,4 +1,4 @@
-app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera,
+app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera, $sce,
                                               $ionicPopup, $ionicLoading, $ionicPlatform, $ionicViewSwitcher, $ionicHistory,
                                               currentUser, currentUserService,
                                               GYM_CONNECT_API)
@@ -29,14 +29,52 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera,
     });
   };
 
+  $scope.check = {
+scale: 'best-fill',
+ onLoad: function(imagecontainer, container) {},
+   onError: function(imagecontainer, container) {},
+   onStart: function(imagecontainer, container) {},
+
+/**
+ Align the image within its frame. Possible values:
+
+ * **left**
+ * **right**
+ * **center**
+ * **top**
+ * **bottom**
+ * **top-left**
+ * **top-right**
+ * **bottom-left**
+ * **bottom-right**
+
+ @type String
+ @default center
+ @since Version 1.2
+*/
+align: 'center',
+parent: null,
+hideParentOverflow: true,
+fadeInDuration: 0,
+rescaleOnResize: false,
+didScale: function(firstTime, options) {},
+
+};
+
   $scope.ionicHistoryBack = function(){
     $ionicHistory.goBack();
   }
 
   $scope.NameDescNext = function(){
+    console.log("Names Desc NExt clicked");
     if ($scope.current_user.name != null || $scope.current_user.description != null){
-      if ($scope.nameDescForm.$dirty){ updateUser('3rd-step');}
-      else{ $ionicViewSwitcher.nextDirection('forward');
+      console.log("Inside current_user name and desc not null");
+      if ($scope.nameDescForm.$dirty){
+        console.log("Inside name descform diry");
+        updateUser('3rd-step');}
+      else{
+            console.log("Inside else ... go to 3rd step");
+            $ionicViewSwitcher.nextDirection('forward');
             $state.go('3rd-step');
       }
     }
@@ -65,15 +103,16 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera,
 
   $scope.GenderNext = function(){
     if($scope.current_user.gender && $scope.current_user.gender_match){
-      if ($scope.genderForm.$dirty){ updateUser('tab.dash');}
+      if ($scope.genderForm.$dirty){ updateUser('tab.myAccount');}
       else{ $ionicViewSwitcher.nextDirection('forward');
-            $state.go('tab.dash');
+            $state.go('tab.myAccount');
       }
     }
-    else{ confirmNext('tab.dash');}
+    else{ confirmNext('tab.myAccount');}
   };
 
   function confirmNext(view){
+    console.log("Inside confirm Next");
     var confirmPopup = $ionicPopup.confirm({
       title: 'Wait',
       template: "Are you sure you want to continue without setting up all of the fields?"
@@ -186,6 +225,10 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera,
 
        }, false); // device ready
   }; // Select picture
+
+  $scope.trustSrc = function(src) {
+    return $sce.trustAsResourceUrl(src);
+  };
 
   function imageUpload(imageURI, fileKey, uri){
     //------File Transfer of Image to Server

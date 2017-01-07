@@ -9815,6 +9815,16 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+@media only screen and (max-height: 481px) {
+  .tutorial-text {
+    font-size: 12px !important; }
+  .step-two-list {
+    margin-top: 0; }
+  img.tutorial-logo {
+    height: 25vh; }
+  .step-two-content {
+    padding-top: 0 !important; } }
+
 @font-face {
   font-family: 'ComfortaaRegular';
   src: url("../fonts/ComfortaaRegular.eot");
@@ -9840,7 +9850,8 @@ a.button {
   background: rgba(0, 0, 0, 0.5) !important;
   border-radius: 30px 30px 30px 0;
   max-width: 90%;
-  padding: 25px 0px 0px 60px; }
+  width: auto;
+  padding: 10px; }
 
 .messages-container li.item {
   padding: 0; }
@@ -10031,7 +10042,7 @@ p.match-description {
 p.convo-last-message {
   color: #c3c3c3; }
 
-p.tutorial-text {
+.tutorial-text {
   font-size: 14px;
   letter-spacing: 1.5px;
   font-family: "ComfortaaRegular";

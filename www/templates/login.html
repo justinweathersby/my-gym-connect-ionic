@@ -3,14 +3,17 @@
 
 
   <form name="loginForm" ng-controller="LoginCtrl">
-  <ion-content scroll="false" class="padding" style="padding-top:20px;">
+  <ion-content class="padding" style="padding-top:2vh;">
 
-    <div class = "text-center">
+    <div class="row text-center" style="padding:0">
       <img src="images/gymconnect.png" style="height: 38vh; margin-left:auto; margin-right:auto; display:block;" alt="">
     </div>
 
     <!-- </div> -->
-    <div class="list list-inset">
+  <div class="col" style="max-height:58vh">
+
+
+    <div class="list list-inset" style="margin-top: 2vh;">
       <label class="form-box item item-input">
         <i class="icon ion-ios-email-outline placeholder-icon"></i>
         <input class="loginFields" style=""  type="email" placeholder="Email" ng-model="user.email" required>
@@ -21,19 +24,25 @@
       </label>
     </div>
   </form>
-
-  <button style="" class="button button-block button-positive"  ng-click="login(user)">
+  <div class="row" style="padding:0">
+  <button style="margin-top:0" class="button button-block button-positive"  ng-click="login(user)">
     Login
   </button>
-  <button  style="" class="button button-block button-positive"  ng-click="goToSignUp()">
+  </div>
+  <div class="row" style="padding:0">
+  <button  style="margin-top:.5vh" class="button button-block button-positive"  ng-click="goToSignUp()">
     Sign Up
   </button>
-
-  <div class="text-center">
-    <button style="" class="button button-clear" ui-sref="forgot-password">
-      Forgot password
-    </button>
   </div>
+
+  <div class="row" style="padding:0">
+    <div class="col col-center text-center">
+      <button style="" class="button button-clear" ui-sref="forgot-password">
+        Forgot password
+      </button>
+    </div>
+  </div>
+    </div>
   <!-- </section> -->
 
   </ion-content>

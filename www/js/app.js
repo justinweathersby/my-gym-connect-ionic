@@ -156,6 +156,30 @@ app.directive('accountImageSlider', function($timeout) {
 //    };
 // });
 
+// app.directive('backImage', function(){
+//   return {
+//     restrict: 'AE',
+//     link: function($scope, elem, attrs) {
+//       console.log("inside directive backimage imageurl: ", $scope.current_user.image_url);
+//       elem.css({
+//           'background-image': 'url(' + $scope.current_user.image_url +')',
+//           'background-size' : 'cover'
+//       });
+//
+//     }
+//
+//   };
+// });
+// app.directive('backImg', function(){
+//     return function(scope, element, attrs){
+//         var url = attrs.backImg;
+//         element.css({
+//             'background-image': 'url(' + url +')',
+//             'background-size' : 'cover'
+//         });
+//       };
+// });​
+
 app.filter('capitalizeFirst', function() {
     return function(input) {
       return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
