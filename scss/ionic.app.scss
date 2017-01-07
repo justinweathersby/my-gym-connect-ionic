@@ -319,11 +319,12 @@ p.tutorial-text{
   text-align: center;
   font-weight: 150;
   padding: 0 5%;
+  padding-top:0;
 
 }
 
 img.tutorial-logo{
-  height: 30vh; margin-left:auto; margin-right:auto; margin-top: 2vh; display:block;
+  height: 30vh; margin-left:auto; margin-right:auto; margin-top: 0vh; display:block;
 }
 
 .flex-row {

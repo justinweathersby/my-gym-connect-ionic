@@ -1,5 +1,5 @@
 <div class="matches-slider" style="visibility: visible; max-width: 600px; margin: 0 auto;">
-<div ng-repeat="match in matches" ng-show="match.visible" class="match" style="padding-top:1vh;">
+<div ng-repeat="match in matches" ng-show="match.visible" class="match" style="padding-top:4vh;">
   <div class="row">
 
 
@@ -12,12 +12,12 @@
       <div class="match-image test-account" style="background-image: url('{{match.image_url}}'); box-shadow: 0 0 10px black;"/>
     </div>
     <div class="row">
-      <h1 class="match-name">{{match.name}}</h1>
+      <h1 class="match-name" style="margin-bottom:0; padding-top:0">{{match.name}}</h1>
     </div>
     <div class="row" style="overflow:hidden; max-height: 60px;">
       <p class="match-description">{{match.description}}</p>
     </div>
-    <div ng-controller="MatchesCtrl" class="row match-buttons-container">
+    <div ng-controller="MatchesCtrl" class="row match-buttons-container" style="padding-bottom:0;">
       <div class="col">
         <button ng-click="openModal(match)" class="button button-small button-positive button-block" style="border-radius: 5px; font-variant:small-caps">Profile</button>
       </div>
