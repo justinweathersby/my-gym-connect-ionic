@@ -60,6 +60,9 @@ $accent-color:                    #FF5252 !default;
 	font-style: normal;
 }
 
+.conversation-item .item[ng-click]:hover{
+  background: transparent !important;
+}
 
 .message-from-me{
   background: #FF5252 !important;

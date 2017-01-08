@@ -1,13 +1,17 @@
 app.controller('TabsCtrl', function($scope, $state,
-                                    $ionicActionSheet, $ionicHistory, $ionicPlatform, $ionicActionSheet, $ionicPopup){
+                                    $ionicActionSheet, $ionicHistory, $ionicPlatform, $ionicActionSheet, $ionicPopup, $cordovaDialogs){
 
 
 $scope.$on('cloud:push:notification', function(event, data) {
   console.log("PUSH NOTIFICATION: ", JSON.stringify(data));
   var msg = data.message;
-  var alertPopup = $ionicPopup.alert({
-    title: msg.title,
-    template: msg.text
+  $cordovaDialogs.alert(
+    msg.text,             // the message
+    function() {},                      // a callback
+    msg.title, // a title
+    "OK"   // the button text
+  ).then(function() {
+    // callback success
   });
 });
 
