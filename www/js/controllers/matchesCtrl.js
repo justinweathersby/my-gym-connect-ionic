@@ -1,5 +1,5 @@
 app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
-                                       $ionicPopup, $ionicLoading, $ionicModal,
+                                       $ionicPopup, $ionicLoading, $ionicModal, $cordovaDialogs,
                                        currentUser, currentConversation,
                                        GYM_CONNECT_API)
 {
@@ -15,22 +15,19 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
               url: GYM_CONNECT_API.url + "/matches",
               headers: {'Authorization' : currentUser.token}
       }).success( function( data ){
-              // console.log('Return Data From Get Matches from Api:', JSON.stringify(data, null, 4));
               $scope.matches = data;
               $scope.matchDataLoaded = true;
-              $ionicLoading.hide();
       }).error( function(error){
             console.log(error);
             if (error.errors === "Not authenticated"){
-              var alertPopup = $ionicPopup.alert({
-                title: 'Error',
-                template: 'Sorry you have been logged out. Please re-login'
-              });
+              $cordovaDialogs.alert(
+                "Sorry you have been logged out. Please re-login",
+                "Woops",  // a title
+                "OK"                                // the button text
+              );
             }
             $state.go('login');
-            $ionicLoading.hide();
       }).finally(function() {
-             // Stop the ion-refresher from spinning
              $ionicLoading.hide();
              $scope.$broadcast('scroll.refreshComplete');
       });
@@ -46,7 +43,6 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
     $scope.openModal = function(match) {
       $scope.matchSelected = match;
       $scope.matchSelectedLoaded = true;
-      console.log("openModal: ", JSON.stringify($scope.matchSelected, null, 4));
       $scope.modal.show();
     };
     $scope.closeModal = function() {
@@ -55,14 +51,6 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
     // Cleanup the modal when we're done with it!
     $scope.$on('$destroy', function() {
       $scope.modal.remove();
-    });
-    // Execute action on hide modal
-    $scope.$on('modal.hidden', function() {
-      // Execute action
-    });
-    // Execute action on remove modal
-    $scope.$on('modal.removed', function() {
-      // Execute action
     });
 
     // Triggered on a button click, or some other target
@@ -114,14 +102,14 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
               headers: {'Authorization' : currentUser.token}
       }).success( function( data ){
               $ionicLoading.hide();
-              console.log('Return Data post new message from Api:', JSON.stringify(data, null, 4));
+              // console.log('Return Data post new message from Api:', JSON.stringify(data, null, 4));
               //--add new current coversation
               //--then go to tab.messages
               currentConversation.id = data.conversation_id;
               currentConversation.sender_id = data.partner_id;
               currentConversation.sender_name = data.partner_name;
-              console.log('Beefore headed to messages:', JSON.stringify(currentConversation, null, 4));
-              console.log('Current Convo id:', JSON.stringify(currentConversation.id, null, 4));
+              // console.log('Beefore headed to messages:', JSON.stringify(currentConversation, null, 4));
+              // console.log('Current Convo id:', JSON.stringify(currentConversation.id, null, 4));
 
               $state.go('tab.messages');
       }).error( function(error){

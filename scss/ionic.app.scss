@@ -60,7 +60,7 @@ $accent-color:                    #FF5252 !default;
 	font-style: normal;
 }
 
-.conversation-item .item[ng-click]:hover{
+.item[ng-click]:hover{
   background: transparent !important;
 }
 
@@ -229,6 +229,23 @@ input:invalid {
   padding:10px;
   text-align: center;
   box-shadow: 0 0 10px black;
+}
+
+.match.ng-hide-add,
+.match.ng-hide-remove {
+  -webkit-transition: all linear 0.5s;
+  -moz-transition: all linear 0.5s;
+  -o-transition: all linear 0.5s;
+  transition: all linear 0.5s;
+  display: block!important;
+}
+.match.ng-hide-add.ng-hide-add-active,
+.match.ng-hide-remove {
+  opacity: 0;
+}
+.match.ng-hide-add,
+.match.ng-hide-remove.ng-hide-remove-active {
+  opacity: 1;
 }
 
 .match-background{

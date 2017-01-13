@@ -1,5 +1,5 @@
 app.controller('SignupCtrl', function($scope,$state, $http, $stateParams,
-                                      $ionicPopup, $ionicLoading,
+                                      $ionicPopup, $ionicLoading,$cordovaDialogs,
                                       authService, GYM_CONNECT_API){
 
   $scope.createUser = function(user){
@@ -12,25 +12,30 @@ app.controller('SignupCtrl', function($scope,$state, $http, $stateParams,
                                                          password: user.password},
                                                          gym_code: user.gym_code})
       .success( function (data) {
-        console.log("Returned Success Data> ");
-        console.log(JSON.stringify(data, null, 4));
-
         authService.login(user)
         .success(function(){
           $state.go('1st-step');
         }).error(function(error){
-          var alertPopup = $ionicPopup.alert({
-            title: 'Sorry',
-            template: "An Error Occured While Loging You In. Please wait and try again. If problem persists please contact support with these errors: " + error.errors
-          });
+
+          $cordovaDialogs.alert(
+            "An Error Occured While Loging You In. Please wait and try again. If problem persists please contact support with these errors: " + JSON.stringify(error),
+            "Woops",  // a title
+            "OK"                                // the button text
+          );
         });
       })
       .error( function(error)
       {
-        var alertPopup = $ionicPopup.alert({
-          title: 'Sorry',
-          template: "An Error Occured While Creating Your Account. Please wait and try again. If problem persists please contact support with these errors: " + error.errors
+        errorString = "";
+        angular.forEach(error.errors, function(value, key) {
+          console.log("Error in signup=====> " + key + ': ' + value);
+          errorString += key + ': ' + value + '\n';
         });
+        $cordovaDialogs.alert(
+          "An Error Occured While Creating Your Account.\n\n" + errorString,
+          "Sorry",  // a title
+          "OK"                                // the button text
+        );
       })
       .finally(function() {
           $ionicLoading.hide();

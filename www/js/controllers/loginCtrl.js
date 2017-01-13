@@ -1,4 +1,11 @@
-app.controller('LoginCtrl', function($scope, $http, $ionicLoading, $state, $ionicPopup, authService, currentUser, GYM_CONNECT_API) {
+app.controller('LoginCtrl', function($scope, $http, $ionicLoading, $state, $ionicPopup, $cordovaDialogs, authService, currentUser, GYM_CONNECT_API) {
+  var token = localStorage.getItem('token');
+  if(token !== null){
+    currentUser.token = token;
+    currentUser.name  = localStorage.getItem('email');
+    $http.defaults.headers.common['Authorization'] = token;
+    $state.go('tab.dash');
+  };
 
   $scope.login = function(user) {
     $ionicLoading.show({
@@ -9,16 +16,15 @@ app.controller('LoginCtrl', function($scope, $http, $ionicLoading, $state, $ioni
 
     if ($scope.loginForm.$valid){
       authService.login(user).success(function(){
-        // console.log('Login Success, Token: ', currentUser.token);
-        // console.log('Sign-In', user);
         $state.go('tab.dash');
         $ionicLoading.hide();
       }).error(function(){
         $ionicLoading.hide();
-        var alertPopup = $ionicPopup.alert({
-          title: 'Login Unsuccessful',
-          template: "Email and password did not match our records."
-        });
+        $cordovaDialogs.alert(
+          "Email and password did not match our records",
+          "Woops",  // a title
+          "OK"                                // the button text
+        );
       });
     }
     else{
@@ -27,7 +33,6 @@ app.controller('LoginCtrl', function($scope, $http, $ionicLoading, $state, $ioni
   };
 
   $scope.resetPassword = function(email) {
-
     $ionicLoading.show({
      template: '<p style="font-family:Brandon;color:grey;">Checking to see if your account exists..</p><ion-spinner></ion-spinner>',
      hideOnStageChange: true
@@ -38,20 +43,22 @@ app.controller('LoginCtrl', function($scope, $http, $ionicLoading, $state, $ioni
         .success( function( data )
         {
           $ionicLoading.hide();
-          $ionicPopup.alert({
-             title: 'Thank You',
-             content: 'An email has been sent to the email provided with instructions to reset your password.'
-           });
+          $cordovaDialogs.alert(
+            "An email has been sent to the email provided with instructions to reset your password.",
+            "Thank You",
+            "OK"                                // the button text
+          );
            $state.go('login');
         }
       )
       .error( function(error)
       {
         $ionicLoading.hide();
-        $ionicPopup.alert({
-           title: 'Woops..',
-           content: 'The email you have entered does not exist in our records'
-         });
+        $cordovaDialogs.alert(         // the message
+          "Email and password did not match our records.", // a title
+          "Woops",
+          "OK"                                // the button text
+        );
          $state.go('signup');
       });
     }
@@ -60,16 +67,10 @@ app.controller('LoginCtrl', function($scope, $http, $ionicLoading, $state, $ioni
     }
   };//end of reset password function
 
-  //end of login function
   $scope.goToSignUp = function() {
     $state.go('signup');
   };
-
   $scope.goToLogin = function() {
     $state.go('login');
   };
-
-  // $scope.goToForgotPassword = function() {
-  //   $state.go('forgot-password');
-  // };
 });

@@ -1,5 +1,5 @@
 app.controller('MessageCtrl', function($scope, $state, $http, $stateParams, $timeout,
-                                        $ionicPopup, $ionicLoading, $ionicScrollDelegate,
+                                        $ionicPopup, $ionicLoading, $ionicScrollDelegate, $cordovaDialogs,
                                         currentUser, currentConversation,
                                         GYM_CONNECT_API)
 {
@@ -10,7 +10,7 @@ app.controller('MessageCtrl', function($scope, $state, $http, $stateParams, $tim
 
   $scope.$on('$ionicView.afterEnter', function(){
     $ionicScrollDelegate.scrollBottom();
-  }); 
+  });
 
   $scope.getMessages = function() {
     $ionicLoading.show({
@@ -28,25 +28,23 @@ app.controller('MessageCtrl', function($scope, $state, $http, $stateParams, $tim
             console.log( JSON.stringify(data, null, 4));
             $scope.messages = data.messages;
             $ionicScrollDelegate.scrollBottom(true);
-            $ionicLoading.hide();
           }
         )
         .error( function(error)
         {
           console.log( JSON.stringify(error, null, 4));
           if (error.errors === "Not authenticated"){
-            var alertPopup = $ionicPopup.alert({
-              title: 'Error',
-              template: 'Sorry you have been logged out. Please re-login'
-            });
+            $cordovaDialogs.alert(
+              "Sorry you have been logged out. Please re-login",
+              "Woops",  // a title
+              "OK"                                // the button text
+            );
             $state.go('login');
           }
-
-          $ionicLoading.hide();
           $state.go('tab.conversations');
         }).finally(function() {
-               // Stop the ion-refresher from spinning
-               $scope.$broadcast('scroll.refreshComplete');
+             $ionicLoading.hide();
+             $scope.$broadcast('scroll.refreshComplete');
         });
   };
 

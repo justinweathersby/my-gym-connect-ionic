@@ -139,47 +139,6 @@ app.directive('accountImageSlider', function($timeout) {
   };
 });
 
-// app.directive('imageOrientationCrop', function(){
-//    return {
-//      restrict: 'A',
-//      link: function(scope, elem, attr) {
-//          elem.on('load', function() {
-//             var img = elem[0];
-//             var imgWidth = img.naturalWidth;
-//             var imgHeight = img.naturalHeight;
-//             if (imgHeight > imgWidth){
-//             elem.addClass('imagePortrait');
-//             }
-//             //check width and height and apply styling to parent here.
-//          });
-//      }
-//    };
-// });
-
-// app.directive('backImage', function(){
-//   return {
-//     restrict: 'AE',
-//     link: function($scope, elem, attrs) {
-//       console.log("inside directive backimage imageurl: ", $scope.current_user.image_url);
-//       elem.css({
-//           'background-image': 'url(' + $scope.current_user.image_url +')',
-//           'background-size' : 'cover'
-//       });
-//
-//     }
-//
-//   };
-// });
-// app.directive('backImg', function(){
-//     return function(scope, element, attrs){
-//         var url = attrs.backImg;
-//         element.css({
-//             'background-image': 'url(' + url +')',
-//             'background-size' : 'cover'
-//         });
-//       };
-// });​
-
 app.filter('capitalizeFirst', function() {
     return function(input) {
       return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
