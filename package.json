@@ -4,6 +4,9 @@
   "description": "my-gym-connect-app: An Ionic project",
   "dependencies": {
     "@ionic/cloud": "^0.14.1",
+    "angular": "^1.6.1",
+    "angularfire": "^2.2.0",
+    "firebase": "^3.6.5",
     "gulp": "^3.5.6",
     "gulp-concat": "^2.2.0",
     "gulp-minify-css": "^0.3.0",
@@ -30,5 +33,7 @@
       "version": "",
       "locator": "ios"
     }
-  ]
+  ],
+  "gcm_sender_id": "103953800507"
+
 }

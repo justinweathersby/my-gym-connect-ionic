@@ -1,6 +1,6 @@
-var app = angular.module('my-gym-connect-app', ['ionic', 'ionic.cloud', 'ngCordova', 'ngAnimate'])
+var app = angular.module('my-gym-connect-app', ['ionic', 'ionic.cloud', 'ngCordova', 'ngAnimate', 'firebase'])
 
-.run(function($ionicPlatform, $ionicPush, currentUser) {
+.run(function($ionicPlatform, $ionicPush, firebase, currentUser) {
   $ionicPlatform.ready(function() {
 
     $ionicPush.register().then(function(t) {
@@ -11,6 +11,44 @@ var app = angular.module('my-gym-connect-app', ['ionic', 'ionic.cloud', 'ngCordo
       console.log("DEVICE TOKEN: ", t.token);
       console.log("DEVICE TYPE: ", t.type);
     });
+
+    var config = {
+      apiKey: "AIzaSyCmU42N_GZccxsowyj_35Eg0ntAvN1Rm1Y",
+      // authDomain: "<PROJECT_ID>.firebaseapp.com",
+      // databaseURL: "https://<DATABASE_NAME>.firebaseio.com",
+      // storageBucket: "<BUCKET>.appspot.com",
+      messagingSenderId: "359998734646"
+    };
+    console.log("FIREBASE:::" );
+    firebase.initializeApp(config);
+
+    // Retrieve Firebase Messaging object.
+    const messaging = firebase.messaging();
+    console.log("FIREBASE MESSAGING: ");
+
+    messaging.requestPermission()
+    .then(function() {
+      console.log('Notification permission granted.');
+      // TODO(developer): Retrieve an Instance ID token for use with FCM.
+      // ...
+    })
+    .catch(function(err) {
+      console.log('Unable to get permission to notify.', err);
+    });
+
+    messaging.getToken().then(function(data){
+      console.log("AFTER GET TOKEN:::" + JSON.stringify(data));
+    }).catch(function(error){console.log("GET TOKEN ERROR: " + JSON.stringify(error))});
+
+    messaging.onTokenRefresh().then(function(data){
+      console.log("AFTER TOKEN REFRESH:::" + JSON.stringify(data));
+    })
+
+    messaging.onMessage(function(payload) {
+      console.log("Message received. ", payload);
+      alert(payload);
+    });
+
 
     TestFairy.begin('993218db594324f249e28bfa5a72f74f0d21732d');
 
