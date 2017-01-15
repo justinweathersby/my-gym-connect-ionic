@@ -1,14 +1,24 @@
-app.controller('ConversationsCtrl', function($scope, $state, $http, $stateParams,
+app.controller('ConversationsCtrl', function($rootScope, $scope, $state, $http, $stateParams, $cordovaBadge,
                                         $ionicPopup, $ionicLoading,
                                         currentUser, currentConversation,
                                         GYM_CONNECT_API)
 {
+  $scope.$on('cloud:push:notification', function(event, data) {
+    var payload = data.message.raw.additionalData.payload;
+    console.log("PAYLOAD FROM PUSH" + JSON.stringify(payload));
+    if (payload.user_message == 1){
+        $scope.getConversations();
+    }
+  });
+
   $scope.current_user = currentUser;
 
-  //---Call to get conversations
-  // getConversations();
+  $rootScope.message_badge_count = 0;
 
   $scope.getConversations = function() {
+    if(window.cordova){
+      $cordovaBadge.clear();
+    }
     console.log("inside getConversations");
     $ionicLoading.show({
         template: '<p>Loading...</p><ion-spinner></ion-spinner>'

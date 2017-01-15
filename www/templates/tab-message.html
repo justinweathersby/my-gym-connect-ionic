@@ -5,26 +5,27 @@
       <i class="icon ion-ios-arrow-back"> Back</i>
     </button>
   </ion-nav-buttons>
-  <ion-content class="padding" style="padding-top:20px;" >
+  <ion-content class="padding" style="padding-top:20px; " delegate-handle="userMessageScroll">
     <ion-refresher
       pulling-text="Pull to refresh..."
       on-refresh="getMessages()">
     </ion-refresher>
     <ol class="messages-container">
       <li ng-repeat="message in messages" class="item" style="width:100%; background:transparent;">
-        <div ng-class="{{message.sender_id == current_user.id}} ? 'message-from-me' : ['message-from-sender']" style="">
+        <div ng-class="{{message.sender_id == current_user.id}} ? 'message-from-me' : ['message-from-sender']" style="display: inline-block; padding-right: 20px;">
           <!-- <img ng-src="{{current_conv.sender_image}}" ng-hide="{{message.sender_id == current_user.id}}" style=""> -->
           <p style="color:white; padding-left:10px; width:auto;">{{message.body}}</p>
         </div>
         <!-- <h2>{{changeName(message.sender_name)}} </h2> -->
       </li>
     </ol>
+    <div ng-init="afterMessagesLoad()"></div>
 
   </ion-content>
   <ion-footer-bar keyboard-attach style="height: 55px; padding:0; background-color: #1D262A">
     <div class="button-bar" style="padding: 8px; padding-top:1px;">
       <div class="message-item item-divider" style="width:100%; margin-bottom: 0; background-color: #1D262A">
-        <button class="button button-small button-positive icon-left ion-reply" style="float:right; max-height: 35px;" ng-click="reply(replyMessage.body)">Message</button>
+        <button class="button button-small button-positive" style="float:right; max-height: 35px;" ng-click="reply(replyMessage.body)">Send</button>
         <div style="overflow: hidden; padding-right: .5em;">
           <input type="text" ng-model="replyMessage.body" style="width: 100%; color:#212121" />
         </div>
@@ -32,5 +33,7 @@
     </div>
   </ion-footer-bar>
 </ion-view>
+
+
 
 <!-- startConversation(match.id, replyMessage.body) -->

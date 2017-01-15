@@ -97,12 +97,10 @@ app.service('authService', function($http, currentUser, GYM_CONNECT_API){
         currentUser.id = data.user.id;
         currentUser.role = data.user.role;
         currentUser.name = data.user.name;
+        currentUser.email = data.user.email;
         currentUser.description = data.user.description;
-        // console.log('UserService token: ', data.user.auth_token)
 
-
-        localStorage.setItem('email', user.email);
-        localStorage.setItem('token', data.user.auth_token);
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
         //--Set header for all subsequent requests
         $http.defaults.headers.common['Authorization'] = data.user.auth_token;

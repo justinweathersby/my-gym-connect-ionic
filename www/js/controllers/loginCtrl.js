@@ -1,9 +1,12 @@
 app.controller('LoginCtrl', function($scope, $http, $ionicLoading, $state, $ionicPopup, $cordovaDialogs, authService, currentUser, GYM_CONNECT_API) {
-  var token = localStorage.getItem('token');
-  if(token !== null){
-    currentUser.token = token;
-    currentUser.name  = localStorage.getItem('email');
-    $http.defaults.headers.common['Authorization'] = token;
+  // var token = localStorage.getItem('token');
+  var storedUser = localStorage.getItem('currentUser');
+  if(storedUser !== null){
+    // currentUser.token = token;
+    // currentUser.name  = localStorage.getItem('email');
+    currentUser = JSON.parse(storedUser);
+    console.log("Inside login controller:::: " + JSON.stringify(currentUser));
+    $http.defaults.headers.common['Authorization'] = currentUser.token;
     $state.go('tab.dash');
   };
 

@@ -3,6 +3,7 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
                                        currentUser, currentConversation,
                                        GYM_CONNECT_API)
 {
+
     $scope.imgLoadingCircle = "<spinner-blue.gif>";
     $scope.matchDataLoaded = false;
     $scope.matchSelectedLoaded = false;

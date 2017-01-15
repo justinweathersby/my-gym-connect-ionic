@@ -15,7 +15,7 @@ var app = angular.module('my-gym-connect-app', ['ionic', 'ionic.cloud', 'ngCordo
     TestFairy.begin('993218db594324f249e28bfa5a72f74f0d21732d');
 
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
     }
     if (window.StatusBar) {

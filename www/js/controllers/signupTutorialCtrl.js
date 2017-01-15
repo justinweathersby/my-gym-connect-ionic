@@ -3,6 +3,17 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera, $s
                                               currentUser, currentUserService,
                                               GYM_CONNECT_API)
 {
+  // $scope.$on('cloud:push:notification', function(event, data) {
+  //   var msg = data.message;
+  //   $cordovaDialogs.alert(
+  //     msg.text,  // the message
+  //     msg.title, // a title
+  //     "OK"       // the button text
+  //   ).then(function() {
+  //     $cordovaBadge.clear();
+  //   });
+  // });
+
   $scope.current_user = currentUser;
 
   $scope.WorkoutLevels = ['beginner','intermediate','expert'];

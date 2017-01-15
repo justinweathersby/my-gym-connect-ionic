@@ -9838,7 +9838,10 @@ a.button {
   font-style: normal; }
 
 .item[ng-click]:hover {
-  background: transparent !important; }
+  background: rgba(255, 255, 255, 0.5) !important; }
+
+.tabs .tab-item .badge.badge-assertive, .badge.badge-assertive {
+  opacity: 1; }
 
 .message-from-me {
   background: #FF5252 !important;
