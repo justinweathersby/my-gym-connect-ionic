@@ -49,7 +49,7 @@ $scope.openMoreModal = function(){
 function logout() {
 //   authService.resetCurrent();
 //   dealerService.resetCurrent();
-  localStorage.clear();
+  localforage.clear();
   $ionicHistory.clearCache();
   $ionicHistory.clearHistory();
   $state.go('login', {}, {reload:true});

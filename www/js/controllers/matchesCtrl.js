@@ -10,28 +10,44 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
 
     $scope.getMatches = function(){
       $ionicLoading.show({
-        template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+        template: '<p>Loading...</p><ion-spinner></ion-spinner>',
+        delay: 500,
+        duration: 5
       });
-      $http({ method: 'GET',
-              url: GYM_CONNECT_API.url + "/matches",
-              headers: {'Authorization' : currentUser.token}
-      }).success( function( data ){
-              $scope.matches = data;
-              $scope.matchDataLoaded = true;
-      }).error( function(error){
-            console.log(error);
-            if (error.errors === "Not authenticated"){
-              $cordovaDialogs.alert(
-                "Sorry you have been logged out. Please re-login",
-                "Woops",  // a title
-                "OK"                                // the button text
-              );
-            }
-            $state.go('login');
-      }).finally(function() {
-             $ionicLoading.hide();
-             $scope.$broadcast('scroll.refreshComplete');
-      });
+
+
+      localforage.getItem('user_token').then(function(value) {
+        console.log("RETURN FROM GETITEM IN getMATCHES: ", value);
+        console.log("Matches Controller...", JSON.stringify(currentUser, null, 4));
+
+        var token = value;
+        console.log("Token: " + token);
+        $http({ method: 'GET',
+                url: GYM_CONNECT_API.url + "/matches",
+                headers: {'Authorization' : token}
+        }).success( function( data ){
+                $scope.matches = data;
+                $scope.matchDataLoaded = true;
+        }).error( function(error){
+              console.log(JSON.stringify(error));
+              if (error.errors === "Not authenticated"){
+                $cordovaDialogs.alert(
+                  "Sorry you have been logged out. Please re-login",
+                  "Woops",  // a title
+                  "OK"                                // the button text
+                );
+              }
+              $state.go('login');
+        }).finally(function() {
+               $ionicLoading.hide();
+               $scope.$broadcast('scroll.refreshComplete');
+        });
+      }).catch(function(err) { console.log("GET ITEM ERROR::Matches::getMatches::", err);});
+      // var auth_token = localforage.getItem('user_token');
+      // console.log("Auth Token: ", JSON.stringify(auth_token));
+
+
+
     };
     $scope.getMatches();
 
@@ -90,32 +106,42 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
 
     function startConversation(send_to, body){
       $ionicLoading.show({
-          template: '<p>Sending Message...</p><ion-spinner></ion-spinner>'
+          template: '<p>Sending Message...</p><ion-spinner></ion-spinner>',
+          delay: 500
       });
-      $http({ method: 'POST',
-              url: GYM_CONNECT_API.url + "/messages",
-              data: {
-                "message":{
-                "body": body
-                },
-                "recipient_id":send_to
-              },
-              headers: {'Authorization' : currentUser.token}
-      }).success( function( data ){
-              $ionicLoading.hide();
-              // console.log('Return Data post new message from Api:', JSON.stringify(data, null, 4));
-              //--add new current coversation
-              //--then go to tab.messages
-              currentConversation.id = data.conversation_id;
-              currentConversation.sender_id = data.partner_id;
-              currentConversation.sender_name = data.partner_name;
-              // console.log('Beefore headed to messages:', JSON.stringify(currentConversation, null, 4));
-              // console.log('Current Convo id:', JSON.stringify(currentConversation.id, null, 4));
 
-              $state.go('tab.messages');
-      }).error( function(error){
-              $ionicLoading.hide();
-              console.log(error);
-      });
+      $scope.token = "";
+      localforage.getItem('user_token').then(function(value) {
+        var token = value;
+        $http({ method: 'POST',
+                url: GYM_CONNECT_API.url + "/messages",
+                data: {
+                  "message":{
+                  "body": body
+                  },
+                  "recipient_id":send_to
+                },
+                headers: {'Authorization' : token}
+        }).success( function( data ){
+                $ionicLoading.hide();
+                // console.log('Return Data post new message from Api:', JSON.stringify(data, null, 4));
+                //--add new current coversation
+                //--then go to tab.messages
+                currentConversation.id = data.conversation_id;
+                currentConversation.sender_id = data.partner_id;
+                currentConversation.sender_name = data.partner_name;
+
+                localforage.setItem('conversation', currentConversation).then(function(value){
+                  $state.go('tab.messages');
+                });
+
+                // console.log('Beefore headed to messages:', JSON.stringify(currentConversation, null, 4));
+                // console.log('Current Convo id:', JSON.stringify(currentConversation.id, null, 4));
+
+        }).error( function(error){
+                $ionicLoading.hide();
+                console.log(error);
+        });
+      }).catch(function(err) { console.log("GET ITEM ERROR::Matches::startConversation::", err);});
     };
 });

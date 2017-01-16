@@ -1,14 +1,21 @@
 app.controller('LoginCtrl', function($scope, $http, $ionicLoading, $state, $ionicPopup, $cordovaDialogs, authService, currentUser, GYM_CONNECT_API) {
   // var token = localStorage.getItem('token');
-  var storedUser = localStorage.getItem('currentUser');
-  if(storedUser !== null){
-    // currentUser.token = token;
-    // currentUser.name  = localStorage.getItem('email');
-    currentUser = JSON.parse(storedUser);
-    console.log("Inside login controller:::: " + JSON.stringify(currentUser));
-    $http.defaults.headers.common['Authorization'] = currentUser.token;
-    $state.go('tab.dash');
-  };
+  // var storedUser = localStorage.getItem('currentUser');
+  // if(storedUser !== null){
+  //   // currentUser.token = token;
+  //   // currentUser.name  = localStorage.getItem('email');
+  //   currentUser = JSON.parse(storedUser);
+  //   console.log("Inside login controller:::: " + JSON.stringify(currentUser));
+  //   $http.defaults.headers.common['Authorization'] = currentUser.token;
+  //   $state.go('tab.dash');
+  // };
+  localforage.getItem('user_token').then(function(value) {
+    var token = value;
+    if(token){
+      console.log("Token: " + token);
+      $state.go('tab.dash');
+    }
+  }).catch(function(err) { console.log("GET ITEM ERROR::Matches::getMatches::", err);});
 
   $scope.login = function(user) {
     $ionicLoading.show({
@@ -19,8 +26,26 @@ app.controller('LoginCtrl', function($scope, $http, $ionicLoading, $state, $ioni
 
     if ($scope.loginForm.$valid){
       authService.login(user).success(function(){
-        $state.go('tab.dash');
-        $ionicLoading.hide();
+        localforage.setItem('user_token', currentUser.token).then(function (value) {
+            // Do other things once the value has been saved.
+            console.log("SUCCESSFULLY STORED TOKEN AFTER AUTHSERVICE");
+            console.log(value);
+
+            localforage.setItem('user_id', currentUser.id).then(function (value) {
+                // Do other things once the value has been saved.
+                console.log("SUCCESSFULLY STORED ID AFTER AUTHSERVICE");
+                console.log(value);
+                $state.go('tab.dash');
+                $ionicLoading.hide();
+            }).catch(function(err) {
+                // This code runs if there were any errors
+                console.log("SET ITEM ERROR::Services::authService::token::",err);
+            });
+
+        }).catch(function(err) {
+            // This code runs if there were any errors
+            console.log("SET ITEM ERROR::Services::authService::token::",err);
+        });
       }).error(function(){
         $ionicLoading.hide();
         $cordovaDialogs.alert(

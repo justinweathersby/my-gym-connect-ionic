@@ -25,8 +25,8 @@ app.service('currentUser', function(){
 app.service('currentUserService', function($http, currentUser, GYM_CONNECT_API){
   // this.clear = function(){};
   this.updateUser = function(){
-    console.log("Updating currentUserService...", JSON.stringify(currentUser, null, 4));
-    return $http({ method: 'POST',
+
+        return $http({ method: 'POST',
                    url: GYM_CONNECT_API.url + "/users/" + currentUser.id,
                    data: {
                       "name": currentUser.name,
@@ -38,35 +38,38 @@ app.service('currentUserService', function($http, currentUser, GYM_CONNECT_API){
                    },
                    headers: {'Authorization' : currentUser.token}
 
-     }).success( function( data ){
+       }).success( function( data ){
 
-     }).error( function(error) {
-          console.log("Update User Failed...");
-          console.log("Error: ", JSON.stringify(error, null, 4));
-     });
+       }).error( function(error) {
+            console.log("Update User Failed...");
+            console.log("Error: ", JSON.stringify(error, null, 4));
+       });
+
   };
+
   this.getUser = function(){
-    console.log("inside currentUserService ", JSON.stringify(currentUser, null, 4));
-    return $http({ method: 'GET',
-              url: GYM_CONNECT_API.url + "/users/" + currentUser.id,
-              headers: {'Authorization' : currentUser.token}
-    }).success( function( data )
-    {
-      console.log("Inside currentUserService getUser success");
-      currentUser.name = data.name;
-      currentUser.email = data.email;
-      currentUser.workout_level = data.workout_level;
-      currentUser.workout_time = data.workout_time;
-      currentUser.gender = data.gender;
-      currentUser.gender_match = data.gender_match;
-      currentUser.image_url = data.image_url;
-      currentUser.second_image_url = data.second_image_url;
-      currentUser.third_image_url = data.third_image_url;
-      currentUser.gym = data.gym;
-      currentUser.description = data.description;
-    }
-  ).error( function(error){console.log(JSON.stringify(error,null,4));});
+        return $http({ method: 'GET',
+                  url: GYM_CONNECT_API.url + "/users/" + currentUser.id,
+                  headers: {'Authorization' : currentUser.token}
+        }).success( function( data )
+        {
+          console.log("Inside currentUserService getUser success");
+          currentUser.name = data.name;
+          currentUser.email = data.email;
+          currentUser.workout_level = data.workout_level;
+          currentUser.workout_time = data.workout_time;
+          currentUser.gender = data.gender;
+          currentUser.gender_match = data.gender_match;
+          currentUser.image_url = data.image_url;
+          currentUser.second_image_url = data.second_image_url;
+          currentUser.third_image_url = data.third_image_url;
+          currentUser.gym = data.gym;
+          currentUser.description = data.description;
+        }).error( function(error){console.log(JSON.stringify(error,null,4));});
   };
+    // localforage.getItem('user_id').then(function(value) { user_id = value; }).catch(function(err) { console.log("GET ITEM ERROR::Services::updateUser::id::", err);});
+    // console.log("inside currentUserService ", JSON.stringify(currentUser, null, 4));
+    // console.log("Token: " + token + "\nUserID: ", user_id);
 });
 
 app.service('currentConversation', function(){
@@ -76,13 +79,6 @@ app.service('currentConversation', function(){
   this.sender_image =
   this.last_message = null;
 });
-
-app.service('conversationService', function(){
-  this.getConversation = function(){
-    ;
-  };
-});
-
 
 //-- This service handles all authentication between app and Chatter API
 app.service('authService', function($http, currentUser, GYM_CONNECT_API){
@@ -100,7 +96,7 @@ app.service('authService', function($http, currentUser, GYM_CONNECT_API){
         currentUser.email = data.user.email;
         currentUser.description = data.user.description;
 
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
 
         //--Set header for all subsequent requests
         $http.defaults.headers.common['Authorization'] = data.user.auth_token;

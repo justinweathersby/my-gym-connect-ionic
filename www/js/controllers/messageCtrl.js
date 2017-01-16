@@ -18,16 +18,11 @@ app.controller('MessageCtrl', function($rootScope, $scope, $state, $http, $state
   });
 
   window.addEventListener('native.keyboardshow', keyboardShowHandler);
-
+  window.addEventListener('native.keyboardhide', keyboardHideHandler);
   function keyboardShowHandler(e){
       console.log('Keyboard height is: ' + e.keyboardHeight);
       $ionicScrollDelegate.scrollBottom(true);
   }
-
-  // This event fires when the keyboard will hide
-
-  window.addEventListener('native.keyboardhide', keyboardHideHandler);
-
   function keyboardHideHandler(e){
       console.log('Goodnight, sweet prince');
       $ionicScrollDelegate.scrollBottom(true);
@@ -37,7 +32,10 @@ app.controller('MessageCtrl', function($rootScope, $scope, $state, $http, $state
 
   //---Call to get conversations
   $scope.current_user = currentUser;
-  $scope.current_conv = currentConversation;
+  localforage.getItem('user_id').then(function(value) {
+    $scope.current_user.id = value;
+  }).catch(function(err) { console.log("GET ITEM ERROR::Messages::getMessages::user_id", JSON.stringify(err));});
+  // $scope.current_conv = currentConversation;
   var viewScroll = $ionicScrollDelegate.$getByHandle('userMessageScroll');
 
 
@@ -45,43 +43,52 @@ app.controller('MessageCtrl', function($rootScope, $scope, $state, $http, $state
     $ionicLoading.show({
         template: '<p>Loading...</p><ion-spinner></ion-spinner>'
     });
-    console.log("BEFORE GET MESSAGES CHECK TOKEN: " + currentUser.token + "::::ID::::" + currentUser.id);
-    $http({ method: 'GET',
-            url: GYM_CONNECT_API.url + "/messages",
-            params: {
-              "conversation_id": currentConversation.id
-            },
-            headers: {'Authorization' : currentUser.token}
-          })
-          .success( function( data )
-          {
-            console.log("GOT MESSAGES SUCCESS::::");
-            console.log( JSON.stringify(data, null, 4));
-            $scope.messages = data.messages;
-          }
-        )
-        .error( function(error)
-        {
-          console.log( JSON.stringify(error, null, 4));
-          if (error.errors === "Not authenticated"){
-            $cordovaDialogs.alert(
-              "Sorry you have been logged out. Please re-login",
-              "Woops",  // a title
-              "OK"                                // the button text
-            );
-            $state.go('login');
-          }
-          $state.go('tab.conversations');
-        }).finally(function() {
-              console.log("AFTER MESSAGES HAVE LOADED");
-             $ionicLoading.hide();
-             $scope.$broadcast('scroll.refreshComplete');
-             $timeout(function() {
-                viewScroll.resize(true);
-                viewScroll.scrollBottom(true);
-              }, 1000);
+    // console.log("BEFORE GET MESSAGES CHECK TOKEN: " + currentUser.token + "::::ID::::" + currentUser.id);
+    localforage.getItem('user_token').then(function(value) {
+      var token = value;
+      console.log("AFTER FORAGE GET ITEM USER TOKEN IN GETMESSAGES: ", token);
 
-        });
+        localforage.getItem('conversation').then(function(value) {
+          $scope.current_conv = value;
+          $http({ method: 'GET',
+                  url: GYM_CONNECT_API.url + "/messages",
+                  params: {
+                    "conversation_id": $scope.current_conv.id
+                  },
+                  headers: {'Authorization' : token}
+                })
+                .success( function( data )
+                {
+                  console.log("GOT MESSAGES SUCCESS::::");
+                  console.log( JSON.stringify(data, null, 4));
+                  $scope.messages = data.messages;
+                }
+              )
+              .error( function(error)
+              {
+                console.log( JSON.stringify(error, null, 4));
+                if (error.errors === "Not authenticated"){
+                  $cordovaDialogs.alert(
+                    "Sorry you have been logged out. Please re-login",
+                    "Woops",  // a title
+                    "OK"                                // the button text
+                  );
+                  $state.go('login');
+                }
+                $state.go('tab.conversations');
+              }).finally(function() {
+                    console.log("AFTER MESSAGES HAVE LOADED");
+                   $ionicLoading.hide();
+                   $scope.$broadcast('scroll.refreshComplete');
+                   $timeout(function() {
+                      viewScroll.resize(true);
+                      viewScroll.scrollBottom(true);
+                    }, 1000);
+
+              });
+          }).catch(function(err) { console.log("GET ITEM ERROR::Messages::getMessages::conversation", JSON.stringify(err));});
+
+    }).catch(function(err) { console.log("GET ITEM ERROR::Messages::getMessages::user_token", JSON.stringify(err));});
   };
 
   $scope.getMessages();
@@ -91,31 +98,36 @@ app.controller('MessageCtrl', function($rootScope, $scope, $state, $http, $state
     $ionicLoading.show({
         template: '<p>Sending Message...</p><ion-spinner></ion-spinner>'
     });
-
-    $http({ method: 'POST',
-              url: GYM_CONNECT_API.url + "/messages",
-              data: {
-                "message":{
-                "body": body
-                },
-                "recipient_id": currentConversation.sender_id
-              },
-              headers: {'Authorization' : currentUser.token}
-    }).success( function( data ){
-            $ionicLoading.hide();
-            var message = {
-              "message":{
-              "body": $scope.replyMessage.body
-              },
-              "recipient_id": currentConversation.sender_id
-            };
-            $scope.messages.push(message);
-            delete $scope.replyMessage.body;
-            $scope.getMessages();
-    }).error( function(error){
-            $ionicLoading.hide();
-            console.log(error);
-    });
+    localforage.getItem('user_token').then(function(value) {
+      var token = value;
+      localforage.getItem('conversation').then(function(value) {
+        $scope.current_conv = value;
+        $http({ method: 'POST',
+                  url: GYM_CONNECT_API.url + "/messages",
+                  data: {
+                    "message":{
+                    "body": body
+                    },
+                    "recipient_id": $scope.current_conv.sender_id
+                  },
+                  headers: {'Authorization' : token}
+        }).success( function( data ){
+                $ionicLoading.hide();
+                // var message = {
+                //   "message":{
+                //   "body": $scope.replyMessage.body
+                //   },
+                //   "recipient_id": $scope.current_conv.sender_id
+                // };
+                // $scope.messages.push(message);
+                delete $scope.replyMessage.body;
+                $scope.getMessages();
+        }).error( function(error){
+                $ionicLoading.hide();
+                console.log(error);
+        });
+      }).catch(function(err) { console.log("GET ITEM ERROR::Messages::getMessages::", JSON.stringify(err));});
+    }).catch(function(err) { console.log("GET ITEM ERROR::Messages::getMessages::", JSON.stringify(err));});
   };
 
   $scope.afterMessagesLoad = function(){

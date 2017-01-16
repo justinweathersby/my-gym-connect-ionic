@@ -14,7 +14,13 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera, $s
   //   });
   // });
 
-  $scope.current_user = currentUser;
+  console.log("CURRENTUSER: ", JSON.stringify(currentUser));
+  if (currentUser.id == null){
+    $state.go('tab.myAccount');
+  }
+  else {
+    $scope.current_user = currentUser;
+  }
 
   $scope.WorkoutLevels = ['beginner','intermediate','expert'];
   $scope.Genders = ['male', 'female'];
@@ -111,25 +117,32 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera, $s
     // });
   };
 
+
   function updateUser(view){
     $ionicLoading.show({
         template: '<p>Updating your information please wait...</p><ion-spinner></ion-spinner>'
     });
-    currentUserService.updateUser().success(function(){
-      $ionicLoading.hide();
-      $ionicViewSwitcher.nextDirection('forward');
-      $state.go(view);
+    localforage.getItem('user_token').then(function(value) {
+      currentUser.token = value;
+      localforage.getItem('user_id').then(function(value) {
+        currentUser.id = value;
+        currentUserService.updateUser().success(function(){
+          $ionicLoading.hide();
+          $ionicViewSwitcher.nextDirection('forward');
+          $state.go(view);
 
-    }).error(function(){
-      $ionicLoading.hide();
-      $cordovaDialogs.alert(
-        "Sorry you have been logged out. Please re-login",
-        "Woops",  // a title
-        "OK"                                // the button text
-      ).then(function(res){
-        $state.go('login');
-      });
-    });
+        }).error(function(){
+          $ionicLoading.hide();
+          $cordovaDialogs.alert(
+            "Sorry you have been logged out. Please re-login",
+            "Woops",  // a title
+            "OK"                                // the button text
+          ).then(function(res){
+            $state.go('login');
+          });
+        });
+      }).catch(function(err) { console.log("GET ITEM ERROR::Services::updateUser::id::", err);});
+    }).catch(function(err) { console.log("GET ITEM ERROR::Services::updateUser::id::", err);});
   };
 
 
@@ -150,7 +163,10 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera, $s
         $cordovaCamera.getPicture(options).then(function(imageURI) {
           $ionicLoading.hide(); //--Hide loading for camera
           currentUser.second_image_url = imageURI;
-          imageUpload(imageURI, "second_image", encodeURI(GYM_CONNECT_API.url + "/users/" + currentUser.id));
+          localforage.getItem('user_id').then(function(value) {
+            currentUser.id = value;
+            imageUpload(imageURI, "second_image", encodeURI(GYM_CONNECT_API.url + "/users/" + currentUser.id));
+          }).catch(function(err) { console.log("GET ITEM ERROR::Services::updateUser::id::", err);});
 
         }, function(err) {
             console.log("Did not get image from library");
@@ -171,7 +187,10 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera, $s
       $cordovaCamera.getPicture(options).then(function(imageURI) {
         $ionicLoading.hide(); //--Hide loading for camera
         currentUser.third_image_url = imageURI;
-        imageUpload(imageURI, "third_image", encodeURI(GYM_CONNECT_API.url + "/users/" + currentUser.id));
+        localforage.getItem('user_id').then(function(value) {
+          currentUser.id = value;
+          imageUpload(imageURI, "third_image", encodeURI(GYM_CONNECT_API.url + "/users/" + currentUser.id));
+        }).catch(function(err) { console.log("GET ITEM ERROR::Services::updateUser::id::", err);});
 
       }, function(err) {
           console.log("Did not get image from library");
@@ -199,7 +218,10 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera, $s
         $cordovaCamera.getPicture(options).then(function(imageURI) {
           $ionicLoading.hide(); //--Hide loading for camera
           currentUser.image = imageURI;
-          imageUpload(imageURI, "image", encodeURI(GYM_CONNECT_API.url + "/users/" + currentUser.id));
+          localforage.getItem('user_id').then(function(value) {
+            currentUser.id = value;
+            imageUpload(imageURI, "image", encodeURI(GYM_CONNECT_API.url + "/users/" + currentUser.id));
+          }).catch(function(err) { console.log("GET ITEM ERROR::Services::updateUser::id::", err);});
 
         }, function(err) {
             console.log("Did not get image from library");
@@ -215,47 +237,50 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera, $s
 
   function imageUpload(imageURI, fileKey, uri){
     //------File Transfer of Image to Server
-    var Uoptions = new FileUploadOptions();
-    Uoptions.fileKey = fileKey;
-    Uoptions.mimeType ="image/jpeg";
-    Uoptions.chunkedMode = false;
-    Uoptions.params = {};
-    Uoptions.headers = {'Authorization' : currentUser.token};
+    localforage.getItem('user_token').then(function(value) {
+      currentUser.token = value;
+      var Uoptions = new FileUploadOptions();
+      Uoptions.fileKey = fileKey;
+      Uoptions.mimeType ="image/jpeg";
+      Uoptions.chunkedMode = false;
+      Uoptions.params = {};
+      Uoptions.headers = {'Authorization' : currentUser.token};
 
-    var ft = new FileTransfer();
+      var ft = new FileTransfer();
 
-    var win = function (r) {
-      $ionicLoading.hide();
-    }
+      var win = function (r) {
+        $ionicLoading.hide();
+      }
 
-    var fail = function (error) {
-      $cordovaDialogs.alert(
-        "An error has occurred: Code = " + error.code,
-        "Sorry",
-        "OK"
-      );
-      $ionicLoading.hide();
-    }
+      var fail = function (error) {
+        $cordovaDialogs.alert(
+          "An error has occurred: Code = " + error.code,
+          "Sorry",
+          "OK"
+        );
+        $ionicLoading.hide();
+      }
 
-    ft.onprogress = function(progressEvent) {
-        var loadingStatus = 0;
-        $ionicLoading.show({
-            template: '<p>Uploading Image.</p><progress max="100" value=' + loadingStatus +'></progress>',
-            scope: $scope
-        });
+      ft.onprogress = function(progressEvent) {
+          var loadingStatus = 0;
+          $ionicLoading.show({
+              template: '<p>Uploading Image.</p><progress max="100" value=' + loadingStatus +'></progress>',
+              scope: $scope
+          });
 
-        if (progressEvent.lengthComputable) {
-            loadingStatus = (progressEvent.loaded / progressEvent.total) * 100;
-            $ionicLoading.show({
-                template: '<p>Uploading Image.</p><progress max="100" value='+ loadingStatus +'></progress>',
-                scope: $scope
-            });
-        } else {
-            loadingStatus += .1;
-        }
-    };
-    console.log("About to start file upload");
-    ft.upload(imageURI, uri, win, fail, Uoptions);
-    //------End File Transfer
+          if (progressEvent.lengthComputable) {
+              loadingStatus = (progressEvent.loaded / progressEvent.total) * 100;
+              $ionicLoading.show({
+                  template: '<p>Uploading Image.</p><progress max="100" value='+ loadingStatus +'></progress>',
+                  scope: $scope
+              });
+          } else {
+              loadingStatus += .1;
+          }
+      };
+      console.log("About to start file upload");
+      ft.upload(imageURI, uri, win, fail, Uoptions);
+      //------End File Transfer
+    }).catch(function(err) { console.log("GET ITEM ERROR::Services::updateUser::id::", err);});
   };
 });

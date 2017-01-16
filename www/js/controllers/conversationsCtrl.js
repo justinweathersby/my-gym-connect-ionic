@@ -12,7 +12,6 @@ app.controller('ConversationsCtrl', function($rootScope, $scope, $state, $http, 
   });
 
   $scope.current_user = currentUser;
-
   $rootScope.message_badge_count = 0;
 
   $scope.getConversations = function() {
@@ -23,27 +22,30 @@ app.controller('ConversationsCtrl', function($rootScope, $scope, $state, $http, 
     $ionicLoading.show({
         template: '<p>Loading...</p><ion-spinner></ion-spinner>'
     });
-    $http({ method: 'GET',
-            url: GYM_CONNECT_API.url + "/conversations",
-            headers: {'Authorization' : currentUser.token}
-    }).success( function( data ){
-            console.log("Data from conversations: ", JSON.stringify(data, null, 4));
-            $scope.conversations = data.conversations;
-            $ionicLoading.hide();
-    }).error( function(error){
-            console.log("Error in Conversations", error.errors)
-            if (error.errors === "Not authenticated"){
-              var alertPopup = $ionicPopup.alert({
-                title: 'Error',
-                template: 'Sorry you have been logged out. Please re-login'
-              });
-            }
-            $state.go('login');
-            $ionicLoading.hide();
-    }).finally(function() {
-           // Stop the ion-refresher from spinning
-           $scope.$broadcast('scroll.refreshComplete');
-    });
+    localforage.getItem('user_token').then(function(value) {
+      var token = value;
+      $http({ method: 'GET',
+              url: GYM_CONNECT_API.url + "/conversations",
+              headers: {'Authorization' : token}
+      }).success( function( data ){
+              console.log("Data from conversations: ", JSON.stringify(data, null, 4));
+              $scope.conversations = data.conversations;
+              $ionicLoading.hide();
+      }).error( function(error){
+              console.log("Error in Conversations", error.errors)
+              if (error.errors === "Not authenticated"){
+                var alertPopup = $ionicPopup.alert({
+                  title: 'Error',
+                  template: 'Sorry you have been logged out. Please re-login'
+                });
+              }
+              $state.go('login');
+              $ionicLoading.hide();
+      }).finally(function() {
+             // Stop the ion-refresher from spinning
+             $scope.$broadcast('scroll.refreshComplete');
+      });
+    }).catch(function(err) { console.log("GET ITEM ERROR::Conversations::getConversation::", JSON.stringify(err));});
   };
 
   $scope.openConversation = function(convo){
@@ -53,6 +55,9 @@ app.controller('ConversationsCtrl', function($rootScope, $scope, $state, $http, 
     currentConversation.sender_id = convo.sender_id;
     currentConversation.sender_name = convo.sender_name;
     currentConversation.sender_image = convo.sender_image;
-    $state.go('tab.messages');
+
+    localforage.setItem('conversation', currentConversation).then(function(value){
+      $state.go('tab.messages');
+    });
   };
 });
