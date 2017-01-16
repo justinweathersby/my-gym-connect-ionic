@@ -1,8 +1,6 @@
 <div class="matches-slider" style="visibility: visible; max-width: 600px; margin: 0 auto;">
-<div ng-repeat="match in matches" ng-show="match.visible" class="match" style="padding-top:4vh; padding-bottom:0;">
+<div ng-repeat="match in matches" ng-show="match.visible" class="match match-slide-animate" style="padding-top:4vh; padding-bottom:0;" on-swipe-left="prev()" on-swipe-right="next()">
   <div class="row">
-
-
   <div class="col-5 match-direction-col">
     <img ng-src="images/circled-chevron-left.png" ng-click="prev()" style="width: 160%; margin-left:50%;z-index:1"/>
   </div>

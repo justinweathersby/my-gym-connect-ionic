@@ -236,22 +236,54 @@ input:invalid {
   box-shadow: 0 0 10px black;
 }
 
+.match{
+  left:0;
+}
+
 .match.ng-hide-add,
 .match.ng-hide-remove {
-  -webkit-transition: all linear 0.5s;
-  -moz-transition: all linear 0.5s;
-  -o-transition: all linear 0.5s;
-  transition: all linear 0.5s;
-  display: block!important;
+  display: block !important;
+  left: 0;
 }
-.match.ng-hide-add.ng-hide-add-active,
-.match.ng-hide-remove {
-  opacity: 0;
+.match.ng-hide-add{
+  -webkit-animation:1s hide;
+  animation:1s hide;
 }
-.match.ng-hide-add,
-.match.ng-hide-remove.ng-hide-remove-active {
-  opacity: 1;
+
+@keyframes hide {
+  from { left: 0; }
+  to { left: -100%; }
 }
+
+@-webkit-keyframes hide {
+  from { left: 0; }
+  to { left: -100%; }
+}
+
+.match.ng-hide-remove{
+  -webkit-animation:1s show;
+  animation:1s show;
+  top: -51px;
+}
+
+@keyframes show {
+  from { left: 100%; }
+  to { left: 0; }
+}
+
+@-webkit-keyframes show {
+  from { left: 100%; }
+  to { left: 0; }
+}
+
+// .match.ng-hide-add.ng-hide-add-active,
+// .match.ng-hide-remove {
+//   opacity: 0;
+// }
+// .match.ng-hide-add,
+// .match.ng-hide-remove.ng-hide-remove-active {
+//   opacity: 1;
+// }
 
 .match-background{
   height:80vh;
