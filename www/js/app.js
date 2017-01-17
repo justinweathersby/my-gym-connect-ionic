@@ -29,18 +29,35 @@ app.directive('matchslider', function($timeout) {
   return {
     restrict: 'AE',
     replace: true,
-    link: function($scope, elem, attrs) {
+    link: function($scope, element, attrs) {
+      $scope.matches.forEach(function(match) {
+        match.visible = false; // make every image invisible
+      });
+
+      console.log("ELEMENT: ", JSON.stringify(element));
+
       $scope.currentIndex = 0; // Initially the index is at the first image
+
       $scope.next = function() {
+        var children = element.children();
+        for(var i=0;i<children.length;i++){
+            angular.element(children[i]).removeClass('slide-in-smooth-left');
+            angular.element(children[i]).addClass('slide-in-smooth-right');
+        }
+        $scope.matches[$scope.currentIndex].visible = false;
         $scope.currentIndex < $scope.matches.length - 1 ? $scope.currentIndex++ : $scope.currentIndex = 0;
       };
       $scope.prev = function() {
+        var children = element.children();
+        for(var i=0;i<children.length;i++){
+            angular.element(children[i]).removeClass('slide-in-smooth-right');
+            angular.element(children[i]).addClass('slide-in-smooth-left');
+        }
+
+        $scope.matches[$scope.currentIndex].visible = false;
         $scope.currentIndex > 0 ? $scope.currentIndex-- : $scope.currentIndex = $scope.matches.length - 1;
       };
       $scope.$watch('currentIndex', function() {
-        $scope.matches.forEach(function(match) {
-          match.visible = false; // make every image invisible
-        });
         $scope.matches[$scope.currentIndex].visible = true; // make the current image visible
       });
     },

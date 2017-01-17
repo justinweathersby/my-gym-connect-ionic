@@ -8,6 +8,8 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
     $scope.matchDataLoaded = false;
     $scope.matchSelectedLoaded = false;
 
+    console.log("TEST FROM CONTROLLER", $scope.currentIndex);
+
     $scope.getMatches = function(){
       $ionicLoading.show({
         template: '<p>Loading...</p><ion-spinner></ion-spinner>',
