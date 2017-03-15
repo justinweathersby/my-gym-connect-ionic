@@ -15,19 +15,20 @@
     </div>
   </div>
   <div class="col">
-    <div class="row profile-item-label">
+    <!-- <div class="row profile-item-label">
       Description
     </div>
     <div class="row profile-item">
       {{match.description}}
-    </div>
-    <hr class="profile-item-divider"/>
+    </div> -->
+    <!-- <hr class="profile-item-divider"/> -->
     <div class="row profile-item-label">
       Gender
     </div>
     <div class="row profile-item">
       {{match.gender | capitalizeFirst}}
     </div>
+
     <hr class="profile-item-divider"/>
     <div class="row profile-item-label">
       Workout Time
@@ -35,14 +36,47 @@
     <div class="row profile-item">
       {{match.workout_time | capitalizeFirst}}
     </div>
-    <hr class="profile-item-divider"/>
 
+    <hr class="profile-item-divider"/>
     <div class="row profile-item-label">
       Workout Level
     </div>
     <div class="row profile-item">
       {{match.workout_level | capitalizeFirst}}
     </div>
+
+    <hr class="profile-item-divider"/>
+    <div class="row profile-item-label">
+      Attend Classes
+    </div>
+    <div class="row profile-item">
+      {{match.attend_classes | capitalizeFirst}}
+    </div>
+
+    <hr class="profile-item-divider"/>
+    <div class="row profile-item-label">
+      Days Per Week
+    </div>
+    <div class="row profile-item">
+      {{match.days_per_week}}
+    </div>
+
+    <hr class="profile-item-divider"/>
+    <div class="row profile-item-label">
+      Cardio Per Week
+    </div>
+    <div class="row profile-item">
+      {{match.cardio_per_week | capitalizeFirst}}
+    </div>
+
+    <hr class="profile-item-divider"/>
+    <div class="row profile-item-label">
+      Workout Preference
+    </div>
+    <div class="row profile-item">
+      {{match.workout_preference | capitalizeFirst}}
+    </div>
+
   </div>
   </ion-content>
   <ion-footer-bar align-title="left" class="bar-assertive" style="background: #455A64">

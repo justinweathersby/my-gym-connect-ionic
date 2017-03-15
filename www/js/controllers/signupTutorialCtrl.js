@@ -18,14 +18,17 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera, $s
   if (currentUser.id == null){
     $state.go('tab.myAccount');
   }
-  else {
-    $scope.current_user = currentUser;
-  }
 
-  $scope.WorkoutLevels = ['beginner','intermediate','expert'];
+    $scope.current_user = currentUser;
+
+
+  $scope.WorkoutLevels = ['beginner','intermediate','advanced'];
   $scope.Genders = ['male', 'female'];
   $scope.WorkoutTimes = ['morning', 'afternoon', 'night', 'all'];
   $scope.GenderMatch = ['male', 'female', 'both'];
+  $scope.WorkoutPreference = ['free weight', 'machines', 'both'];
+  $scope.AttendClasses= ['yes', 'no'];
+  $scope.CardioPerWeek = ['none', '< 15 minutes', 'an hour', 'a few hours', 'very often', 'continuously', 'I only do Cardio'];
 
   $scope.skipTutorial = function(){
     $cordovaDialogs.confirm(
@@ -46,7 +49,7 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera, $s
 
   $scope.NameDescNext = function(){
     console.log("Names Desc NExt clicked");
-    if ($scope.current_user.name != null || $scope.current_user.description != null){
+    if ($scope.current_user.name != null){
       console.log("Inside current_user name and desc not null");
       if ($scope.nameDescForm.$dirty){
         console.log("Inside name descform diry");
@@ -71,13 +74,13 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera, $s
   };
 
   $scope.WorkoutNext = function(){
-    if($scope.current_user.workout_time != null){
+    // if($scope.current_user.workout_time != null){
       if ($scope.workoutForm.$dirty){ updateUser('5th-step');}
       else{ $ionicViewSwitcher.nextDirection('forward');
             $state.go('5th-step');
       }
-    }
-    else{ confirmNext('5th-step'); }
+    // }
+    // else{ confirmNext('5th-step'); }
   };
 
   $scope.GenderNext = function(){
@@ -217,7 +220,7 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera, $s
         };
         $cordovaCamera.getPicture(options).then(function(imageURI) {
           $ionicLoading.hide(); //--Hide loading for camera
-          currentUser.image = imageURI;
+          currentUser.image_url = imageURI;
           localforage.getItem('user_id').then(function(value) {
             currentUser.id = value;
             imageUpload(imageURI, "image", encodeURI(GYM_CONNECT_API.url + "/users/" + currentUser.id));
@@ -233,6 +236,15 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera, $s
 
   $scope.trustSrc = function(src) {
     return $sce.trustAsResourceUrl(src);
+  };
+
+  $scope.range = function(min, max, step) {
+    step = step || 1;
+    var input = [];
+    for (var i = min; i <= max; i += step) {
+        input.push(i);
+    }
+    return input;
   };
 
   function imageUpload(imageURI, fileKey, uri){

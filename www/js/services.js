@@ -16,6 +16,10 @@ app.service('currentUser', function(){
   this.gym = null;
   // this.image = null;
   this.description = null;
+  this.attend_classes = null;
+  this.cardio_per_week = null;
+  this.workout_preference = null;
+  this.days_per_week = null;
 
   this.device_token = null;
   this.device_type = null;
@@ -34,7 +38,11 @@ app.service('currentUserService', function($http, currentUser, GYM_CONNECT_API){
                       "gender_match": currentUser.gender_match,
                       "workout_time": currentUser.workout_time,
                       "workout_level": currentUser.workout_level,
-                      "description": currentUser.description
+                      "description": currentUser.description,
+                      "attend_classes": currentUser.attend_classes,
+                      "cardio_per_week": currentUser.cardio_per_week,
+                      "workout_preference": currentUser.workout_preference,
+                      "days_per_week": currentUser.days_per_week
                    },
                    headers: {'Authorization' : currentUser.token}
 
@@ -65,6 +73,10 @@ app.service('currentUserService', function($http, currentUser, GYM_CONNECT_API){
           currentUser.third_image_url = data.third_image_url;
           currentUser.gym = data.gym;
           currentUser.description = data.description;
+          currentUser.attend_classes = data.attend_classes;
+          currentUser.cardio_per_week = data.cardio_per_week;
+          currentUser.workout_preference = data.workout_preference;
+          currentUser.days_per_week = data.days_per_week;
         }).error( function(error){console.log(JSON.stringify(error,null,4));});
   };
     // localforage.getItem('user_id').then(function(value) { user_id = value; }).catch(function(err) { console.log("GET ITEM ERROR::Services::updateUser::id::", err);});

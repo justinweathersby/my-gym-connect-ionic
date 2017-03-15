@@ -1,6 +1,6 @@
 <ion-view class="mainBackground">
   <form name="genderForm" ng-controller="SignupTutorialCtrl">
-  <ion-content scroll="false" class="padding" style="padding-top:20px;">
+  <ion-content class="padding" style="padding-top:20px;">
     <section class="text-center">
       <div class="text-center">
         <img src="images/gymconnect.png" class="tutorial-logo">
@@ -8,14 +8,20 @@
       <p style="padding-top:0"class="tutorial-text">Last step! Please fill out your gender and the gender you would like to match with.</p>
       <div class="list list-inset">
         <label class="item item-input item-select">
+            <i class="icon ion-ios-clock-outline placeholder-icon" style="padding-left: 7px;"></i><span class="item-select-label">Workout Time</span>
+            <select ng-model="current_user.workout_time" style="padding-right: 32px;">
+               <option ng-repeat="option in WorkoutTimes" value="{{option}}">{{option}}</option>
+            </select>
+        </label>
+        <label class="item item-input item-select">
             <i class="icon ion-ios-person placeholder-icon" style="padding-left:7px"></i><span class="item-select-label">My Gender</span>
-            <select ng-model="current_user.gender">
+            <select ng-model="current_user.gender" style="padding-right: 32px;">
                 <option ng-repeat="option in Genders" value="{{option}}">{{option}}</option>
             </select>
         </label>
         <label class="item item-input item-select">
             <i class="icon ion-ios-people placeholder-icon" style="padding-left:7px"></i><span class="item-select-label">Match Me With</span>
-            <select ng-model="current_user.gender_match">
+            <select ng-model="current_user.gender_match" style="padding-right: 32px;">
                 <option ng-repeat="option in GenderMatch" value="{{option}}">{{option}}</option>
             </select>
         </label>

@@ -31,13 +31,6 @@ height: 80%;line-height:80%" ui-sref="2nd-step">
     </div>
     <hr class="profile-item-divider"/>
     <div class="row profile-item-label">
-      Description
-    </div>
-    <div class="row profile-item">
-      {{current_user.description}}
-    </div>
-    <hr class="profile-item-divider"/>
-    <div class="row profile-item-label">
       Gender
     </div>
     <div class="row profile-item">
@@ -64,6 +57,38 @@ height: 80%;line-height:80%" ui-sref="2nd-step">
     </div>
     <div class="row profile-item">
       {{current_user.workout_level | capitalizeFirst}}
+    </div>
+    <hr class="profile-item-divider"/>
+
+    <div class="row profile-item-label">
+      Attend Classes?
+    </div>
+    <div class="row profile-item">
+      {{current_user.attend_classes | capitalizeFirst}}
+    </div>
+    <hr class="profile-item-divider"/>
+
+    <div class="row profile-item-label">
+      Workout Preference
+    </div>
+    <div class="row profile-item">
+      {{current_user.workout_preference | capitalizeFirst}}
+    </div>
+    <hr class="profile-item-divider"/>
+
+    <div class="row profile-item-label">
+      Cardio Per Week
+    </div>
+    <div class="row profile-item">
+      {{current_user.cardio_per_week | capitalizeFirst}}
+    </div>
+    <hr class="profile-item-divider"/>
+
+    <div class="row profile-item-label">
+      Days Per Week
+    </div>
+    <div class="row profile-item">
+      {{current_user.days_per_week }}
     </div>
   </div>
   </ion-content>

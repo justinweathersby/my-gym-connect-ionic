@@ -1,30 +1,29 @@
 <ion-view class="mainBackground">
   <form name="nameDescForm" ng-controller="SignupTutorialCtrl">
   <ion-content class="padding has-footer step-two-content" style="padding-top:20px;">
+    <div class="row text-center">
+      <img src="images/gymconnect.png" class="tutorial-logo">
+    </div>
+    <div class="row tutorial-text" style="padding-top:0">First we need some basic information about you. Including your name and some Gym habbits!</div>
 
-        <div class="row text-center">
-          <img src="images/gymconnect.png" class="tutorial-logo">
-        </div>
-        <div class="row tutorial-text" style="padding-top:0">First we need some basic information about you. Including your name and a short blurb that best describes you!</div>
-
-        <div class="list list-inset step-two-list">
-          <label class="form-box item item-input">
-            <i class="icon ion-android-person placeholder-icon" style=" padding-left:15px"></i>
-            <input keyboard-attach id="nameInput2S" style="loginFields" type="text" placeholder="Name" ng-model="current_user.name"  />
-          </label>
-          <label class="form-box item item-input" style="height: 125px;">
-             <i class="icon ion-edit placeholder-icon" style="padding-right:29px; height:100%;"></i>
-             <textarea
-              id="descInput2S"
-              rows="7"
-              placeholder="Description"
-              maxlength="255"
-              ng-model="current_user.description"
-              style="background-color: transparent; color: white; margin-top: 12px; margin-right:5px; overflow-y:hidden; resize:none;" />
-            </textarea>
-          </label>
-        </div>
-
+    <div class="list list-inset step-two-list">
+      <label class="form-box item item-input">
+        <i class="icon ion-android-person placeholder-icon" style=" padding-left:15px"></i>
+        <input keyboard-attach id="nameInput2S" style="loginFields" type="text" placeholder="Name" ng-model="current_user.name"  />
+      </label>
+      <label class="item item-input item-select">
+          <i class="icon ion-clipboard placeholder-icon" style="padding-left: 14px;"></i><span class="item-select-label">Attend Classes</span>
+          <select ng-model="current_user.attend_classes" style="padding-right: 32px;">
+             <option ng-repeat="option in AttendClasses" value="{{option}}">{{option}}</option>
+          </select>
+      </label>
+      <label class="item item-input item-select">
+          <i class="icon ion-calendar placeholder-icon" style="padding-left: 14px;"></i><span class="item-select-label">Days Per Week</span>
+          <select ng-model="current_user.days_per_week" style="padding-right: 32px;" convert-to-number>
+             <option ng-repeat="n in range(0,7)" value="{{n}}">{{n}}</option>
+          </select>
+      </label>
+    </div>
   </ion-content>
 
   <div class="bar bar-subfooter bar-clear auto-height">
@@ -47,6 +46,7 @@
       </div>
     </div>
 </div>
+
 <ion-footer-bar class="bar bar-footer bar-clear" style="padding:0; margin:0;">
   <div class="row" style="padding:0; margin:0">
     <div class="col" style="padding:0;">
@@ -63,20 +63,4 @@
   </div>
     </form>
 </ion-footer-bar>
-  <!-- <div class="bar bar-footer bar-clear" style="padding:0; margin:0" ng-controller="SignupTutorialCtrl">
-    <div class="row" style="padding:0; margin:0">
-      <div class="col" style="padding:0;">
-        <button style="width: 100%; min-height:44px; height:100%; font-size:16px; padding-bottom:0; margin-bottom:0" class="button  button-positive"  ng-click="ionicHistoryBack()" nav-direction="back">
-          Back
-        </button>
-      </div>
-      <div class="col"></div>
-      <div class="col" style="padding:0; text-align:right">
-        <button  style="width: 100%; min-height:44px; height:100%; font-size:16px; padding-bottom:0;margin-bottom:0" class="button  button-positive" ng-click='NameDescNext()' nav-direction="forward">
-          Next
-        </button>
-      </div>
-    </div>
-  </div> -->
-
 </ion-view>

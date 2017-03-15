@@ -9,11 +9,24 @@
       <div class="match-image test-account" style="background-image: url('{{match.image_url}}'); box-shadow: 0 0 10px black;"/>
     </div>
     <div class="row">
-      <h1 class="match-name" style="margin-bottom:0; padding-top:0; padding-bottom:1.5vh; ">{{match.name}}</h1>
+      <h1 class="match-name" style="text-align:center; width:100%; margin-bottom:0; padding-top:.5vh; padding-bottom:1.5vh; ">{{match.name}}</h1>
     </div>
-    <div class="row" style="overflow:hidden;">
-      <p class="match-description" style="max-height: 12vh; line-height: 3vh; overflow:hidden">{{match.description}}</p>
+
+    <div class="row">
+      <span align="right" class="col col-50 profile-item-label" style="text-align:right;">gender</span>
+      <span align="left" class="col col-50 profile-item-label" style="color: black; font-weight:200;">{{match.gender}}</span>
     </div>
+
+    <div class="row">
+      <span align="right" class="col col-50 profile-item-label" style="text-align:right;">workout time</span>
+      <span align="left" class="col col-50 profile-item-label" style="color: black; font-weight:200;">{{match.workout_time}}</span>
+    </div>
+
+    <div class="row">
+      <span align="right" class="col col-50 profile-item-label" style="text-align:right;">workout level</span>
+      <span align="left" class="col col-50 profile-item-label" style="color: black; font-weight:200;">{{match.workout_level }}</span>
+    </div>
+
     <div ng-controller="MatchesCtrl" class="row match-buttons-container" style="padding-bottom:0; margin-bottom: -1vh">
       <div class="col">
         <button ng-click="openModal(match)" class="button button-small button-positive button-block" style="border-radius: 5px; font-variant:small-caps">Profile</button>

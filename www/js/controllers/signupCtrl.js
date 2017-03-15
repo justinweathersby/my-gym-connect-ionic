@@ -1,6 +1,6 @@
 app.controller('SignupCtrl', function($scope,$state, $http, $stateParams,
                                       $ionicPopup, $ionicLoading,$cordovaDialogs,
-                                      authService, GYM_CONNECT_API){
+                                      authService, currentUser, GYM_CONNECT_API){
 
   $scope.createUser = function(user){
     $ionicLoading.show({
@@ -12,9 +12,25 @@ app.controller('SignupCtrl', function($scope,$state, $http, $stateParams,
                                                          password: user.password},
                                                          gym_code: user.gym_code})
       .success( function (data) {
+        console.log("Returned data from create user: " + JSON.stringify(data));
         authService.login(user)
         .success(function(){
-          $state.go('1st-step');
+          localforage.setItem('user_token', currentUser.token).then(function (value) {
+              // Do other things once the value has been saved.
+              console.log("SUCCESSFULLY STORED TOKEN AFTER AUTHSERVICE");
+              console.log(value);
+
+              localforage.setItem('user_id', currentUser.id).then(function (value) {
+                  $state.go('1st-step');
+              }).catch(function(err) {
+                  console.log("SET ITEM ERROR::Controller::signupCtrl::token::",err);
+              });
+
+          }).catch(function(err) {
+              // This code runs if there were any errors
+              console.log("SET ITEM ERROR::Controller::signupCtrl::token::",err);
+          });
+
         }).error(function(error){
 
           $cordovaDialogs.alert(

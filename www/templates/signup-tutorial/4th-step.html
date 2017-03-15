@@ -1,22 +1,28 @@
 <ion-view class="mainBackground">
   <form name="workoutForm" ng-controller="SignupTutorialCtrl">
-  <ion-content scroll="false" class="padding" style="padding-top:20px;">
+  <ion-content class="padding" style="padding-top:20px;">
     <section class="text-center" style="">
       <div class="text-center">
         <img src="images/gymconnect.png" class="tutorial-logo">
       </div>
-      <p style="padding-top:0"class="tutorial-text">Next we need to determine the type of gym experience you are looking for. Please select a workout level and time that best describes you!</p>
+      <p style="padding-top:0"class="tutorial-text">Next we need to determine the best type of gym experience for you. Please select a workout level, preference and time that best describes you!</p>
       <div class="list list-inset">
         <label class="item item-input item-select">
             <i class="icon ion-heart placeholder-icon" style="padding-left: 7px;"></i><span class="item-select-label">Workout Level</span>
-            <select style="loginFields" ng-model="current_user.workout_level">
+            <select ng-model="current_user.workout_level" style="padding-right: 32px;">
                <option ng-repeat="option in WorkoutLevels" value="{{option}}">{{option}}</option>
             </select>
         </label>
         <label class="item item-input item-select">
-            <i class="icon ion-ios-clock-outline placeholder-icon" style="padding-left: 7px;"></i><span class="item-select-label">Workout Time</span>
-            <select ng-model="current_user.workout_time">
-               <option ng-repeat="option in WorkoutTimes" value="{{option}}">{{option}}</option>
+            <i class="icon ion-android-settings placeholder-icon" style="padding-left: 7px;"></i><span class="item-select-label">Workout Preference</span>
+            <select ng-model="current_user.workout_preference" style="padding-right: 32px;">
+               <option ng-repeat="option in WorkoutPreference" value="{{option}}">{{option}}</option>
+            </select>
+        </label>
+        <label class="item item-input item-select">
+            <i class="icon ion-ios-pulse-strong placeholder-icon" style="padding-left: 7px;"></i><span class="item-select-label">Cardio Per Week</span>
+            <select ng-model="current_user.cardio_per_week" style="padding-right: 32px;">
+               <option ng-repeat="n in CardioPerWeek" value="{{n}}">{{n}}</option>
             </select>
         </label>
       </div>
