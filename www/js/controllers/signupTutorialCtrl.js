@@ -161,7 +161,7 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera, $s
             targetWidth: 700,
             targetHeight: 700,
             destinationType: Camera.DestinationType.FILE_URI,
-            sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+            correctOrientation: true
         };
         $cordovaCamera.getPicture(options).then(function(imageURI) {
           $ionicLoading.hide(); //--Hide loading for camera
@@ -185,7 +185,7 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera, $s
           targetWidth: 700,
           targetHeight: 700,
           destinationType: Camera.DestinationType.FILE_URI,
-          sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+          correctOrientation: true
       };
       $cordovaCamera.getPicture(options).then(function(imageURI) {
         $ionicLoading.hide(); //--Hide loading for camera
@@ -212,11 +212,11 @@ app.controller('SignupTutorialCtrl', function($scope, $state, $cordovaCamera, $s
     $ionicPlatform.ready(function() {
         console.log("Device is ready..")
         var options = {
-            quality: 100,
+            quality: 75,
             targetWidth: 700,
             targetHeight: 700,
-            destinationType: Camera.DestinationType.FILE_URI,
-            sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+            correctOrientation: true,
+            destinationType: Camera.DestinationType.FILE_URI
         };
         $cordovaCamera.getPicture(options).then(function(imageURI) {
           $ionicLoading.hide(); //--Hide loading for camera

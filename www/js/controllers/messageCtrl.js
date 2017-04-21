@@ -17,18 +17,32 @@ app.controller('MessageCtrl', function($rootScope, $scope, $state, $http, $state
     }
   });
 
-  window.addEventListener('native.keyboardshow', keyboardShowHandler);
-  window.addEventListener('native.keyboardhide', keyboardHideHandler);
+
+  var viewScroll = $ionicScrollDelegate.$getByHandle('userMessageScroll');
+
   function keyboardShowHandler(e){
-      console.log('Keyboard height is: ' + e.keyboardHeight);
       $ionicScrollDelegate.scrollBottom(true);
   }
   function keyboardHideHandler(e){
-      console.log('Goodnight, sweet prince');
       $ionicScrollDelegate.scrollBottom(true);
   }
 
-  $rootScope.message_badge_count = 0;
+  $scope.$on('$ionicView.enter', function() {
+
+    cordova.plugins.Keyboard.disableScroll(true);
+    window.addEventListener('native.keyboardshow', keyboardShowHandler);
+    window.addEventListener('native.keyboardhide', keyboardHideHandler);
+
+    $rootScope.message_badge_count = 0;
+  });
+
+
+  $scope.$on('$ionicView.leave', function() {
+    window.removeEventListener('native.keyboardshow', keyboardShowHandler);
+    window.removeEventListener('native.keyboardhide', keyboardHideHandler);
+
+    cordova.plugins.Keyboard.disableScroll(false);
+  });
 
   //---Call to get conversations
   $scope.current_user = currentUser;

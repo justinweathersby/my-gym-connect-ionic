@@ -1,4 +1,4 @@
-app.config(function($ionicCloudProvider) {
+app.config(function($ionicCloudProvider, $ionicConfigProvider) {
   $ionicCloudProvider.init({
     "core": {
       "app_id": "fff6c12d"
@@ -16,6 +16,13 @@ app.config(function($ionicCloudProvider) {
       }
     }
   });
+
+
+  $ionicConfigProvider.navBar.alignTitle('center');
+
+  $ionicConfigProvider.tabs.position('bottom');
+
+  $ionicConfigProvider.tabs.style('standard');
 });
 
 app.config(function($stateProvider, $urlRouterProvider) {

@@ -246,6 +246,10 @@ input:invalid {
     opacity: 0;
   }
 
+  80%{
+    opacity: .2;
+  }
+
   100% {
     -webkit-transform: translate3d(0,0,0);
     opacity: 1;
@@ -370,8 +374,8 @@ input:invalid {
    animation: fadeIn ease-in 1;
    -webkit-animation-fill-mode: forwards;
    animation-fill-mode: forwards;
-   -webkit-animation-duration: 750ms;
-   animation-duration: 750ms;
+   -webkit-animation-duration: 2000ms;
+   animation-duration: 2000ms;
 }
 
 .fade-out.ng-hide-add{
