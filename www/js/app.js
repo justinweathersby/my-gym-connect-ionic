@@ -12,8 +12,6 @@ var app = angular.module('my-gym-connect-app', ['ionic', 'ionic.cloud', 'ngCordo
       console.log("DEVICE TYPE: ", t.type);
     });
 
-    TestFairy.begin('993218db594324f249e28bfa5a72f74f0d21732d');
-
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
@@ -34,7 +32,7 @@ app.directive('matchslider', function($timeout) {
         match.visible = false; // make every image invisible
       });
 
-      console.log("ELEMENT: ", JSON.stringify(element));
+      // console.log("ELEMENT: ", JSON.stringify(element));
 
       $scope.currentIndex = 0; // Initially the index is at the first image
 
@@ -47,6 +45,7 @@ app.directive('matchslider', function($timeout) {
         $scope.matches[$scope.currentIndex].visible = false;
         $scope.currentIndex < $scope.matches.length - 1 ? $scope.currentIndex++ : $scope.currentIndex = 0;
       };
+
       $scope.prev = function() {
         var children = element.children();
         for(var i=0;i<children.length;i++){
@@ -57,7 +56,9 @@ app.directive('matchslider', function($timeout) {
         $scope.matches[$scope.currentIndex].visible = false;
         $scope.currentIndex > 0 ? $scope.currentIndex-- : $scope.currentIndex = $scope.matches.length - 1;
       };
+
       $scope.$watch('currentIndex', function() {
+        console.log("Current Index is changing: " + $scope.currentIndex);
         $scope.matches[$scope.currentIndex].visible = true; // make the current image visible
       });
     },

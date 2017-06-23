@@ -1,6 +1,6 @@
 <ion-view class="mainBackground">
   <form name="workoutForm" ng-controller="SignupTutorialCtrl">
-  <ion-content class="padding" style="padding-top:20px;">
+  <ion-content class="padding has-footer" style="padding-top:20px;">
     <section class="text-center" style="">
       <div class="text-center">
         <img src="images/gymconnect.png" class="tutorial-logo">
@@ -27,10 +27,11 @@
         </label>
       </div>
     </section>
-  </form>
-    <section style="position: absolute; bottom:0; left:0; padding:0; margin:0; width:100%;">
-      <div class="row" style="width:33.3%; margin:0 auto;">
-        <div class="col col-center" style="color:white; padding-bottom: 0;">
+    </ion-content>
+
+    <div class="bar bar-subfooter bar-clear auto-height hide-on-keyboard-open">
+      <div class="row" style="width:33.3%; margin:0 auto; padding-bottom:0">
+        <div class="col col-center" style="color:white;  padding-bottom: 0;">
           <div class="row" style="padding:0 0 0 0; margin:0;">
             <div class="col" style="text-align:center">
               <i class="icon ion-ios-circle-outline"></i>
@@ -47,19 +48,23 @@
           </div>
         </div>
       </div>
-      <div class="row" style="padding:0; margin:0">
-        <div class="col" style="padding:0;">
-          <button style="width: 100%" class="button  button-positive"  ui-sref="3rd-step" nav-direction="back">
-            Back
-          </button>
-        </div>
-        <div class="col"></div>
-        <div class="col" style="padding:0; text-align:right">
-          <button  style="width: 100%" class="button  button-positive" ng-click="WorkoutNext()">
-            Next
-          </button>
-        </div>
-      </div>
-    </section>
-  </ion-content>
+  </div>
+</div>
+
+<ion-footer-bar class="bar bar-footer bar-clear hide-on-keyboard-open" style="padding:0; margin:0;">
+  <div class="row" style="padding:0; margin:0">
+    <div class="col" style="padding:0;">
+      <button style="width: 100%; min-height:44px; height:100%; font-size:16px; padding-bottom:0; margin-bottom:0" class="button  button-positive"  ui-sref="3rd-step" nav-direction="back">
+        Back
+      </button>
+    </div>
+    <div class="col"></div>
+    <div class="col" style="padding:0; text-align:right">
+      <button  style="width: 100%; min-height:44px; height:100%; font-size:16px; padding-bottom:0;margin-bottom:0" class="button  button-positive" ng-click='WorkoutNext()' nav-direction="forward">
+        Next
+      </button>
+    </div>
+  </div>
+    </form>
+</ion-footer-bar>
 </ion-view>

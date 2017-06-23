@@ -1,14 +1,13 @@
 app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
-                                       $ionicPopup, $ionicLoading, $ionicModal, $cordovaDialogs,
+                                       $ionicPopup, $ionicLoading, $ionicModal, $ionicPlatform, $cordovaDialogs,
                                        currentUser, currentConversation,
                                        GYM_CONNECT_API)
 {
 
+
     $scope.imgLoadingCircle = "<spinner-blue.gif>";
     $scope.matchDataLoaded = false;
     $scope.matchSelectedLoaded = false;
-
-    console.log("TEST FROM CONTROLLER", $scope.currentIndex);
 
     $scope.getMatches = function(){
       $ionicLoading.show({
@@ -17,10 +16,8 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
         duration: 5
       });
 
-
       localforage.getItem('user_token').then(function(value) {
         console.log("RETURN FROM GETITEM IN getMATCHES: ", value);
-        console.log("Matches Controller...", JSON.stringify(currentUser, null, 4));
 
         var token = value;
         console.log("Token: " + token);
@@ -29,7 +26,6 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
                 headers: {'Authorization' : token}
         }).success( function( data ){
                 $scope.matches = data;
-                $scope.matchDataLoaded = true;
         }).error( function(error){
               console.log(JSON.stringify(error));
               if (error.errors === "Not authenticated"){
@@ -42,16 +38,19 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
               $state.go('login');
         }).finally(function() {
                $ionicLoading.hide();
+               $scope.matchDataLoaded = true;
                $scope.$broadcast('scroll.refreshComplete');
         });
       }).catch(function(err) { console.log("GET ITEM ERROR::Matches::getMatches::", err);});
       // var auth_token = localforage.getItem('user_token');
       // console.log("Auth Token: ", JSON.stringify(auth_token));
-
-
-
     };
-    $scope.getMatches();
+
+    $ionicPlatform.ready(function() {
+      console.log("Calling get matches from ionic platform ready matches ctrl");
+      $scope.getMatches();
+      // $scope.matches[0].visible = true;
+    });
 
     $ionicModal.fromTemplateUrl('templates/modals/match-profile-modal.html', {
       scope: $scope,
