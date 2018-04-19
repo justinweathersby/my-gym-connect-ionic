@@ -11,7 +11,7 @@ app.controller('MessageCtrl', function($rootScope, $scope, $state, $http, $state
       if (payload.conversation_id == currentConversation.id){
         $scope.getMessages();
         $rootScope.$apply(function () {
-          $rootScope.message_badge_count=0;
+
         });
       }
     }
@@ -33,7 +33,7 @@ app.controller('MessageCtrl', function($rootScope, $scope, $state, $http, $state
     window.addEventListener('native.keyboardshow', keyboardShowHandler);
     window.addEventListener('native.keyboardhide', keyboardHideHandler);
 
-    $rootScope.message_badge_count = 0;
+    //$rootScope.message_badge_count = 0;
   });
 
 
@@ -143,6 +143,10 @@ app.controller('MessageCtrl', function($rootScope, $scope, $state, $http, $state
       }).catch(function(err) { console.log("GET ITEM ERROR::Messages::getMessages::", JSON.stringify(err));});
     }).catch(function(err) { console.log("GET ITEM ERROR::Messages::getMessages::", JSON.stringify(err));});
   };
+
+  $scope.onReplyChange = function () {
+    $rootScope.message_badge_count=0;
+  }
 
   $scope.afterMessagesLoad = function(){
     $timeout(function() {

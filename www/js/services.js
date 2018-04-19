@@ -56,6 +56,7 @@ app.service('currentUserService', function($http, currentUser, GYM_CONNECT_API){
   };
 
   this.getUser = function(){
+    console.log('currentUser ===>', currentUser);
         return $http({ method: 'GET',
                   url: GYM_CONNECT_API.url + "/users/" + currentUser.id,
                   headers: {'Authorization' : currentUser.token}

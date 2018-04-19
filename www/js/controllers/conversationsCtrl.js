@@ -1,6 +1,6 @@
 app.controller('ConversationsCtrl', function($rootScope, $scope, $state, $http, $stateParams, $cordovaBadge,
                                         $ionicPopup, $ionicLoading,
-                                        currentUser, currentConversation,
+                                        currentUser, currentConversation,moment,
                                         GYM_CONNECT_API)
 {
   $scope.$on('cloud:push:notification', function(event, data) {
@@ -12,7 +12,7 @@ app.controller('ConversationsCtrl', function($rootScope, $scope, $state, $http, 
   });
 
   $scope.current_user = currentUser;
-  $rootScope.message_badge_count = 0;
+  //$rootScope.message_badge_count = 0;
 
   $scope.getConversations = function() {
     if(window.cordova){
@@ -28,8 +28,24 @@ app.controller('ConversationsCtrl', function($rootScope, $scope, $state, $http, 
               url: GYM_CONNECT_API.url + "/conversations",
               headers: {'Authorization' : token}
       }).success( function( data ){
+              console.log("Data from conversations: ", data);
               console.log("Data from conversations: ", JSON.stringify(data, null, 4));
               $scope.conversations = data.conversations;
+              $scope.conversations.forEach(function(conv) {
+                var created_at = conv.last_message.created_at;
+                console.log('create_at: ', created_at);
+                var createDate = new Date(created_at);
+                var now = moment();
+                var showTime;
+                if (now.isSame(createDate, 'd')) {
+                    // They are on the same day
+                    showTime = moment(createDate).format('h:mm A');
+                } else {
+                    // They are not on the same day
+                    showTime = moment(createDate).format('MMM D');
+                }
+                conv.last_message.show_time = showTime;
+              });
               $ionicLoading.hide();
       }).error( function(error){
               console.log("Error in Conversations", error.errors)

@@ -9986,6 +9986,13 @@ input:invalid {
 .match {
   position: absolute; }
 
+.delayLayer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 60px; }
+
 @-webkit-keyframes fadeIn {
   0% {
     opacity: 0; }

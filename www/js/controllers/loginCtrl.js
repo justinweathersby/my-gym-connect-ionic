@@ -81,6 +81,7 @@ app.controller('LoginCtrl', function($scope, $http, $ionicLoading, $state, $ioni
       )
       .error( function(error)
       {
+        console.log('resetPassword err: ', err);
         $ionicLoading.hide();
         $cordovaDialogs.alert(         // the message
           "Email and password did not match our records.", // a title

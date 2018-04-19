@@ -1,15 +1,17 @@
 <ion-view hide-nav-bar="true">
 
   <ion-content class="mainBackground" >
-    <div class="row row-center fade-in" style="max-height: 90vh;" ng-show="matchDataLoaded">
+    <div class="row row-center fade-in" style="max-height: 90vh;" ng-show="matchDataShow">
       <div class="col col-center">
         <matchslider ng-if="matchDataLoaded"/>
       </div>
     </div>
-    <div class="text-center no-matches-container fade-out" ng-hide="matchDataLoaded">
+  </ion-content>
+  <div class="mainBackground delayLayer fade-out" ng-hide="matchDataLoaded">
+    <div class="text-center no-matches-container fade-out" >
       <h4 style="text-align: center; color: white">No Matches</h4>
       <hr style="display: block; height: 0px; border: 0; border-top: 1px solid #fff; border-bottom: 1px solid #fff; border-radius:2px; margin: 1em auto; padding: 0; width: 90% "/>
       <p style="color: white;"><b>Note:</b> Try to diversify your workout times to find more workout buddies</p>
     </div>
-  </ion-content>
+  </div>
 </ion-view>

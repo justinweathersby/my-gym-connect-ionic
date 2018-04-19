@@ -1,19 +1,18 @@
 app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
                                        $ionicPopup, $ionicLoading, $ionicModal, $ionicPlatform, $cordovaDialogs,
-                                       currentUser, currentConversation,
+                                       currentUser, currentConversation, $timeout,
                                        GYM_CONNECT_API)
 {
 
 
     $scope.imgLoadingCircle = "<spinner-blue.gif>";
+    $scope.matchDataShow = false;
     $scope.matchDataLoaded = false;
     $scope.matchSelectedLoaded = false;
 
     $scope.getMatches = function(){
       $ionicLoading.show({
-        template: '<p>Loading...</p><ion-spinner></ion-spinner>',
-        delay: 500,
-        duration: 5
+        template: '<p>Loading...</p><ion-spinner></ion-spinner>'
       });
 
       localforage.getItem('user_token').then(function(value) {
@@ -25,6 +24,7 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
                 url: GYM_CONNECT_API.url + "/matches",
                 headers: {'Authorization' : token}
         }).success( function( data ){
+                console.log('getMatches success: ', data);
                 $scope.matches = data;
         }).error( function(error){
               console.log(JSON.stringify(error));
@@ -37,19 +37,34 @@ app.controller('MatchesCtrl', function($scope, $state, $http, $stateParams,
               }
               $state.go('login');
         }).finally(function() {
-               $ionicLoading.hide();
-               $scope.matchDataLoaded = true;
-               $scope.$broadcast('scroll.refreshComplete');
+
+           console.log('===========');
+           $scope.matchDataShow = true;
+           $timeout(function() {
+             $scope.matchDataLoaded = true;
+             $scope.$broadcast('scroll.refreshComplete');
+             $ionicLoading.hide();
+           }, 900);
+
+
         });
-      }).catch(function(err) { console.log("GET ITEM ERROR::Matches::getMatches::", err);});
+      }).catch(function(err) { console.log("GET ITEM ERROR::Matches::getMatches::", err); $ionicLoading.hide();});
       // var auth_token = localforage.getItem('user_token');
       // console.log("Auth Token: ", JSON.stringify(auth_token));
     };
 
     $ionicPlatform.ready(function() {
+      // console.log("Calling get matches from ionic platform ready matches ctrl");
+      //$scope.getMatches();
+      // $scope.matches[0].visible = true;
+    });
+
+    $scope.$on('$ionicView.enter', function(ev) {
+      if(ev.targetScope !== $scope)
+          return;
+      //alert('2');
       console.log("Calling get matches from ionic platform ready matches ctrl");
       $scope.getMatches();
-      // $scope.matches[0].visible = true;
     });
 
     $ionicModal.fromTemplateUrl('templates/modals/match-profile-modal.html', {
